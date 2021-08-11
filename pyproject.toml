@@ -1,0 +1,24 @@
+[build-system]
+requires = [
+    "wheel",
+    "setuptools",
+    "cython>=0.21.0",
+    "numpy>=1.8.0",
+]
+
+[tool.pysen]
+version = "0.9"
+
+[tool.pysen.lint]
+enable_black = true
+enable_flake8 = true
+enable_isort = true
+enable_mypy = true
+mypy_preset = "entry"
+line_length = 88
+py_version = "py37"
+
+mypy_ignore_packages=["ttslearn.wavenet.*", "ttslearn.tacotron.*"]
+
+[[tool.pysen.lint.mypy_targets]]
+paths = ["ttslearn", "tests"]

@@ -1,0 +1,2 @@
+include README.md LICENSE
+recursive-include ttslearn/_example_data *.wav *.lab *.hed COPYING LICENSE README.md

@@ -1,0 +1,13 @@
+netG:
+  _target_: ttslearn.dnntts.LSTMRNN
+  in_dim: 329
+  out_dim: 4
+  hidden_dim: 64
+  bidirectional: True
+  num_layers: 2
+  dropout: 0.5
+
+# (lf0, vuv)
+stream_sizes: [3, 1]
+has_dynamic_features: [true, false]
+num_windows: 3

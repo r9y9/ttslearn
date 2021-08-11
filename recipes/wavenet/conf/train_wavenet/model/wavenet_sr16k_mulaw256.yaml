@@ -1,0 +1,12 @@
+netG:
+  _target_: ttslearn.wavenet.WaveNet
+  out_channels: 256
+  layers: 30
+  stacks: 3
+  residual_channels: 64
+  gate_channels: 128
+  skip_out_channels: 64
+  kernel_size: 3
+  cin_channels: 333 # 329 (linguistic features) + 4 (logf0 + vuv)
+  upsample_scales: [2, 4, 2, 5] # np.prod(upsample_scales) = 80
+  aux_context_window: 2

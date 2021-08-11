@@ -1,0 +1,72 @@
+# @package _global_
+
+defaults:
+  - model: wavenet_sr16k_mu256_30layers
+
+verbose: 100
+seed: 773
+
+# 1) none 2) tqdm
+tqdm: tqdm
+
+cudnn:
+  benchmark: true
+  deterministic: false
+
+# Multi-gpu
+data_parallel: false
+
+###########################################################
+#                DATA SETTING                             #
+###########################################################
+data:
+  # training set
+  train:
+    utt_list: data/train.list
+    in_dir:
+    out_dir:
+
+  # development set
+  dev:
+    utt_list: data/dev.list
+    in_dir:
+    out_dir:
+
+  # data loader
+  num_workers: 4
+  batch_size: 16
+
+  # mini-batch sampling
+  # (max_time_frames * hop_size) samples are randomly selected
+  max_time_frames: 50
+  hop_size: 200
+  aux_context_window: 2
+
+###########################################################
+#                TRAIN SETTING                            #
+###########################################################
+train:
+  out_dir: exp
+  log_dir: tensorboard/exp
+
+  # steps can either be specified by steps or epochs
+  max_train_steps: 500000
+  nepochs: -1
+  checkpoint_epoch_interval: 100
+
+  optim:
+    optimizer:
+      name: Adam
+      params:
+        lr: 0.001
+        betas: [0.9, 0.999]
+        eps: 1e-8
+        weight_decay: 0.0
+    lr_scheduler:
+      name: StepLR
+      params:
+        step_size: 200000
+        gamma: 0.5
+
+  pretrained:
+    checkpoint:

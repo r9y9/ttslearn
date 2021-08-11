@@ -1,0 +1,37 @@
+# @package _global_
+
+verbose: 100
+
+# 1) none 2) tqdm
+tqdm: tqdm
+
+device: cuda # or cpu
+
+utt_list:
+in_dir:
+out_dir:
+
+# リストの逆順で発話を処理する
+reverse: false
+
+# 生成する発話の数
+# 指定がない場合、utt_list の発話をすべて処理する
+num_eval_utts:
+
+sample_rate: 16000
+
+# Trueの場合、WaveNetボコーダ
+# Falseの場合、Griffin-Limのアルゴリズム
+use_wavenet: false
+
+acoustic:
+  checkpoint:
+  in_scaler_path:
+  out_scaler_path:
+  model_yaml:
+
+wavenet:
+  checkpoint:
+  in_scaler_path:
+  out_scaler_path:
+  model_yaml:
