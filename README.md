@@ -15,14 +15,16 @@
 
 </div>
 
+日本語は以下に続きます (Japanese follows)
+
+English: This book is written in Japanese and primarily focuses on Japanese TTS. Some of the functionality (e.g., neural network implementations) in this codebase can be used for other languages. However, we didn't prepare any guide or code for non-Japanese TTS systems.
+We may extend the codebase for other languages in the future but cannot guarantee if we would work on it.
+
 ## Installation
 
 ```
 pip install ttslearn
 ```
-
-NOTE: This book is written in Japanese and primarily focuses on Japanese TTS. Some of the functionality (e.g., neural network implementations) in this codebase can be used for other languages. However, we didn't prepare any guide or code for non-Japanese TTS systems.
-We may extend the codebase for other languages in the future but cannot guarantee if we would work on it.
 
 ## リポジトリの構成
 
