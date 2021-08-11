@@ -1,0 +1,452 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>ttslearn.tacotron.frontend.openjtalk &mdash; ttslearn 0.2.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/plot_directive.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/css/custom.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+    
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../../index.html" class="icon icon-home"> ttslearn
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.2.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Demo</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../notebooks/ch00_Quick-start.html">Quick start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../notebooks/ch11_Advanced-demos.html">Advanced TTS demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../demo_server.html">Demo server (with streamlit)</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Chapters</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../notebooks/ch04_Python-SP.html">第4章 Python による音声信号処理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../notebooks/ch05_DNNTTS.html">第5章 深層学習に基づく統計的パラメトリック音声合成</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../notebooks/ch06_Recipe-DNNTTS.html">第6章: 日本語 DNN 音声合成システムの実装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../notebooks/ch07_WaveNet.html">第7章 WaveNet: 深層学習に基づく音声波形の生成モデル</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../notebooks/ch08_Recipe-WaveNet.html">第8章 日本語 WaveNet 音声合成システムの実装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../notebooks/ch09_Tacotron.html">第9章 Tacotron 2: 一貫学習を狙った音声合成</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../notebooks/ch10_Recipe-Tacotron.html">第10章 日本語Tacotronに基づく音声合成システムの実装</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Core modules</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../dsp.html">ttslearn.dsp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../dnntts.html">ttslearn.dnntts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../wavenet.html">ttslearn.wavenet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tacotron.html">ttslearn.tacotron</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Helpers</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../pretrained.html">ttslearn.pretrained</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../util.html">ttslearn.util</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../train_util.html">ttslearn.train_util</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Advanced topics</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../extra_recipes.html">Extra recipes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../contrib.html">ttslearn.contrib</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Meta information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../changelog.html">Change log</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">ttslearn</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../../index.html">Module code</a> &raquo;</li>
+        
+      <li>ttslearn.tacotron.frontend.openjtalk</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for ttslearn.tacotron.frontend.openjtalk</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">re</span>
+
+<span class="c1"># 音素 (+pau/sil)</span>
+<span class="n">phonemes</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;A&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;E&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;I&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;N&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;O&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;U&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;a&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;b&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;by&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ch&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;cl&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;d&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;dy&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;e&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;f&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;g&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;gy&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;h&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;hy&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;i&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;j&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;k&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ky&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;m&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;my&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;n&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ny&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;o&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;p&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;py&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;r&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ry&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;s&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;sh&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;t&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ts&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ty&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;u&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;v&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;w&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;y&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;z&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;pau&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;sil&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="n">extra_symbols</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;^&quot;</span><span class="p">,</span>  <span class="c1"># 文の先頭を表す特殊記号 &lt;SOS&gt;</span>
+    <span class="s2">&quot;$&quot;</span><span class="p">,</span>  <span class="c1"># 文の末尾を表す特殊記号 &lt;EOS&gt; (通常)</span>
+    <span class="s2">&quot;?&quot;</span><span class="p">,</span>  <span class="c1"># 文の末尾を表す特殊記号 &lt;EOS&gt; (疑問系)</span>
+    <span class="s2">&quot;_&quot;</span><span class="p">,</span>  <span class="c1"># ポーズ</span>
+    <span class="s2">&quot;#&quot;</span><span class="p">,</span>  <span class="c1"># アクセント句境界</span>
+    <span class="s2">&quot;[&quot;</span><span class="p">,</span>  <span class="c1"># ピッチの上がり位置</span>
+    <span class="s2">&quot;]&quot;</span><span class="p">,</span>  <span class="c1"># ピッチの下がり位置</span>
+<span class="p">]</span>
+
+<span class="n">_pad</span> <span class="o">=</span> <span class="s2">&quot;~&quot;</span>
+
+<span class="c1"># NOTE: 0 をパディングを表す数値とする</span>
+<span class="n">symbols</span> <span class="o">=</span> <span class="p">[</span><span class="n">_pad</span><span class="p">]</span> <span class="o">+</span> <span class="n">extra_symbols</span> <span class="o">+</span> <span class="n">phonemes</span>
+
+
+<span class="n">_symbol_to_id</span> <span class="o">=</span> <span class="p">{</span><span class="n">s</span><span class="p">:</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">symbols</span><span class="p">)}</span>
+<span class="n">_id_to_symbol</span> <span class="o">=</span> <span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="n">s</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">symbols</span><span class="p">)}</span>
+
+
+<span class="k">def</span> <span class="nf">numeric_feature_by_regex</span><span class="p">(</span><span class="n">regex</span><span class="p">,</span> <span class="n">s</span><span class="p">):</span>
+    <span class="n">match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">regex</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">match</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">50</span>
+    <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+
+
+<div class="viewcode-block" id="pp_symbols"><a class="viewcode-back" href="../../../../generated/ttslearn.tacotron.frontend.openjtalk.pp_symbols.html#ttslearn.tacotron.frontend.openjtalk.pp_symbols">[docs]</a><span class="k">def</span> <span class="nf">pp_symbols</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">drop_unvoiced_vowels</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Extract phoneme + prosoody symbol sequence from input full-context labels</span>
+
+<span class="sd">    The algorithm is based on [Kurihara 2021] [1]_ with some tweaks.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        labels (HTSLabelFile): List of labels</span>
+<span class="sd">        drop_unvoiced_vowels (bool): Drop unvoiced vowels. Defaults to True.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        list: List of phoneme + prosody symbols</span>
+
+<span class="sd">    .. ipython::</span>
+
+<span class="sd">        In [11]: import ttslearn</span>
+
+<span class="sd">        In [12]: from nnmnkwii.io import hts</span>
+
+<span class="sd">        In [13]: from ttslearn.tacotron.frontend.openjtalk import pp_symbols</span>
+
+<span class="sd">        In [14]: labels = hts.load(ttslearn.util.example_label_file())</span>
+
+<span class="sd">        In [15]: &quot; &quot;.join(pp_symbols(labels.contexts))</span>
+<span class="sd">        Out[15]: &#39;^ m i [ z u o # m a [ r e ] e sh i a k a r a ... $&#39;</span>
+
+<span class="sd">    .. [1] K. Kurihara, N. Seiyama, and T. Kumano, “Prosodic features control by</span>
+<span class="sd">        symbols as input of sequence-to-sequence acoustic modeling for neural tts,”</span>
+<span class="sd">        IEICE Transactions on Information and Systems, vol. E104.D, no. 2,</span>
+<span class="sd">        pp. 302–311, 2021.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">PP</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span>
+
+    <span class="c1"># 各音素毎に順番に処理</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+        <span class="n">lab_curr</span> <span class="o">=</span> <span class="n">labels</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
+
+        <span class="c1"># 当該音素</span>
+        <span class="n">p3</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\-(.*?)\+&quot;</span><span class="p">,</span> <span class="n">lab_curr</span><span class="p">)</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
+
+        <span class="c1"># 無声化母音を通常の母音として扱う</span>
+        <span class="k">if</span> <span class="n">drop_unvoiced_vowels</span> <span class="ow">and</span> <span class="n">p3</span> <span class="ow">in</span> <span class="s2">&quot;AEIOU&quot;</span><span class="p">:</span>
+            <span class="n">p3</span> <span class="o">=</span> <span class="n">p3</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+
+        <span class="c1"># 先頭と末尾の sil のみ例外対応</span>
+        <span class="k">if</span> <span class="n">p3</span> <span class="o">==</span> <span class="s2">&quot;sil&quot;</span><span class="p">:</span>
+            <span class="k">assert</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">n</span> <span class="o">==</span> <span class="n">N</span> <span class="o">-</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">PP</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;^&quot;</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">n</span> <span class="o">==</span> <span class="n">N</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="c1"># 疑問系かどうか</span>
+                <span class="n">e3</span> <span class="o">=</span> <span class="n">numeric_feature_by_regex</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;!(\d+)_&quot;</span><span class="p">,</span> <span class="n">lab_curr</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">e3</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">PP</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;$&quot;</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">e3</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="n">PP</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;?&quot;</span><span class="p">)</span>
+            <span class="k">continue</span>
+        <span class="k">elif</span> <span class="n">p3</span> <span class="o">==</span> <span class="s2">&quot;pau&quot;</span><span class="p">:</span>
+            <span class="n">PP</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)</span>
+            <span class="k">continue</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">PP</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">p3</span><span class="p">)</span>
+
+        <span class="c1"># アクセント型および位置情報（前方または後方）</span>
+        <span class="n">a1</span> <span class="o">=</span> <span class="n">numeric_feature_by_regex</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;/A:([0-9\-]+)\+&quot;</span><span class="p">,</span> <span class="n">lab_curr</span><span class="p">)</span>
+        <span class="n">a2</span> <span class="o">=</span> <span class="n">numeric_feature_by_regex</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\+(\d+)\+&quot;</span><span class="p">,</span> <span class="n">lab_curr</span><span class="p">)</span>
+        <span class="n">a3</span> <span class="o">=</span> <span class="n">numeric_feature_by_regex</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\+(\d+)/&quot;</span><span class="p">,</span> <span class="n">lab_curr</span><span class="p">)</span>
+        <span class="c1"># アクセント句におけるモーラ数</span>
+        <span class="n">f1</span> <span class="o">=</span> <span class="n">numeric_feature_by_regex</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;/F:(\d+)_&quot;</span><span class="p">,</span> <span class="n">lab_curr</span><span class="p">)</span>
+
+        <span class="n">a2_next</span> <span class="o">=</span> <span class="n">numeric_feature_by_regex</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\+(\d+)\+&quot;</span><span class="p">,</span> <span class="n">labels</span><span class="p">[</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>
+
+        <span class="c1"># アクセント句境界</span>
+        <span class="k">if</span> <span class="n">a3</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">a2_next</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">PP</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;#&quot;</span><span class="p">)</span>
+        <span class="c1"># ピッチの立ち下がり（アクセント核）</span>
+        <span class="k">elif</span> <span class="n">a1</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">a2_next</span> <span class="o">==</span> <span class="n">a2</span> <span class="o">+</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">a2</span> <span class="o">!=</span> <span class="n">f1</span><span class="p">:</span>
+            <span class="n">PP</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;]&quot;</span><span class="p">)</span>
+        <span class="c1"># ピッチの立ち上がり</span>
+        <span class="k">elif</span> <span class="n">a2</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">a2_next</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">PP</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;[&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">PP</span></div>
+
+
+<div class="viewcode-block" id="num_vocab"><a class="viewcode-back" href="../../../../generated/ttslearn.tacotron.frontend.openjtalk.num_vocab.html#ttslearn.tacotron.frontend.openjtalk.num_vocab">[docs]</a><span class="k">def</span> <span class="nf">num_vocab</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Get number of vocabraries</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        int: Number of vocabraries</span>
+
+<span class="sd">    Examples:</span>
+
+<span class="sd">        &gt;&gt;&gt; from ttslearn.tacotron.frontend.openjtalk import num_vocab</span>
+<span class="sd">        &gt;&gt;&gt; num_vocab()</span>
+<span class="sd">        &gt;&gt;&gt; 52</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">symbols</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="text_to_sequence"><a class="viewcode-back" href="../../../../generated/ttslearn.tacotron.frontend.openjtalk.text_to_sequence.html#ttslearn.tacotron.frontend.openjtalk.text_to_sequence">[docs]</a><span class="k">def</span> <span class="nf">text_to_sequence</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Convert phoneme + prosody symbols to sequence of numbers</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        text (list): text as a list of phoneme + prosody symbols</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        list: List of numbers</span>
+
+<span class="sd">    Examples:</span>
+
+<span class="sd">        &gt;&gt;&gt; from ttslearn.tacotron.frontend.openjtalk import text_to_sequence</span>
+<span class="sd">        &gt;&gt;&gt; text_to_sequence([&quot;^&quot;, &quot;m&quot;, &quot;i&quot;, &quot;[&quot;, &quot;z&quot;,&quot;o&quot;, &quot;$&quot;])</span>
+<span class="sd">        &gt;&gt;&gt; [1, 31, 27, 6, 49, 35, 2]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">_symbol_to_id</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">text</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="sequence_to_text"><a class="viewcode-back" href="../../../../generated/ttslearn.tacotron.frontend.openjtalk.sequence_to_text.html#ttslearn.tacotron.frontend.openjtalk.sequence_to_text">[docs]</a><span class="k">def</span> <span class="nf">sequence_to_text</span><span class="p">(</span><span class="n">seq</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Convert sequence of numbers to phoneme + prosody symbols</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        seq (list): Input sequence of numbers</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        list: List of phoneme + prosody symbols</span>
+
+<span class="sd">    Examples:</span>
+
+<span class="sd">        &gt;&gt;&gt; from ttslearn.tacotron.frontend.openjtalk import sequence_to_text</span>
+<span class="sd">        &gt;&gt;&gt; sequence_to_text([1, 31, 27, 6, 49, 35, 2])</span>
+<span class="sd">        &gt;&gt;&gt; [&#39;^&#39;, &#39;m&#39;, &#39;i&#39;, &#39;[&#39;, &#39;z&#39;, &#39;o&#39;, &#39;$&#39;]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">_id_to_symbol</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">seq</span><span class="p">]</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Ryuichi Yamamoto.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

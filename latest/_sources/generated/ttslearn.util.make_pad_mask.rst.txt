@@ -1,0 +1,6 @@
+﻿ttslearn.util.make\_pad\_mask
+=============================
+
+.. currentmodule:: ttslearn.util
+
+.. autofunction:: make_pad_mask

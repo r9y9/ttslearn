@@ -1,0 +1,410 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>ttslearn.dnntts.multistream &mdash; ttslearn 0.2.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/plot_directive.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/custom.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> ttslearn
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.2.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Demo</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/ch00_Quick-start.html">Quick start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/ch11_Advanced-demos.html">Advanced TTS demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../demo_server.html">Demo server (with streamlit)</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Chapters</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/ch04_Python-SP.html">第4章 Python による音声信号処理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/ch05_DNNTTS.html">第5章 深層学習に基づく統計的パラメトリック音声合成</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/ch06_Recipe-DNNTTS.html">第6章: 日本語 DNN 音声合成システムの実装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/ch07_WaveNet.html">第7章 WaveNet: 深層学習に基づく音声波形の生成モデル</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/ch08_Recipe-WaveNet.html">第8章 日本語 WaveNet 音声合成システムの実装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/ch09_Tacotron.html">第9章 Tacotron 2: 一貫学習を狙った音声合成</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/ch10_Recipe-Tacotron.html">第10章 日本語Tacotronに基づく音声合成システムの実装</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Core modules</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../dsp.html">ttslearn.dsp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dnntts.html">ttslearn.dnntts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../wavenet.html">ttslearn.wavenet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tacotron.html">ttslearn.tacotron</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Helpers</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../pretrained.html">ttslearn.pretrained</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../util.html">ttslearn.util</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../train_util.html">ttslearn.train_util</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Advanced topics</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../extra_recipes.html">Extra recipes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contrib.html">ttslearn.contrib</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Meta information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Change log</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">ttslearn</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>ttslearn.dnntts.multistream</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for ttslearn.dnntts.multistream</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">nnmnkwii</span> <span class="kn">import</span> <span class="n">paramgen</span>
+
+
+<div class="viewcode-block" id="get_windows"><a class="viewcode-back" href="../../../generated/ttslearn.dnntts.multistream.get_windows.html#ttslearn.dnntts.multistream.get_windows">[docs]</a><span class="k">def</span> <span class="nf">get_windows</span><span class="p">(</span><span class="n">num_window</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Get windows for parameter generation</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        num_window (int): Number of windows (1, 2 or 3)</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: if not supported num_windows is specified</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        list: list of windows</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">windows</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.0</span><span class="p">]))]</span>
+    <span class="k">if</span> <span class="n">num_window</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">windows</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">])))</span>
+    <span class="k">if</span> <span class="n">num_window</span> <span class="o">&gt;=</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="n">windows</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">])))</span>
+
+    <span class="k">if</span> <span class="n">num_window</span> <span class="o">&gt;=</span> <span class="mi">4</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Not supported num windows: </span><span class="si">{</span><span class="n">num_window</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">windows</span></div>
+
+
+<div class="viewcode-block" id="split_streams"><a class="viewcode-back" href="../../../generated/ttslearn.dnntts.multistream.split_streams.html#ttslearn.dnntts.multistream.split_streams">[docs]</a><span class="k">def</span> <span class="nf">split_streams</span><span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="n">stream_sizes</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Split streams from multi-stream features</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        inputs (array like): input 3-d array</span>
+<span class="sd">        stream_sizes (list): sizes for each stream</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        list: list of stream features</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">ret</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">start_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">(([</span><span class="mi">0</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">stream_sizes</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
+    <span class="k">for</span> <span class="n">start_idx</span><span class="p">,</span> <span class="n">size</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">start_indices</span><span class="p">,</span> <span class="n">stream_sizes</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">inputs</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="n">inputs</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">start_idx</span> <span class="p">:</span> <span class="n">start_idx</span> <span class="o">+</span> <span class="n">size</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="n">inputs</span><span class="p">[:,</span> <span class="n">start_idx</span> <span class="p">:</span> <span class="n">start_idx</span> <span class="o">+</span> <span class="n">size</span><span class="p">]</span>
+        <span class="n">ret</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">ret</span></div>
+
+
+<div class="viewcode-block" id="get_static_stream_sizes"><a class="viewcode-back" href="../../../generated/ttslearn.dnntts.multistream.get_static_stream_sizes.html#ttslearn.dnntts.multistream.get_static_stream_sizes">[docs]</a><span class="k">def</span> <span class="nf">get_static_stream_sizes</span><span class="p">(</span><span class="n">stream_sizes</span><span class="p">,</span> <span class="n">has_dynamic_features</span><span class="p">,</span> <span class="n">num_windows</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Get static sizes for each feature stream</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        stream_sizes (list): stream sizes</span>
+<span class="sd">        has_dynamic_features (list): binary flags that indicates if steams have dynamic features</span>
+<span class="sd">        num_windows (int): number of windows</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        list: stream sizes</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">static_stream_sizes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">stream_sizes</span><span class="p">)</span>
+    <span class="n">static_stream_sizes</span><span class="p">[</span><span class="n">has_dynamic_features</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">static_stream_sizes</span><span class="p">[</span><span class="n">has_dynamic_features</span><span class="p">]</span> <span class="o">/</span> <span class="n">num_windows</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">static_stream_sizes</span></div>
+
+
+<div class="viewcode-block" id="get_static_features"><a class="viewcode-back" href="../../../generated/ttslearn.dnntts.multistream.get_static_features.html#ttslearn.dnntts.multistream.get_static_features">[docs]</a><span class="k">def</span> <span class="nf">get_static_features</span><span class="p">(</span>
+    <span class="n">inputs</span><span class="p">,</span>
+    <span class="n">num_windows</span><span class="p">,</span>
+    <span class="n">stream_sizes</span><span class="p">,</span>
+    <span class="n">has_dynamic_features</span><span class="p">,</span>
+    <span class="n">streams</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Get static features from static+dynamic features</span>
+
+
+<span class="sd">    Args:</span>
+<span class="sd">        inputs (array like): input 3-d or 2-d array</span>
+<span class="sd">        num_windows (int): number of windows</span>
+<span class="sd">        stream_sizes (list): stream sizes</span>
+<span class="sd">        has_dynamic_features (list): binary flags that indicates if steams have dynamic features</span>
+<span class="sd">        streams (list, optional): Streams of interests. Returns all streams if streams is None.</span>
+<span class="sd">            Defaults to None.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        list: list of static features</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">D</span> <span class="o">=</span> <span class="n">inputs</span><span class="o">.</span><span class="n">shape</span>
+    <span class="k">if</span> <span class="n">stream_sizes</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">stream_sizes</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">has_dynamic_features</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+        <span class="k">return</span> <span class="n">inputs</span><span class="p">[:,</span> <span class="p">:</span> <span class="n">D</span> <span class="o">//</span> <span class="n">num_windows</span><span class="p">]</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">stream_sizes</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">has_dynamic_features</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="n">inputs</span>
+    <span class="k">if</span> <span class="n">streams</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">streams</span> <span class="o">=</span> <span class="p">[</span><span class="kc">True</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">stream_sizes</span><span class="p">)</span>
+
+    <span class="c1"># Multi stream case</span>
+    <span class="n">ret</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">start_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">(([</span><span class="mi">0</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">stream_sizes</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
+    <span class="k">for</span> <span class="n">start_idx</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">enabled</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span>
+        <span class="n">start_indices</span><span class="p">,</span> <span class="n">stream_sizes</span><span class="p">,</span> <span class="n">has_dynamic_features</span><span class="p">,</span> <span class="n">streams</span>
+    <span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">enabled</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="k">if</span> <span class="n">v</span><span class="p">:</span>
+            <span class="n">static_features</span> <span class="o">=</span> <span class="n">inputs</span><span class="p">[:,</span> <span class="n">start_idx</span> <span class="p">:</span> <span class="n">start_idx</span> <span class="o">+</span> <span class="n">size</span> <span class="o">//</span> <span class="n">num_windows</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">static_features</span> <span class="o">=</span> <span class="n">inputs</span><span class="p">[:,</span> <span class="n">start_idx</span> <span class="p">:</span> <span class="n">start_idx</span> <span class="o">+</span> <span class="n">size</span><span class="p">]</span>
+        <span class="n">ret</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">static_features</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">ret</span></div>
+
+
+<div class="viewcode-block" id="multi_stream_mlpg"><a class="viewcode-back" href="../../../generated/ttslearn.dnntts.multistream.multi_stream_mlpg.html#ttslearn.dnntts.multistream.multi_stream_mlpg">[docs]</a><span class="k">def</span> <span class="nf">multi_stream_mlpg</span><span class="p">(</span>
+    <span class="n">inputs</span><span class="p">,</span>
+    <span class="n">variances</span><span class="p">,</span>
+    <span class="n">windows</span><span class="p">,</span>
+    <span class="n">stream_sizes</span><span class="p">,</span>
+    <span class="n">has_dynamic_features</span><span class="p">,</span>
+    <span class="n">streams</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Split streams and do apply MLPG if stream has dynamic features</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        inputs (array like): input 3-d or 2-d array</span>
+<span class="sd">        variances (array like): variances of input features</span>
+<span class="sd">        windows (list): windows for parameter generation</span>
+<span class="sd">        stream_sizes (list): stream sizes</span>
+<span class="sd">        has_dynamic_features (list): binary flags that indicates if steams have dynamic features</span>
+<span class="sd">        streams (list, optional): Streams of interests. Returns all streams if streams is None.</span>
+<span class="sd">            Defaults to None.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        RuntimeError: if stream sizes are wrong</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        array like: generated static features</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">T</span><span class="p">,</span> <span class="n">D</span> <span class="o">=</span> <span class="n">inputs</span><span class="o">.</span><span class="n">shape</span>
+    <span class="k">if</span> <span class="n">D</span> <span class="o">!=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">stream_sizes</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;You probably have specified wrong dimention params.&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">streams</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">streams</span> <span class="o">=</span> <span class="p">[</span><span class="kc">True</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">stream_sizes</span><span class="p">)</span>
+
+    <span class="c1"># Straem indices for static+delta features</span>
+    <span class="c1"># [0,   180, 183, 184]</span>
+    <span class="n">start_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">(([</span><span class="mi">0</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">stream_sizes</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
+    <span class="c1"># [180, 183, 184, 199]</span>
+    <span class="n">end_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">stream_sizes</span><span class="p">)</span>
+
+    <span class="n">ret</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">in_start_idx</span><span class="p">,</span> <span class="n">in_end_idx</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">enabled</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span>
+        <span class="n">start_indices</span><span class="p">,</span>
+        <span class="n">end_indices</span><span class="p">,</span>
+        <span class="n">has_dynamic_features</span><span class="p">,</span>
+        <span class="n">streams</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">enabled</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">inputs</span><span class="p">[:,</span> <span class="n">in_start_idx</span><span class="p">:</span><span class="n">in_end_idx</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">inputs</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="n">variances</span><span class="o">.</span><span class="n">shape</span><span class="p">:</span>
+            <span class="n">var_</span> <span class="o">=</span> <span class="n">variances</span><span class="p">[:,</span> <span class="n">in_start_idx</span><span class="p">:</span><span class="n">in_end_idx</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">var_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">variances</span><span class="p">[</span><span class="n">in_start_idx</span><span class="p">:</span><span class="n">in_end_idx</span><span class="p">],</span> <span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">paramgen</span><span class="o">.</span><span class="n">mlpg</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">var_</span><span class="p">,</span> <span class="n">windows</span><span class="p">)</span> <span class="k">if</span> <span class="n">v</span> <span class="k">else</span> <span class="n">x</span>
+        <span class="n">ret</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">ret</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Ryuichi Yamamoto.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

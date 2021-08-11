@@ -1,0 +1,6 @@
+﻿ttslearn.dsp.world\_log\_f0\_vuv
+================================
+
+.. currentmodule:: ttslearn.dsp
+
+.. autofunction:: world_log_f0_vuv

@@ -1,0 +1,6 @@
+﻿ttslearn.tacotron.gen.synthesis
+===============================
+
+.. currentmodule:: ttslearn.tacotron.gen
+
+.. autofunction:: synthesis

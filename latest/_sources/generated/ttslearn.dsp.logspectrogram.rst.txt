@@ -1,0 +1,6 @@
+﻿ttslearn.dsp.logspectrogram
+===========================
+
+.. currentmodule:: ttslearn.dsp
+
+.. autofunction:: logspectrogram

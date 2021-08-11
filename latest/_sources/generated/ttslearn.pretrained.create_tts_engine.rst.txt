@@ -1,0 +1,6 @@
+﻿ttslearn.pretrained.create\_tts\_engine
+=======================================
+
+.. currentmodule:: ttslearn.pretrained
+
+.. autofunction:: create_tts_engine

@@ -1,0 +1,6 @@
+﻿ttslearn.dnntts.gen.gen\_waveform
+=================================
+
+.. currentmodule:: ttslearn.dnntts.gen
+
+.. autofunction:: gen_waveform

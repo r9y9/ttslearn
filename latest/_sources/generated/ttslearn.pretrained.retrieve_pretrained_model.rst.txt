@@ -1,0 +1,6 @@
+﻿ttslearn.pretrained.retrieve\_pretrained\_model
+===============================================
+
+.. currentmodule:: ttslearn.pretrained
+
+.. autofunction:: retrieve_pretrained_model

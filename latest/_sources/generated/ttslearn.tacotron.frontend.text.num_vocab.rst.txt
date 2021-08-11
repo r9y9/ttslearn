@@ -1,0 +1,6 @@
+﻿ttslearn.tacotron.frontend.text.num\_vocab
+==========================================
+
+.. currentmodule:: ttslearn.tacotron.frontend.text
+
+.. autofunction:: num_vocab

@@ -1,0 +1,6 @@
+﻿ttslearn.contrib.multispk\_util.setup
+=====================================
+
+.. currentmodule:: ttslearn.contrib.multispk_util
+
+.. autofunction:: setup

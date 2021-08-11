@@ -1,0 +1,408 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>ttslearn.util &mdash; ttslearn 0.2.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/plot_directive.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="ttslearn.util.example_audio_file" href="generated/ttslearn.util.example_audio_file.html" />
+    <link rel="prev" title="ttslearn.pretrained.retrieve_pretrained_model" href="generated/ttslearn.pretrained.retrieve_pretrained_model.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> ttslearn
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.2.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Demo</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/ch00_Quick-start.html">Quick start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/ch11_Advanced-demos.html">Advanced TTS demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo_server.html">Demo server (with streamlit)</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Chapters</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/ch04_Python-SP.html">第4章 Python による音声信号処理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/ch05_DNNTTS.html">第5章 深層学習に基づく統計的パラメトリック音声合成</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/ch06_Recipe-DNNTTS.html">第6章: 日本語 DNN 音声合成システムの実装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/ch07_WaveNet.html">第7章 WaveNet: 深層学習に基づく音声波形の生成モデル</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/ch08_Recipe-WaveNet.html">第8章 日本語 WaveNet 音声合成システムの実装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/ch09_Tacotron.html">第9章 Tacotron 2: 一貫学習を狙った音声合成</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/ch10_Recipe-Tacotron.html">第10章 日本語Tacotronに基づく音声合成システムの実装</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Core modules</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="dsp.html">ttslearn.dsp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dnntts.html">ttslearn.dnntts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wavenet.html">ttslearn.wavenet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tacotron.html">ttslearn.tacotron</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Helpers</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="pretrained.html">ttslearn.pretrained</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">ttslearn.util</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#example-files">Example files</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/ttslearn.util.example_audio_file.html">ttslearn.util.example_audio_file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/ttslearn.util.example_label_file.html">ttslearn.util.example_label_file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/ttslearn.util.example_qst_file.html">ttslearn.util.example_qst_file</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#mask">Mask</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/ttslearn.util.make_pad_mask.html">ttslearn.util.make_pad_mask</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/ttslearn.util.make_non_pad_mask.html">ttslearn.util.make_non_pad_mask</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#padding">Padding</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/ttslearn.util.pad_1d.html">ttslearn.util.pad_1d</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/ttslearn.util.pad_2d.html">ttslearn.util.pad_2d</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#path">Path</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/ttslearn.util.load_utt_list.html">ttslearn.util.load_utt_list</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/ttslearn.util.find_lab.html">ttslearn.util.find_lab</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/ttslearn.util.find_feats.html">ttslearn.util.find_feats</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#misc">Misc</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/ttslearn.util.init_seed.html">ttslearn.util.init_seed</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/ttslearn.util.dynamic_import.html">ttslearn.util.dynamic_import</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/ttslearn.util.lab2phonemes.html">ttslearn.util.lab2phonemes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/ttslearn.util.optional_tqdm.html">ttslearn.util.optional_tqdm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/ttslearn.util.trim_silence.html">ttslearn.util.trim_silence</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="train_util.html">ttslearn.train_util</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Advanced topics</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="extra_recipes.html">Extra recipes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contrib.html">ttslearn.contrib</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Meta information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Change log</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ttslearn</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>ttslearn.util</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/util.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="ttslearn-util">
+<h1>ttslearn.util<a class="headerlink" href="#ttslearn-util" title="Permalink to this headline">¶</a></h1>
+<p>General utility</p>
+<span class="target" id="module-ttslearn.util"></span><div class="section" id="example-files">
+<h2>Example files<a class="headerlink" href="#example-files" title="Permalink to this headline">¶</a></h2>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/ttslearn.util.example_audio_file.html#ttslearn.util.example_audio_file" title="ttslearn.util.example_audio_file"><code class="xref py py-obj docutils literal notranslate"><span class="pre">example_audio_file</span></code></a></p></td>
+<td><p>Get the path to an included audio example file.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/ttslearn.util.example_label_file.html#ttslearn.util.example_label_file" title="ttslearn.util.example_label_file"><code class="xref py py-obj docutils literal notranslate"><span class="pre">example_label_file</span></code></a></p></td>
+<td><p>Get the path to an included label file.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/ttslearn.util.example_qst_file.html#ttslearn.util.example_qst_file" title="ttslearn.util.example_qst_file"><code class="xref py py-obj docutils literal notranslate"><span class="pre">example_qst_file</span></code></a></p></td>
+<td><p>Get the path to an included question set file.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="mask">
+<h2>Mask<a class="headerlink" href="#mask" title="Permalink to this headline">¶</a></h2>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/ttslearn.util.make_pad_mask.html#ttslearn.util.make_pad_mask" title="ttslearn.util.make_pad_mask"><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_pad_mask</span></code></a></p></td>
+<td><p>Make mask for padding frames</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/ttslearn.util.make_non_pad_mask.html#ttslearn.util.make_non_pad_mask" title="ttslearn.util.make_non_pad_mask"><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_non_pad_mask</span></code></a></p></td>
+<td><p>Make mask for non-padding frames</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="padding">
+<h2>Padding<a class="headerlink" href="#padding" title="Permalink to this headline">¶</a></h2>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/ttslearn.util.pad_1d.html#ttslearn.util.pad_1d" title="ttslearn.util.pad_1d"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pad_1d</span></code></a></p></td>
+<td><p>Pad a 1d-tensor.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/ttslearn.util.pad_2d.html#ttslearn.util.pad_2d" title="ttslearn.util.pad_2d"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pad_2d</span></code></a></p></td>
+<td><p>Pad a 2d-tensor.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="path">
+<h2>Path<a class="headerlink" href="#path" title="Permalink to this headline">¶</a></h2>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/ttslearn.util.load_utt_list.html#ttslearn.util.load_utt_list" title="ttslearn.util.load_utt_list"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_utt_list</span></code></a></p></td>
+<td><p>Load a list of utterances.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/ttslearn.util.find_lab.html#ttslearn.util.find_lab" title="ttslearn.util.find_lab"><code class="xref py py-obj docutils literal notranslate"><span class="pre">find_lab</span></code></a></p></td>
+<td><p>Find label for a given utterance.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/ttslearn.util.find_feats.html#ttslearn.util.find_feats" title="ttslearn.util.find_feats"><code class="xref py py-obj docutils literal notranslate"><span class="pre">find_feats</span></code></a></p></td>
+<td><p>Find features for a given utterance.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="misc">
+<h2>Misc<a class="headerlink" href="#misc" title="Permalink to this headline">¶</a></h2>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/ttslearn.util.init_seed.html#ttslearn.util.init_seed" title="ttslearn.util.init_seed"><code class="xref py py-obj docutils literal notranslate"><span class="pre">init_seed</span></code></a></p></td>
+<td><p>Initialize random seed.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/ttslearn.util.dynamic_import.html#ttslearn.util.dynamic_import" title="ttslearn.util.dynamic_import"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dynamic_import</span></code></a></p></td>
+<td><p>Dynamic import</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/ttslearn.util.lab2phonemes.html#ttslearn.util.lab2phonemes" title="ttslearn.util.lab2phonemes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">lab2phonemes</span></code></a></p></td>
+<td><p>Convert labels to phonemes.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/ttslearn.util.optional_tqdm.html#ttslearn.util.optional_tqdm" title="ttslearn.util.optional_tqdm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">optional_tqdm</span></code></a></p></td>
+<td><p>Get a tqdm object.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/ttslearn.util.trim_silence.html#ttslearn.util.trim_silence" title="ttslearn.util.trim_silence"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trim_silence</span></code></a></p></td>
+<td><p>Trim silence from input features.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="generated/ttslearn.util.example_audio_file.html" class="btn btn-neutral float-right" title="ttslearn.util.example_audio_file" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="generated/ttslearn.pretrained.retrieve_pretrained_model.html" class="btn btn-neutral float-left" title="ttslearn.pretrained.retrieve_pretrained_model" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Ryuichi Yamamoto.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

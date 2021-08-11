@@ -1,0 +1,265 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Overview: module code &mdash; ttslearn 0.2.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/plot_directive.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> ttslearn
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.2.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Demo</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/ch00_Quick-start.html">Quick start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/ch11_Advanced-demos.html">Advanced TTS demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../demo_server.html">Demo server (with streamlit)</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Chapters</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/ch04_Python-SP.html">第4章 Python による音声信号処理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/ch05_DNNTTS.html">第5章 深層学習に基づく統計的パラメトリック音声合成</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/ch06_Recipe-DNNTTS.html">第6章: 日本語 DNN 音声合成システムの実装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/ch07_WaveNet.html">第7章 WaveNet: 深層学習に基づく音声波形の生成モデル</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/ch08_Recipe-WaveNet.html">第8章 日本語 WaveNet 音声合成システムの実装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/ch09_Tacotron.html">第9章 Tacotron 2: 一貫学習を狙った音声合成</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/ch10_Recipe-Tacotron.html">第10章 日本語Tacotronに基づく音声合成システムの実装</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Core modules</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dsp.html">ttslearn.dsp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dnntts.html">ttslearn.dnntts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wavenet.html">ttslearn.wavenet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tacotron.html">ttslearn.tacotron</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Helpers</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../pretrained.html">ttslearn.pretrained</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../util.html">ttslearn.util</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../train_util.html">ttslearn.train_util</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Advanced topics</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../extra_recipes.html">Extra recipes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contrib.html">ttslearn.contrib</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Meta information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Change log</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">ttslearn</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Overview: module code</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>All modules for which code is available</h1>
+<ul><li><a href="ttslearn/contrib/multispk_tacotron2.html">ttslearn.contrib.multispk_tacotron2</a></li>
+<li><a href="ttslearn/contrib/multispk_util.html">ttslearn.contrib.multispk_util</a></li>
+<li><a href="ttslearn/contrib/tacotron2_pwg.html">ttslearn.contrib.tacotron2_pwg</a></li>
+<li><a href="ttslearn/dnntts/gen.html">ttslearn.dnntts.gen</a></li>
+<li><a href="ttslearn/dnntts/model.html">ttslearn.dnntts.model</a></li>
+<li><a href="ttslearn/dnntts/multistream.html">ttslearn.dnntts.multistream</a></li>
+<li><a href="ttslearn/dnntts/tts.html">ttslearn.dnntts.tts</a></li>
+<li><a href="ttslearn/dsp.html">ttslearn.dsp</a></li>
+<li><a href="ttslearn/pretrained.html">ttslearn.pretrained</a></li>
+<li><a href="ttslearn/tacotron/attention.html">ttslearn.tacotron.attention</a></li>
+<li><a href="ttslearn/tacotron/decoder.html">ttslearn.tacotron.decoder</a></li>
+<li><a href="ttslearn/tacotron/encoder.html">ttslearn.tacotron.encoder</a></li>
+<li><a href="ttslearn/tacotron/frontend/openjtalk.html">ttslearn.tacotron.frontend.openjtalk</a></li>
+<li><a href="ttslearn/tacotron/frontend/text.html">ttslearn.tacotron.frontend.text</a></li>
+<li><a href="ttslearn/tacotron/gen.html">ttslearn.tacotron.gen</a></li>
+<li><a href="ttslearn/tacotron/postnet.html">ttslearn.tacotron.postnet</a></li>
+<li><a href="ttslearn/tacotron/tacotron2.html">ttslearn.tacotron.tacotron2</a></li>
+<li><a href="ttslearn/tacotron/tts.html">ttslearn.tacotron.tts</a></li>
+<li><a href="ttslearn/train_util.html">ttslearn.train_util</a></li>
+<li><a href="ttslearn/util.html">ttslearn.util</a></li>
+<li><a href="ttslearn/wavenet.html">ttslearn.wavenet</a></li>
+<ul><li><a href="ttslearn/wavenet/gen.html">ttslearn.wavenet.gen</a></li>
+<li><a href="ttslearn/wavenet/modules.html">ttslearn.wavenet.modules</a></li>
+<li><a href="ttslearn/wavenet/tts.html">ttslearn.wavenet.tts</a></li>
+<li><a href="ttslearn/wavenet/upsample.html">ttslearn.wavenet.upsample</a></li>
+<li><a href="ttslearn/wavenet/wavenet.html">ttslearn.wavenet.wavenet</a></li>
+</ul></ul>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Ryuichi Yamamoto.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,6 @@
+﻿ttslearn.train\_util.get\_epochs\_with\_optional\_tqdm
+======================================================
+
+.. currentmodule:: ttslearn.train_util
+
+.. autofunction:: get_epochs_with_optional_tqdm

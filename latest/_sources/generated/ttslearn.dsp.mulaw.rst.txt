@@ -1,0 +1,6 @@
+﻿ttslearn.dsp.mulaw
+==================
+
+.. currentmodule:: ttslearn.dsp
+
+.. autofunction:: mulaw

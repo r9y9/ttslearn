@@ -1,0 +1,6 @@
+﻿ttslearn.dnntts.gen.predict\_acoustic
+=====================================
+
+.. currentmodule:: ttslearn.dnntts.gen
+
+.. autofunction:: predict_acoustic

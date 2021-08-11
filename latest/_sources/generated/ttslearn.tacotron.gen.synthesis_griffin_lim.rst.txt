@@ -1,0 +1,6 @@
+﻿ttslearn.tacotron.gen.synthesis\_griffin\_lim
+=============================================
+
+.. currentmodule:: ttslearn.tacotron.gen
+
+.. autofunction:: synthesis_griffin_lim

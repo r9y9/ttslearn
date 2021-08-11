@@ -1,0 +1,6 @@
+﻿ttslearn.wavenet.receptive\_field\_size
+=======================================
+
+.. currentmodule:: ttslearn.wavenet
+
+.. autofunction:: receptive_field_size

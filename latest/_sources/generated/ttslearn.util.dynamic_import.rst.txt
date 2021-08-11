@@ -1,0 +1,6 @@
+﻿ttslearn.util.dynamic\_import
+=============================
+
+.. currentmodule:: ttslearn.util
+
+.. autofunction:: dynamic_import

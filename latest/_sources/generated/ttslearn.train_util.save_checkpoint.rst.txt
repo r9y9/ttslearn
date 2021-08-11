@@ -1,0 +1,6 @@
+﻿ttslearn.train\_util.save\_checkpoint
+=====================================
+
+.. currentmodule:: ttslearn.train_util
+
+.. autofunction:: save_checkpoint

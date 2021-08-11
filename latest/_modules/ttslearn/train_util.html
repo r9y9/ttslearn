@@ -1,0 +1,658 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>ttslearn.train_util &mdash; ttslearn 0.2.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/plot_directive.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> ttslearn
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.2.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Demo</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/ch00_Quick-start.html">Quick start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/ch11_Advanced-demos.html">Advanced TTS demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../demo_server.html">Demo server (with streamlit)</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Chapters</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/ch04_Python-SP.html">第4章 Python による音声信号処理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/ch05_DNNTTS.html">第5章 深層学習に基づく統計的パラメトリック音声合成</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/ch06_Recipe-DNNTTS.html">第6章: 日本語 DNN 音声合成システムの実装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/ch07_WaveNet.html">第7章 WaveNet: 深層学習に基づく音声波形の生成モデル</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/ch08_Recipe-WaveNet.html">第8章 日本語 WaveNet 音声合成システムの実装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/ch09_Tacotron.html">第9章 Tacotron 2: 一貫学習を狙った音声合成</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/ch10_Recipe-Tacotron.html">第10章 日本語Tacotronに基づく音声合成システムの実装</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Core modules</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../dsp.html">ttslearn.dsp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dnntts.html">ttslearn.dnntts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../wavenet.html">ttslearn.wavenet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tacotron.html">ttslearn.tacotron</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Helpers</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../pretrained.html">ttslearn.pretrained</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../util.html">ttslearn.util</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../train_util.html">ttslearn.train_util</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Advanced topics</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../extra_recipes.html">Extra recipes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contrib.html">ttslearn.contrib</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Meta information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Change log</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ttslearn</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>ttslearn.train_util</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for ttslearn.train_util</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">shutil</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+
+<span class="kn">import</span> <span class="nn">hydra</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">hydra.utils</span> <span class="kn">import</span> <span class="n">to_absolute_path</span>
+<span class="kn">from</span> <span class="nn">omegaconf</span> <span class="kn">import</span> <span class="n">OmegaConf</span>
+<span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">nn</span><span class="p">,</span> <span class="n">optim</span>
+<span class="kn">from</span> <span class="nn">torch.utils</span> <span class="kn">import</span> <span class="n">data</span> <span class="k">as</span> <span class="n">data_utils</span>
+<span class="kn">from</span> <span class="nn">torch.utils.tensorboard</span> <span class="kn">import</span> <span class="n">SummaryWriter</span>
+<span class="kn">from</span> <span class="nn">ttslearn.logger</span> <span class="kn">import</span> <span class="n">getLogger</span>
+<span class="kn">from</span> <span class="nn">ttslearn.util</span> <span class="kn">import</span> <span class="n">init_seed</span><span class="p">,</span> <span class="n">load_utt_list</span><span class="p">,</span> <span class="n">pad_1d</span><span class="p">,</span> <span class="n">pad_2d</span>
+
+
+<div class="viewcode-block" id="get_epochs_with_optional_tqdm"><a class="viewcode-back" href="../../generated/ttslearn.train_util.get_epochs_with_optional_tqdm.html#ttslearn.train_util.get_epochs_with_optional_tqdm">[docs]</a><span class="k">def</span> <span class="nf">get_epochs_with_optional_tqdm</span><span class="p">(</span><span class="n">tqdm_mode</span><span class="p">,</span> <span class="n">nepochs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Get epochs with optional progress bar.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        tqdm_mode (str): Progress bar mode.</span>
+<span class="sd">        nepochs (int): Number of epochs.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        iterable: Epochs.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">tqdm_mode</span> <span class="o">==</span> <span class="s2">&quot;tqdm&quot;</span><span class="p">:</span>
+        <span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
+
+        <span class="n">epochs</span> <span class="o">=</span> <span class="n">tqdm</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">nepochs</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="n">desc</span><span class="o">=</span><span class="s2">&quot;epoch&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">epochs</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">nepochs</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">epochs</span></div>
+
+
+<div class="viewcode-block" id="moving_average_"><a class="viewcode-back" href="../../generated/ttslearn.train_util.moving_average_.html#ttslearn.train_util.moving_average_">[docs]</a><span class="k">def</span> <span class="nf">moving_average_</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">model_test</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="mf">0.9999</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Exponential moving average (EMA) of model parameters.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        model (torch.nn.Module): Model to perform EMA on.</span>
+<span class="sd">        model_test (torch.nn.Module): Model to use for the test phase.</span>
+<span class="sd">        beta (float, optional): [description]. Defaults to 0.9999.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">param</span><span class="p">,</span> <span class="n">param_test</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">model_test</span><span class="o">.</span><span class="n">parameters</span><span class="p">()):</span>
+        <span class="n">param_test</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">lerp</span><span class="p">(</span><span class="n">param</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">param_test</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">beta</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="num_trainable_params"><a class="viewcode-back" href="../../generated/ttslearn.train_util.num_trainable_params.html#ttslearn.train_util.num_trainable_params">[docs]</a><span class="k">def</span> <span class="nf">num_trainable_params</span><span class="p">(</span><span class="n">model</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Count the number of trainable parameters in the model.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        model (torch.nn.Module): Model to count the number of trainable parameters.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        int: Number of trainable parameters.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">parameters</span> <span class="o">=</span> <span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">p</span><span class="p">:</span> <span class="n">p</span><span class="o">.</span><span class="n">requires_grad</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">())</span>
+    <span class="k">return</span> <span class="nb">sum</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">size</span><span class="p">())</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">parameters</span><span class="p">])</span></div>
+
+
+<div class="viewcode-block" id="Dataset"><a class="viewcode-back" href="../../train_util.html#ttslearn.train_util.Dataset">[docs]</a><span class="k">class</span> <span class="nc">Dataset</span><span class="p">(</span><span class="n">data_utils</span><span class="o">.</span><span class="n">Dataset</span><span class="p">):</span>  <span class="c1"># type: ignore</span>
+    <span class="sd">&quot;&quot;&quot;Dataset for numpy files</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        in_paths (list): List of paths to input files</span>
+<span class="sd">        out_paths (list): List of paths to output files</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">in_paths</span><span class="p">,</span> <span class="n">out_paths</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">in_paths</span> <span class="o">=</span> <span class="n">in_paths</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">out_paths</span> <span class="o">=</span> <span class="n">out_paths</span>
+
+<div class="viewcode-block" id="Dataset.__getitem__"><a class="viewcode-back" href="../../train_util.html#ttslearn.train_util.Dataset.__getitem__">[docs]</a>    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get a pair of input and target</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            idx (int): index of the pair</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            tuple: input and target in numpy format</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">in_paths</span><span class="p">[</span><span class="n">idx</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">out_paths</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span></div>
+
+<div class="viewcode-block" id="Dataset.__len__"><a class="viewcode-back" href="../../train_util.html#ttslearn.train_util.Dataset.__len__">[docs]</a>    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns the size of the dataset</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            int: size of the dataset</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">in_paths</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="get_data_loaders"><a class="viewcode-back" href="../../generated/ttslearn.train_util.get_data_loaders.html#ttslearn.train_util.get_data_loaders">[docs]</a><span class="k">def</span> <span class="nf">get_data_loaders</span><span class="p">(</span><span class="n">data_config</span><span class="p">,</span> <span class="n">collate_fn</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Get data loaders for training and validation.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        data_config (dict): Data configuration.</span>
+<span class="sd">        collate_fn (callable): Collate function.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        dict: Data loaders.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">data_loaders</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">for</span> <span class="n">phase</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;train&quot;</span><span class="p">,</span> <span class="s2">&quot;dev&quot;</span><span class="p">]:</span>
+        <span class="n">utt_ids</span> <span class="o">=</span> <span class="n">load_utt_list</span><span class="p">(</span><span class="n">to_absolute_path</span><span class="p">(</span><span class="n">data_config</span><span class="p">[</span><span class="n">phase</span><span class="p">]</span><span class="o">.</span><span class="n">utt_list</span><span class="p">))</span>
+        <span class="n">in_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">to_absolute_path</span><span class="p">(</span><span class="n">data_config</span><span class="p">[</span><span class="n">phase</span><span class="p">]</span><span class="o">.</span><span class="n">in_dir</span><span class="p">))</span>
+        <span class="n">out_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">to_absolute_path</span><span class="p">(</span><span class="n">data_config</span><span class="p">[</span><span class="n">phase</span><span class="p">]</span><span class="o">.</span><span class="n">out_dir</span><span class="p">))</span>
+
+        <span class="n">in_feats_paths</span> <span class="o">=</span> <span class="p">[</span><span class="n">in_dir</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">utt_id</span><span class="si">}</span><span class="s2">-feats.npy&quot;</span> <span class="k">for</span> <span class="n">utt_id</span> <span class="ow">in</span> <span class="n">utt_ids</span><span class="p">]</span>
+        <span class="n">out_feats_paths</span> <span class="o">=</span> <span class="p">[</span><span class="n">out_dir</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">utt_id</span><span class="si">}</span><span class="s2">-feats.npy&quot;</span> <span class="k">for</span> <span class="n">utt_id</span> <span class="ow">in</span> <span class="n">utt_ids</span><span class="p">]</span>
+
+        <span class="n">dataset</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="n">in_feats_paths</span><span class="p">,</span> <span class="n">out_feats_paths</span><span class="p">)</span>
+        <span class="n">data_loaders</span><span class="p">[</span><span class="n">phase</span><span class="p">]</span> <span class="o">=</span> <span class="n">data_utils</span><span class="o">.</span><span class="n">DataLoader</span><span class="p">(</span>
+            <span class="n">dataset</span><span class="p">,</span>
+            <span class="n">batch_size</span><span class="o">=</span><span class="n">data_config</span><span class="o">.</span><span class="n">batch_size</span><span class="p">,</span>
+            <span class="n">collate_fn</span><span class="o">=</span><span class="n">collate_fn</span><span class="p">,</span>
+            <span class="n">pin_memory</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">num_workers</span><span class="o">=</span><span class="n">data_config</span><span class="o">.</span><span class="n">num_workers</span><span class="p">,</span>
+            <span class="n">shuffle</span><span class="o">=</span><span class="n">phase</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;train&quot;</span><span class="p">),</span>
+        <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">data_loaders</span></div>
+
+
+<div class="viewcode-block" id="collate_fn_dnntts"><a class="viewcode-back" href="../../generated/ttslearn.train_util.collate_fn_dnntts.html#ttslearn.train_util.collate_fn_dnntts">[docs]</a><span class="k">def</span> <span class="nf">collate_fn_dnntts</span><span class="p">(</span><span class="n">batch</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Collate function for DNN-TTS.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        batch (list): List of tuples of the form (inputs, targets).</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        tuple: Batch of inputs, targets, and lengths.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">lengths</span> <span class="o">=</span> <span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">batch</span><span class="p">]</span>
+    <span class="n">max_len</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">lengths</span><span class="p">)</span>
+    <span class="n">x_batch</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">pad_2d</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">max_len</span><span class="p">))</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">batch</span><span class="p">])</span>
+    <span class="n">y_batch</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">pad_2d</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">max_len</span><span class="p">))</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">batch</span><span class="p">])</span>
+    <span class="n">l_batch</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">lengths</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">long</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">x_batch</span><span class="p">,</span> <span class="n">y_batch</span><span class="p">,</span> <span class="n">l_batch</span></div>
+
+
+<div class="viewcode-block" id="collate_fn_wavenet"><a class="viewcode-back" href="../../generated/ttslearn.train_util.collate_fn_wavenet.html#ttslearn.train_util.collate_fn_wavenet">[docs]</a><span class="k">def</span> <span class="nf">collate_fn_wavenet</span><span class="p">(</span><span class="n">batch</span><span class="p">,</span> <span class="n">max_time_frames</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">hop_size</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span> <span class="n">aux_context_window</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Collate function for WaveNet.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        batch (list): List of tuples of the form (inputs, targets).</span>
+<span class="sd">        max_time_frames (int, optional): Number of time frames. Defaults to 100.</span>
+<span class="sd">        hop_size (int, optional): Hop size. Defaults to 80.</span>
+<span class="sd">        aux_context_window (int, optional): Auxiliary context window. Defaults to 2.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        tuple: Batch of waveforms and conditional features.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">max_time_steps</span> <span class="o">=</span> <span class="n">max_time_frames</span> <span class="o">*</span> <span class="n">hop_size</span>
+
+    <span class="n">xs</span><span class="p">,</span> <span class="n">cs</span> <span class="o">=</span> <span class="p">[</span><span class="n">b</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">batch</span><span class="p">],</span> <span class="p">[</span><span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">batch</span><span class="p">]</span>
+
+    <span class="c1"># 条件付け特徴量の開始位置をランダム抽出した後、それに相当する短い音声波形を切り出します</span>
+    <span class="n">c_lengths</span> <span class="o">=</span> <span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">cs</span><span class="p">]</span>
+    <span class="n">start_frames</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+        <span class="p">[</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span>
+                <span class="n">aux_context_window</span><span class="p">,</span> <span class="n">cl</span> <span class="o">-</span> <span class="n">aux_context_window</span> <span class="o">-</span> <span class="n">max_time_frames</span>
+            <span class="p">)</span>
+            <span class="k">for</span> <span class="n">cl</span> <span class="ow">in</span> <span class="n">c_lengths</span>
+        <span class="p">]</span>
+    <span class="p">)</span>
+    <span class="n">x_starts</span> <span class="o">=</span> <span class="n">start_frames</span> <span class="o">*</span> <span class="n">hop_size</span>
+    <span class="n">x_ends</span> <span class="o">=</span> <span class="n">x_starts</span> <span class="o">+</span> <span class="n">max_time_steps</span>
+    <span class="n">c_starts</span> <span class="o">=</span> <span class="n">start_frames</span> <span class="o">-</span> <span class="n">aux_context_window</span>
+    <span class="n">c_ends</span> <span class="o">=</span> <span class="n">start_frames</span> <span class="o">+</span> <span class="n">max_time_frames</span> <span class="o">+</span> <span class="n">aux_context_window</span>
+    <span class="n">x_cut</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="n">s</span><span class="p">:</span><span class="n">e</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">e</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">x_starts</span><span class="p">,</span> <span class="n">x_ends</span><span class="p">)]</span>
+    <span class="n">c_cut</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span><span class="p">[</span><span class="n">s</span><span class="p">:</span><span class="n">e</span><span class="p">]</span> <span class="k">for</span> <span class="n">c</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">e</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">cs</span><span class="p">,</span> <span class="n">c_starts</span><span class="p">,</span> <span class="n">c_ends</span><span class="p">)]</span>
+
+    <span class="c1"># numpy.ndarray のリスト型から torch.Tensor 型に変換します</span>
+    <span class="n">x_batch</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">x_cut</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">long</span><span class="p">)</span>  <span class="c1"># (B, T)</span>
+    <span class="n">c_batch</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">c_cut</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float</span><span class="p">)</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># (B, C, T&#39;)</span>
+
+    <span class="k">return</span> <span class="n">x_batch</span><span class="p">,</span> <span class="n">c_batch</span></div>
+
+
+<span class="k">def</span> <span class="nf">ensure_divisible_by</span><span class="p">(</span><span class="n">feats</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Ensure that the number of frames is divisible by N.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        feats (np.ndarray): Input features.</span>
+<span class="sd">        N (int): Target number of frames.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        np.ndarray: Input features with number of frames divisible by N.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">N</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">feats</span>
+    <span class="n">mod</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">feats</span><span class="p">)</span> <span class="o">%</span> <span class="n">N</span>
+    <span class="k">if</span> <span class="n">mod</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">feats</span> <span class="o">=</span> <span class="n">feats</span><span class="p">[:</span> <span class="nb">len</span><span class="p">(</span><span class="n">feats</span><span class="p">)</span> <span class="o">-</span> <span class="n">mod</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">feats</span>
+
+
+<div class="viewcode-block" id="collate_fn_tacotron"><a class="viewcode-back" href="../../generated/ttslearn.train_util.collate_fn_tacotron.html#ttslearn.train_util.collate_fn_tacotron">[docs]</a><span class="k">def</span> <span class="nf">collate_fn_tacotron</span><span class="p">(</span><span class="n">batch</span><span class="p">,</span> <span class="n">reduction_factor</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Collate function for Tacotron.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        batch (list): List of tuples of the form (inputs, targets).</span>
+<span class="sd">        reduction_factor (int, optional): Reduction factor. Defaults to 1.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        tuple: Batch of inputs, input lengths, targets, target lengths and stop flags.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">xs</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">batch</span><span class="p">]</span>
+    <span class="n">ys</span> <span class="o">=</span> <span class="p">[</span><span class="n">ensure_divisible_by</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">reduction_factor</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">batch</span><span class="p">]</span>
+    <span class="n">in_lens</span> <span class="o">=</span> <span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">xs</span><span class="p">]</span>
+    <span class="n">out_lens</span> <span class="o">=</span> <span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">ys</span><span class="p">]</span>
+    <span class="n">in_max_len</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">in_lens</span><span class="p">)</span>
+    <span class="n">out_max_len</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">out_lens</span><span class="p">)</span>
+    <span class="n">x_batch</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">pad_1d</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">in_max_len</span><span class="p">))</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">xs</span><span class="p">])</span>
+    <span class="n">y_batch</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">pad_2d</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">out_max_len</span><span class="p">))</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">ys</span><span class="p">])</span>
+    <span class="n">il_batch</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">in_lens</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">long</span><span class="p">)</span>
+    <span class="n">ol_batch</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">out_lens</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">long</span><span class="p">)</span>
+    <span class="n">stop_flags</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">y_batch</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">y_batch</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">out_len</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">out_lens</span><span class="p">):</span>
+        <span class="n">stop_flags</span><span class="p">[</span><span class="n">idx</span><span class="p">,</span> <span class="n">out_len</span> <span class="o">-</span> <span class="mi">1</span> <span class="p">:]</span> <span class="o">=</span> <span class="mf">1.0</span>
+    <span class="k">return</span> <span class="n">x_batch</span><span class="p">,</span> <span class="n">il_batch</span><span class="p">,</span> <span class="n">y_batch</span><span class="p">,</span> <span class="n">ol_batch</span><span class="p">,</span> <span class="n">stop_flags</span></div>
+
+
+<span class="k">def</span> <span class="nf">set_epochs_based_on_max_steps_</span><span class="p">(</span><span class="n">train_config</span><span class="p">,</span> <span class="n">steps_per_epoch</span><span class="p">,</span> <span class="n">logger</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Set epochs based on max steps.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        train_config (TrainConfig): Train config.</span>
+<span class="sd">        steps_per_epoch (int): Number of steps per epoch.</span>
+<span class="sd">        logger (logging.Logger): Logger.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number of iterations per epoch: </span><span class="si">{</span><span class="n">steps_per_epoch</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">train_config</span><span class="o">.</span><span class="n">max_train_steps</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="c1"># Set max_train_steps based on nepochs</span>
+        <span class="n">max_train_steps</span> <span class="o">=</span> <span class="n">train_config</span><span class="o">.</span><span class="n">nepochs</span> <span class="o">*</span> <span class="n">steps_per_epoch</span>
+        <span class="n">train_config</span><span class="o">.</span><span class="n">max_train_steps</span> <span class="o">=</span> <span class="n">max_train_steps</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+            <span class="s2">&quot;Number of max_train_steps is set based on nepochs: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">max_train_steps</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># Set nepochs based on max_train_steps</span>
+        <span class="n">max_train_steps</span> <span class="o">=</span> <span class="n">train_config</span><span class="o">.</span><span class="n">max_train_steps</span>
+        <span class="n">epochs</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">max_train_steps</span> <span class="o">/</span> <span class="n">steps_per_epoch</span><span class="p">))</span>
+        <span class="n">train_config</span><span class="o">.</span><span class="n">nepochs</span> <span class="o">=</span> <span class="n">epochs</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+            <span class="s2">&quot;Number of epochs is set based on max_train_steps: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">epochs</span><span class="p">)</span>
+        <span class="p">)</span>
+
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number of epochs: </span><span class="si">{</span><span class="n">train_config</span><span class="o">.</span><span class="n">nepochs</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number of iterations: </span><span class="si">{</span><span class="n">train_config</span><span class="o">.</span><span class="n">max_train_steps</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="save_checkpoint"><a class="viewcode-back" href="../../generated/ttslearn.train_util.save_checkpoint.html#ttslearn.train_util.save_checkpoint">[docs]</a><span class="k">def</span> <span class="nf">save_checkpoint</span><span class="p">(</span>
+    <span class="n">logger</span><span class="p">,</span> <span class="n">out_dir</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">,</span> <span class="n">epoch</span><span class="p">,</span> <span class="n">is_best</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">postfix</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+<span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Save a checkpoint.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        logger (logging.Logger): Logger.</span>
+<span class="sd">        out_dir (str): Output directory.</span>
+<span class="sd">        model (nn.Module): Model.</span>
+<span class="sd">        optimizer (Optimizer): Optimizer.</span>
+<span class="sd">        epoch (int): Current epoch.</span>
+<span class="sd">        is_best (bool, optional): Whether or not the current model is the best.</span>
+<span class="sd">            Defaults to False.</span>
+<span class="sd">        postfix (str, optional): Postfix. Defaults to &quot;&quot;.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">nn</span><span class="o">.</span><span class="n">DataParallel</span><span class="p">):</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">module</span>
+
+    <span class="n">out_dir</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">is_best</span><span class="p">:</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="n">out_dir</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;best_loss</span><span class="si">{</span><span class="n">postfix</span><span class="si">}</span><span class="s2">.pth&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="n">out_dir</span> <span class="o">/</span> <span class="s2">&quot;epoch</span><span class="si">{:04d}{}</span><span class="s2">.pth&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">epoch</span><span class="p">,</span> <span class="n">postfix</span><span class="p">)</span>
+    <span class="n">torch</span><span class="o">.</span><span class="n">save</span><span class="p">(</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;state_dict&quot;</span><span class="p">:</span> <span class="n">model</span><span class="o">.</span><span class="n">state_dict</span><span class="p">(),</span>
+            <span class="s2">&quot;optimizer_state&quot;</span><span class="p">:</span> <span class="n">optimizer</span><span class="o">.</span><span class="n">state_dict</span><span class="p">(),</span>
+        <span class="p">},</span>
+        <span class="n">path</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Saved checkpoint at </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">is_best</span><span class="p">:</span>
+        <span class="n">shutil</span><span class="o">.</span><span class="n">copyfile</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">out_dir</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;latest</span><span class="si">{</span><span class="n">postfix</span><span class="si">}</span><span class="s2">.pth&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="plot_attention"><a class="viewcode-back" href="../../generated/ttslearn.train_util.plot_attention.html#ttslearn.train_util.plot_attention">[docs]</a><span class="k">def</span> <span class="nf">plot_attention</span><span class="p">(</span><span class="n">alignment</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Plot attention.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        alignment (np.ndarray): Attention.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+    <span class="n">alignment</span> <span class="o">=</span> <span class="n">alignment</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span><span class="o">.</span><span class="n">T</span>
+    <span class="n">im</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">alignment</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="s2">&quot;lower&quot;</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">)</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Decoder time step&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Encoder time step&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">fig</span></div>
+
+
+<div class="viewcode-block" id="plot_2d_feats"><a class="viewcode-back" href="../../generated/ttslearn.train_util.plot_2d_feats.html#ttslearn.train_util.plot_2d_feats">[docs]</a><span class="k">def</span> <span class="nf">plot_2d_feats</span><span class="p">(</span><span class="n">feats</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Plot 2D features.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        feats (np.ndarray): Input features.</span>
+<span class="sd">        title (str, optional): Title. Defaults to None.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">feats</span> <span class="o">=</span> <span class="n">feats</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span><span class="o">.</span><span class="n">T</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+    <span class="n">im</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span>
+        <span class="n">feats</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="s2">&quot;lower&quot;</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;viridis&quot;</span>
+    <span class="p">)</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">title</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">fig</span></div>
+
+
+<div class="viewcode-block" id="setup"><a class="viewcode-back" href="../../generated/ttslearn.train_util.setup.html#ttslearn.train_util.setup">[docs]</a><span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">device</span><span class="p">,</span> <span class="n">collate_fn</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Setup for traiining</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        config (dict): configuration for training</span>
+<span class="sd">        device (torch.device): device to use for training</span>
+<span class="sd">        collate_fn (callable): function to collate mini-batches</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        (tuple): tuple containing model, optimizer, learning rate scheduler,</span>
+<span class="sd">            data loaders, tensorboard writer, and logger.</span>
+
+<span class="sd">    .. note::</span>
+
+<span class="sd">        書籍に記載のコードは、この関数を一部簡略化しています。</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># NOTE: hydra は内部で stream logger を追加するので、二重に追加しないことに注意</span>
+    <span class="n">logger</span> <span class="o">=</span> <span class="n">getLogger</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">verbose</span><span class="p">,</span> <span class="n">add_stream_handler</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;PyTorch version: </span><span class="si">{</span><span class="n">torch</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># CUDA 周りの設定</span>
+    <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">():</span>
+        <span class="kn">from</span> <span class="nn">torch.backends</span> <span class="kn">import</span> <span class="n">cudnn</span>
+
+        <span class="n">cudnn</span><span class="o">.</span><span class="n">benchmark</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">cudnn</span><span class="o">.</span><span class="n">benchmark</span>
+        <span class="n">cudnn</span><span class="o">.</span><span class="n">deterministic</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">cudnn</span><span class="o">.</span><span class="n">deterministic</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;cudnn.deterministic: </span><span class="si">{</span><span class="n">cudnn</span><span class="o">.</span><span class="n">deterministic</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;cudnn.benchmark: </span><span class="si">{</span><span class="n">cudnn</span><span class="o">.</span><span class="n">benchmark</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">backends</span><span class="o">.</span><span class="n">cudnn</span><span class="o">.</span><span class="n">version</span><span class="p">()</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;cuDNN version: </span><span class="si">{</span><span class="n">torch</span><span class="o">.</span><span class="n">backends</span><span class="o">.</span><span class="n">cudnn</span><span class="o">.</span><span class="n">version</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Random seed: </span><span class="si">{</span><span class="n">config</span><span class="o">.</span><span class="n">seed</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">init_seed</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">seed</span><span class="p">)</span>
+
+    <span class="c1"># モデルのインスタンス化</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">hydra</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">instantiate</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">netG</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+        <span class="s2">&quot;Number of trainable params: </span><span class="si">{:.3f}</span><span class="s2"> million&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">num_trainable_params</span><span class="p">(</span><span class="n">model</span><span class="p">)</span> <span class="o">/</span> <span class="mf">1000000.0</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="c1"># (optional) 学習済みモデルの読み込み</span>
+    <span class="c1"># ファインチューニングしたい場合</span>
+    <span class="n">pretrained_checkpoint</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">pretrained</span><span class="o">.</span><span class="n">checkpoint</span>
+    <span class="k">if</span> <span class="n">pretrained_checkpoint</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">pretrained_checkpoint</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+            <span class="s2">&quot;Fine-tuning! Loading a checkpoint: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">pretrained_checkpoint</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">checkpoint</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">pretrained_checkpoint</span><span class="p">,</span> <span class="n">map_location</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">load_state_dict</span><span class="p">(</span><span class="n">checkpoint</span><span class="p">[</span><span class="s2">&quot;state_dict&quot;</span><span class="p">])</span>
+
+    <span class="c1"># 複数 GPU 対応</span>
+    <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">data_parallel</span><span class="p">:</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">DataParallel</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+
+    <span class="c1"># Optimizer</span>
+    <span class="n">optimizer_class</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">optim</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">optimizer</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+    <span class="n">optimizer</span> <span class="o">=</span> <span class="n">optimizer_class</span><span class="p">(</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="o">**</span><span class="n">config</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">optimizer</span><span class="o">.</span><span class="n">params</span>
+    <span class="p">)</span>
+
+    <span class="c1"># 学習率スケジューラ</span>
+    <span class="n">lr_scheduler_class</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span>
+        <span class="n">optim</span><span class="o">.</span><span class="n">lr_scheduler</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">lr_scheduler</span><span class="o">.</span><span class="n">name</span>
+    <span class="p">)</span>
+    <span class="n">lr_scheduler</span> <span class="o">=</span> <span class="n">lr_scheduler_class</span><span class="p">(</span>
+        <span class="n">optimizer</span><span class="p">,</span> <span class="o">**</span><span class="n">config</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">lr_scheduler</span><span class="o">.</span><span class="n">params</span>
+    <span class="p">)</span>
+
+    <span class="c1"># DataLoader</span>
+    <span class="n">data_loaders</span> <span class="o">=</span> <span class="n">get_data_loaders</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">collate_fn</span><span class="p">)</span>
+
+    <span class="n">set_epochs_based_on_max_steps_</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">train</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">data_loaders</span><span class="p">[</span><span class="s2">&quot;train&quot;</span><span class="p">]),</span> <span class="n">logger</span><span class="p">)</span>
+
+    <span class="c1"># Tensorboard の設定</span>
+    <span class="n">writer</span> <span class="o">=</span> <span class="n">SummaryWriter</span><span class="p">(</span><span class="n">to_absolute_path</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">log_dir</span><span class="p">))</span>
+
+    <span class="c1"># config ファイルを保存しておく</span>
+    <span class="n">out_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">to_absolute_path</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">out_dir</span><span class="p">))</span>
+    <span class="n">out_dir</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">out_dir</span> <span class="o">/</span> <span class="s2">&quot;model.yaml&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">OmegaConf</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">model</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">out_dir</span> <span class="o">/</span> <span class="s2">&quot;config.yaml&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">OmegaConf</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">model</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">,</span> <span class="n">lr_scheduler</span><span class="p">,</span> <span class="n">data_loaders</span><span class="p">,</span> <span class="n">writer</span><span class="p">,</span> <span class="n">logger</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Ryuichi Yamamoto.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

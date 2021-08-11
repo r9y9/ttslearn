@@ -1,0 +1,6 @@
+﻿ttslearn.dnntts.multistream.get\_windows
+========================================
+
+.. currentmodule:: ttslearn.dnntts.multistream
+
+.. autofunction:: get_windows

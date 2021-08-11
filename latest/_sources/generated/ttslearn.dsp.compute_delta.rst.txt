@@ -1,0 +1,6 @@
+﻿ttslearn.dsp.compute\_delta
+===========================
+
+.. currentmodule:: ttslearn.dsp
+
+.. autofunction:: compute_delta

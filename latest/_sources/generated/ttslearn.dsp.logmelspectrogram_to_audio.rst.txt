@@ -1,0 +1,6 @@
+﻿ttslearn.dsp.logmelspectrogram\_to\_audio
+=========================================
+
+.. currentmodule:: ttslearn.dsp
+
+.. autofunction:: logmelspectrogram_to_audio

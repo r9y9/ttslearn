@@ -1,0 +1,6 @@
+﻿ttslearn.tacotron.frontend.openjtalk.num\_vocab
+===============================================
+
+.. currentmodule:: ttslearn.tacotron.frontend.openjtalk
+
+.. autofunction:: num_vocab

@@ -1,0 +1,6 @@
+﻿ttslearn.tacotron.frontend.openjtalk.pp\_symbols
+================================================
+
+.. currentmodule:: ttslearn.tacotron.frontend.openjtalk
+
+.. autofunction:: pp_symbols

@@ -1,0 +1,6 @@
+﻿ttslearn.dnntts.multistream.multi\_stream\_mlpg
+===============================================
+
+.. currentmodule:: ttslearn.dnntts.multistream
+
+.. autofunction:: multi_stream_mlpg

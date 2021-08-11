@@ -1,0 +1,625 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>ttslearn.wavenet &mdash; ttslearn 0.2.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/plot_directive.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="ttslearn.wavenet.gen.gen_waveform" href="generated/ttslearn.wavenet.gen.gen_waveform.html" />
+    <link rel="prev" title="ttslearn.dnntts.gen.gen_waveform" href="generated/ttslearn.dnntts.gen.gen_waveform.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> ttslearn
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.2.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Demo</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/ch00_Quick-start.html">Quick start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/ch11_Advanced-demos.html">Advanced TTS demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo_server.html">Demo server (with streamlit)</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Chapters</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/ch04_Python-SP.html">第4章 Python による音声信号処理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/ch05_DNNTTS.html">第5章 深層学習に基づく統計的パラメトリック音声合成</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/ch06_Recipe-DNNTTS.html">第6章: 日本語 DNN 音声合成システムの実装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/ch07_WaveNet.html">第7章 WaveNet: 深層学習に基づく音声波形の生成モデル</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/ch08_Recipe-WaveNet.html">第8章 日本語 WaveNet 音声合成システムの実装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/ch09_Tacotron.html">第9章 Tacotron 2: 一貫学習を狙った音声合成</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/ch10_Recipe-Tacotron.html">第10章 日本語Tacotronに基づく音声合成システムの実装</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Core modules</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="dsp.html">ttslearn.dsp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dnntts.html">ttslearn.dnntts</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">ttslearn.wavenet</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#tts">TTS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-ttslearn.wavenet.upsample">Upsampling networks</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#repeat-upsampling">Repeat upsampling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nearest-neighbor-upsampling">Nearest neighbor upsampling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#conv1d-nearest-neighbor-upsampling">Conv1d + nearest neighbor upsampling</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-ttslearn.wavenet.modules">Convolution block</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-ttslearn.wavenet.wavenet">WaveNet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-ttslearn.wavenet.gen">Generation utility</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/ttslearn.wavenet.gen.gen_waveform.html">ttslearn.wavenet.gen.gen_waveform</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-ttslearn.wavenet">Utility</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/ttslearn.wavenet.receptive_field_size.html">ttslearn.wavenet.receptive_field_size</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tacotron.html">ttslearn.tacotron</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Helpers</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="pretrained.html">ttslearn.pretrained</a></li>
+<li class="toctree-l1"><a class="reference internal" href="util.html">ttslearn.util</a></li>
+<li class="toctree-l1"><a class="reference internal" href="train_util.html">ttslearn.train_util</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Advanced topics</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="extra_recipes.html">Extra recipes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contrib.html">ttslearn.contrib</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Meta information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Change log</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ttslearn</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>ttslearn.wavenet</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/wavenet.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="ttslearn-wavenet">
+<h1>ttslearn.wavenet<a class="headerlink" href="#ttslearn-wavenet" title="Permalink to this headline">¶</a></h1>
+<p>WaveNet音声合成のためのモジュールです。</p>
+<div class="section" id="tts">
+<h2>TTS<a class="headerlink" href="#tts" title="Permalink to this headline">¶</a></h2>
+<p>The TTS functionality is accessible from <code class="docutils literal notranslate"><span class="pre">ttslearn.wavenet.*</span></code></p>
+<span class="target" id="module-ttslearn.wavenet.tts"></span><dl class="py class">
+<dt id="ttslearn.wavenet.tts.WaveNetTTS">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">ttslearn.wavenet.tts.</span></code><code class="sig-name descname"><span class="pre">WaveNetTTS</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cpu'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ttslearn/wavenet/tts.html#WaveNetTTS"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ttslearn.wavenet.tts.WaveNetTTS" title="Permalink to this definition">¶</a></dt>
+<dd><p>WaveNet-based text-to-speech</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>model_dir</strong> (<a class="reference external" href="https://docs.python.org/dev/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – model directory. A pre-trained model (ID: <code class="docutils literal notranslate"><span class="pre">wavenettts</span></code>)
+is used if None.</p></li>
+<li><p><strong>device</strong> (<a class="reference external" href="https://docs.python.org/dev/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – cpu or cuda.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ttslearn.dnntts</span> <span class="kn">import</span> <span class="n">WaveNetTTS</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">engine</span> <span class="o">=</span> <span class="n">WaveNetTTS</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wav</span><span class="p">,</span> <span class="n">sr</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">tts</span><span class="p">(</span><span class="s2">&quot;今日もいい天気ですね。&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt id="ttslearn.wavenet.tts.WaveNetTTS.set_device">
+<code class="sig-name descname"><span class="pre">set_device</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">device</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ttslearn/wavenet/tts.html#WaveNetTTS.set_device"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ttslearn.wavenet.tts.WaveNetTTS.set_device" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set device for the TTS models</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>device</strong> (<a class="reference external" href="https://docs.python.org/dev/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – cpu or cuda.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ttslearn.wavenet.tts.WaveNetTTS.tts">
+<code class="sig-name descname"><span class="pre">tts</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">text</span></em>, <em class="sig-param"><span class="pre">tqdm=&lt;class</span> <span class="pre">'tqdm.std.tqdm'&gt;</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ttslearn/wavenet/tts.html#WaveNetTTS.tts"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ttslearn.wavenet.tts.WaveNetTTS.tts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run TTS</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/dev/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Input text</p></li>
+<li><p><strong>tqdm</strong> (<a class="reference external" href="https://docs.python.org/dev/library/functions.html#object" title="(in Python v3.11)"><em>object</em></a><em>, </em><em>optional</em>) – tqdm object. Defaults to None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>audio array (np.int16) and sampling rate (int)</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/dev/library/stdtypes.html#tuple" title="(in Python v3.11)">tuple</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-ttslearn.wavenet.upsample">
+<span id="upsampling-networks"></span><h2>Upsampling networks<a class="headerlink" href="#module-ttslearn.wavenet.upsample" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="repeat-upsampling">
+<h3>Repeat upsampling<a class="headerlink" href="#repeat-upsampling" title="Permalink to this headline">¶</a></h3>
+<dl class="py class">
+<dt id="ttslearn.wavenet.upsample.RepeatUpsampling">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">ttslearn.wavenet.upsample.</span></code><code class="sig-name descname"><span class="pre">RepeatUpsampling</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">upsample_scales</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ttslearn/wavenet/upsample.html#RepeatUpsampling"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ttslearn.wavenet.upsample.RepeatUpsampling" title="Permalink to this definition">¶</a></dt>
+<dd><p>Repeat upsampling</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>upsample_scales</strong> (<a class="reference external" href="https://docs.python.org/dev/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a>) – list of scales to upsample</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="ttslearn.wavenet.upsample.RepeatUpsampling.forward">
+<code class="sig-name descname"><span class="pre">forward</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">c</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ttslearn/wavenet/upsample.html#RepeatUpsampling.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ttslearn.wavenet.upsample.RepeatUpsampling.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Forward step</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>c</strong> (<em>torch.Tensor</em>) – input features</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>upsampled features</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>torch.Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="nearest-neighbor-upsampling">
+<h3>Nearest neighbor upsampling<a class="headerlink" href="#nearest-neighbor-upsampling" title="Permalink to this headline">¶</a></h3>
+<dl class="py class">
+<dt id="ttslearn.wavenet.upsample.UpsampleNetwork">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">ttslearn.wavenet.upsample.</span></code><code class="sig-name descname"><span class="pre">UpsampleNetwork</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">upsample_scales</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ttslearn/wavenet/upsample.html#UpsampleNetwork"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ttslearn.wavenet.upsample.UpsampleNetwork" title="Permalink to this definition">¶</a></dt>
+<dd><p>Upsample by nearest neighbor</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>upsample_scales</strong> (<a class="reference external" href="https://docs.python.org/dev/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a>) – list of scales to upsample</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="ttslearn.wavenet.upsample.UpsampleNetwork.forward">
+<code class="sig-name descname"><span class="pre">forward</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">c</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ttslearn/wavenet/upsample.html#UpsampleNetwork.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ttslearn.wavenet.upsample.UpsampleNetwork.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Forward step</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>c</strong> (<em>torch.Tensor</em>) – input features</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>upsampled features</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>torch.Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="conv1d-nearest-neighbor-upsampling">
+<h3>Conv1d + nearest neighbor upsampling<a class="headerlink" href="#conv1d-nearest-neighbor-upsampling" title="Permalink to this headline">¶</a></h3>
+<dl class="py class">
+<dt id="ttslearn.wavenet.upsample.ConvInUpsampleNetwork">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">ttslearn.wavenet.upsample.</span></code><code class="sig-name descname"><span class="pre">ConvInUpsampleNetwork</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">upsample_scales</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cin_channels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">aux_context_window</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ttslearn/wavenet/upsample.html#ConvInUpsampleNetwork"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ttslearn.wavenet.upsample.ConvInUpsampleNetwork" title="Permalink to this definition">¶</a></dt>
+<dd><p>Conv1d + UpsampleNetwork</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>upsample_scales</strong> (<a class="reference external" href="https://docs.python.org/dev/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a>) – list of scales to upsample</p></li>
+<li><p><strong>cin_channels</strong> (<a class="reference external" href="https://docs.python.org/dev/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – number of input channels</p></li>
+<li><p><strong>aux_context_window</strong> (<a class="reference external" href="https://docs.python.org/dev/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – size of the auxilary context window</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="ttslearn.wavenet.upsample.ConvInUpsampleNetwork.forward">
+<code class="sig-name descname"><span class="pre">forward</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">c</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ttslearn/wavenet/upsample.html#ConvInUpsampleNetwork.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ttslearn.wavenet.upsample.ConvInUpsampleNetwork.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Forward step</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>c</strong> (<em>torch.Tensor</em>) – input features</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>upsampled features</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>torch.Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="module-ttslearn.wavenet.modules">
+<span id="convolution-block"></span><h2>Convolution block<a class="headerlink" href="#module-ttslearn.wavenet.modules" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="ttslearn.wavenet.modules.ResSkipBlock">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">ttslearn.wavenet.modules.</span></code><code class="sig-name descname"><span class="pre">ResSkipBlock</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">residual_channels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gate_channels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kernel_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_out_channels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dilation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cin_channels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">80</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ttslearn/wavenet/modules.html#ResSkipBlock"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ttslearn.wavenet.modules.ResSkipBlock" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convolution block with residual and skip connections.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>residual_channels</strong> (<a class="reference external" href="https://docs.python.org/dev/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Residual connection channels.</p></li>
+<li><p><strong>gate_channels</strong> (<a class="reference external" href="https://docs.python.org/dev/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Gated activation channels.</p></li>
+<li><p><strong>kernel_size</strong> (<a class="reference external" href="https://docs.python.org/dev/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Kernel size of convolution layers.</p></li>
+<li><p><strong>skip_out_channels</strong> (<a class="reference external" href="https://docs.python.org/dev/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Skip connection channels.</p></li>
+<li><p><strong>dilation</strong> (<a class="reference external" href="https://docs.python.org/dev/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Dilation factor.</p></li>
+<li><p><strong>cin_channels</strong> (<a class="reference external" href="https://docs.python.org/dev/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Local conditioning channels.</p></li>
+<li><p><strong>args</strong> (<a class="reference external" href="https://docs.python.org/dev/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a>) – Additional arguments for Conv1d.</p></li>
+<li><p><strong>kwargs</strong> (<a class="reference external" href="https://docs.python.org/dev/library/stdtypes.html#dict" title="(in Python v3.11)"><em>dict</em></a>) – Additional arguments for Conv1d.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="ttslearn.wavenet.modules.ResSkipBlock.forward">
+<code class="sig-name descname"><span class="pre">forward</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ttslearn/wavenet/modules.html#ResSkipBlock.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ttslearn.wavenet.modules.ResSkipBlock.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Forward step</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>torch.Tensor</em>) – Input signal.</p></li>
+<li><p><strong>c</strong> (<em>torch.Tensor</em>) – Local conditioning signal.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Tuple of output signal and skip connection signal</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/dev/library/stdtypes.html#tuple" title="(in Python v3.11)">tuple</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ttslearn.wavenet.modules.ResSkipBlock.incremental_forward">
+<code class="sig-name descname"><span class="pre">incremental_forward</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ttslearn/wavenet/modules.html#ResSkipBlock.incremental_forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ttslearn.wavenet.modules.ResSkipBlock.incremental_forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Incremental forward</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>torch.Tensor</em>) – Input signal.</p></li>
+<li><p><strong>c</strong> (<em>torch.Tensor</em>) – Local conditioning signal.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Tuple of output signal and skip connection signal</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/dev/library/stdtypes.html#tuple" title="(in Python v3.11)">tuple</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ttslearn.wavenet.modules.ResSkipBlock.clear_buffer">
+<code class="sig-name descname"><span class="pre">clear_buffer</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/ttslearn/wavenet/modules.html#ResSkipBlock.clear_buffer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ttslearn.wavenet.modules.ResSkipBlock.clear_buffer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Clear input buffer.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-ttslearn.wavenet.wavenet">
+<span id="wavenet"></span><h2>WaveNet<a class="headerlink" href="#module-ttslearn.wavenet.wavenet" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="ttslearn.wavenet.wavenet.WaveNet">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">ttslearn.wavenet.wavenet.</span></code><code class="sig-name descname"><span class="pre">WaveNet</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">out_channels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">256</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">30</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stacks</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">residual_channels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">64</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gate_channels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">128</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_out_channels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">64</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kernel_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cin_channels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">80</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">upsample_scales</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">aux_context_window</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ttslearn/wavenet/wavenet.html#WaveNet"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ttslearn.wavenet.wavenet.WaveNet" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>out_channels</strong> (<a class="reference external" href="https://docs.python.org/dev/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – the number of output channels</p></li>
+<li><p><strong>layers</strong> (<a class="reference external" href="https://docs.python.org/dev/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – the number of layers</p></li>
+<li><p><strong>stacks</strong> (<a class="reference external" href="https://docs.python.org/dev/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – the number of residual stacks</p></li>
+<li><p><strong>residual_channels</strong> (<a class="reference external" href="https://docs.python.org/dev/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – the number of residual channels</p></li>
+<li><p><strong>gate_channels</strong> (<a class="reference external" href="https://docs.python.org/dev/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – the number of channels for the gating function</p></li>
+<li><p><strong>skip_out_channels</strong> (<a class="reference external" href="https://docs.python.org/dev/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – the number of channels in the skip output</p></li>
+<li><p><strong>kernel_size</strong> (<a class="reference external" href="https://docs.python.org/dev/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – the size of the convolutional kernel</p></li>
+<li><p><strong>cin_channels</strong> (<a class="reference external" href="https://docs.python.org/dev/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – the number of input channels for local conditioning</p></li>
+<li><p><strong>upsample_scales</strong> (<a class="reference external" href="https://docs.python.org/dev/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a>) – the list of scales to upsample the local conditioning features</p></li>
+<li><p><strong>aux_context_window</strong> (<a class="reference external" href="https://docs.python.org/dev/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – the number of context frames</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="ttslearn.wavenet.wavenet.WaveNet.forward">
+<code class="sig-name descname"><span class="pre">forward</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ttslearn/wavenet/wavenet.html#WaveNet.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ttslearn.wavenet.wavenet.WaveNet.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Forward step</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>torch.Tensor</em>) – the input waveform</p></li>
+<li><p><strong>c</strong> (<em>torch.Tensor</em>) – the local conditioning feature</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the output waveform</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>torch.Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ttslearn.wavenet.wavenet.WaveNet.inference">
+<code class="sig-name descname"><span class="pre">inference</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">c</span></em>, <em class="sig-param"><span class="pre">num_time_steps=100</span></em>, <em class="sig-param"><span class="pre">tqdm=&lt;function</span> <span class="pre">WaveNet.&lt;lambda&gt;&gt;</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ttslearn/wavenet/wavenet.html#WaveNet.inference"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ttslearn.wavenet.wavenet.WaveNet.inference" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inference step</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>c</strong> (<em>torch.Tensor</em>) – the local conditioning feature</p></li>
+<li><p><strong>num_time_steps</strong> (<a class="reference external" href="https://docs.python.org/dev/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – the number of time steps to generate</p></li>
+<li><p><strong>tqdm</strong> (<em>lambda</em>) – a tqdm function to track progress</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the output waveform</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>torch.Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ttslearn.wavenet.wavenet.WaveNet.clear_buffer">
+<code class="sig-name descname"><span class="pre">clear_buffer</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/ttslearn/wavenet/wavenet.html#WaveNet.clear_buffer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ttslearn.wavenet.wavenet.WaveNet.clear_buffer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Clear the internal buffer.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ttslearn.wavenet.wavenet.WaveNet.remove_weight_norm_">
+<code class="sig-name descname"><span class="pre">remove_weight_norm_</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/ttslearn/wavenet/wavenet.html#WaveNet.remove_weight_norm_"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ttslearn.wavenet.wavenet.WaveNet.remove_weight_norm_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove weight normalization of the model</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-ttslearn.wavenet.gen">
+<span id="generation-utility"></span><h2>Generation utility<a class="headerlink" href="#module-ttslearn.wavenet.gen" title="Permalink to this headline">¶</a></h2>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/ttslearn.wavenet.gen.gen_waveform.html#ttslearn.wavenet.gen.gen_waveform" title="ttslearn.wavenet.gen.gen_waveform"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gen_waveform</span></code></a></p></td>
+<td><p>Generate waveform from WaveNet.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="module-ttslearn.wavenet">
+<span id="utility"></span><h2>Utility<a class="headerlink" href="#module-ttslearn.wavenet" title="Permalink to this headline">¶</a></h2>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/ttslearn.wavenet.receptive_field_size.html#ttslearn.wavenet.receptive_field_size" title="ttslearn.wavenet.receptive_field_size"><code class="xref py py-obj docutils literal notranslate"><span class="pre">receptive_field_size</span></code></a></p></td>
+<td><p>Compute receptive field size of WaveNet</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="generated/ttslearn.wavenet.gen.gen_waveform.html" class="btn btn-neutral float-right" title="ttslearn.wavenet.gen.gen_waveform" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="generated/ttslearn.dnntts.gen.gen_waveform.html" class="btn btn-neutral float-left" title="ttslearn.dnntts.gen.gen_waveform" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Ryuichi Yamamoto.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

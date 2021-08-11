@@ -1,0 +1,6 @@
+﻿ttslearn.util.load\_utt\_list
+=============================
+
+.. currentmodule:: ttslearn.util
+
+.. autofunction:: load_utt_list

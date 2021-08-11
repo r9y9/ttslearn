@@ -1,0 +1,396 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>ttslearn.dsp &mdash; ttslearn 0.2.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/plot_directive.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="ttslearn.dsp.world_spss_params" href="generated/ttslearn.dsp.world_spss_params.html" />
+    <link rel="prev" title="第10章 日本語Tacotronに基づく音声合成システムの実装" href="notebooks/ch10_Recipe-Tacotron.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> ttslearn
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.2.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Demo</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/ch00_Quick-start.html">Quick start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/ch11_Advanced-demos.html">Advanced TTS demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo_server.html">Demo server (with streamlit)</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Chapters</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/ch04_Python-SP.html">第4章 Python による音声信号処理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/ch05_DNNTTS.html">第5章 深層学習に基づく統計的パラメトリック音声合成</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/ch06_Recipe-DNNTTS.html">第6章: 日本語 DNN 音声合成システムの実装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/ch07_WaveNet.html">第7章 WaveNet: 深層学習に基づく音声波形の生成モデル</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/ch08_Recipe-WaveNet.html">第8章 日本語 WaveNet 音声合成システムの実装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/ch09_Tacotron.html">第9章 Tacotron 2: 一貫学習を狙った音声合成</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/ch10_Recipe-Tacotron.html">第10章 日本語Tacotronに基づく音声合成システムの実装</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Core modules</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">ttslearn.dsp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#acoustic-feature-extraction">Acoustic feature extraction</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/ttslearn.dsp.world_spss_params.html">ttslearn.dsp.world_spss_params</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/ttslearn.dsp.world_log_f0_vuv.html">ttslearn.dsp.world_log_f0_vuv</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/ttslearn.dsp.logspectrogram.html">ttslearn.dsp.logspectrogram</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/ttslearn.dsp.logmelspectrogram.html">ttslearn.dsp.logmelspectrogram</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#f0-conversion">F0 conversion</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/ttslearn.dsp.f0_to_lf0.html">ttslearn.dsp.f0_to_lf0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/ttslearn.dsp.lf0_to_f0.html">ttslearn.dsp.lf0_to_f0</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#dynamic-features">Dynamic features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/ttslearn.dsp.compute_delta.html">ttslearn.dsp.compute_delta</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#compression-and-de-compression">Compression and de-compression</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/ttslearn.dsp.mulaw.html">ttslearn.dsp.mulaw</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/ttslearn.dsp.mulaw_quantize.html">ttslearn.dsp.mulaw_quantize</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/ttslearn.dsp.inv_mulaw.html">ttslearn.dsp.inv_mulaw</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/ttslearn.dsp.inv_mulaw_quantize.html">ttslearn.dsp.inv_mulaw_quantize</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#inversion">Inversion</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/ttslearn.dsp.logmelspectrogram_to_audio.html">ttslearn.dsp.logmelspectrogram_to_audio</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dnntts.html">ttslearn.dnntts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wavenet.html">ttslearn.wavenet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tacotron.html">ttslearn.tacotron</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Helpers</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="pretrained.html">ttslearn.pretrained</a></li>
+<li class="toctree-l1"><a class="reference internal" href="util.html">ttslearn.util</a></li>
+<li class="toctree-l1"><a class="reference internal" href="train_util.html">ttslearn.train_util</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Advanced topics</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="extra_recipes.html">Extra recipes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contrib.html">ttslearn.contrib</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Meta information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Change log</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ttslearn</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>ttslearn.dsp</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/dsp.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="ttslearn-dsp">
+<h1>ttslearn.dsp<a class="headerlink" href="#ttslearn-dsp" title="Permalink to this headline">¶</a></h1>
+<p>音声信号処理の機能を提供するモジュールです。</p>
+<span class="target" id="module-ttslearn.dsp"></span><div class="section" id="acoustic-feature-extraction">
+<h2>Acoustic feature extraction<a class="headerlink" href="#acoustic-feature-extraction" title="Permalink to this headline">¶</a></h2>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/ttslearn.dsp.world_spss_params.html#ttslearn.dsp.world_spss_params" title="ttslearn.dsp.world_spss_params"><code class="xref py py-obj docutils literal notranslate"><span class="pre">world_spss_params</span></code></a></p></td>
+<td><p>WORLD-based acoustic feature extraction</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/ttslearn.dsp.world_log_f0_vuv.html#ttslearn.dsp.world_log_f0_vuv" title="ttslearn.dsp.world_log_f0_vuv"><code class="xref py py-obj docutils literal notranslate"><span class="pre">world_log_f0_vuv</span></code></a></p></td>
+<td><p>WORLD-based log-F0 and V/UV extraction</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/ttslearn.dsp.logspectrogram.html#ttslearn.dsp.logspectrogram" title="ttslearn.dsp.logspectrogram"><code class="xref py py-obj docutils literal notranslate"><span class="pre">logspectrogram</span></code></a></p></td>
+<td><p>Compute log-spectrogram.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/ttslearn.dsp.logmelspectrogram.html#ttslearn.dsp.logmelspectrogram" title="ttslearn.dsp.logmelspectrogram"><code class="xref py py-obj docutils literal notranslate"><span class="pre">logmelspectrogram</span></code></a></p></td>
+<td><p>Compute log-melspectrogram.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="f0-conversion">
+<h2>F0 conversion<a class="headerlink" href="#f0-conversion" title="Permalink to this headline">¶</a></h2>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/ttslearn.dsp.f0_to_lf0.html#ttslearn.dsp.f0_to_lf0" title="ttslearn.dsp.f0_to_lf0"><code class="xref py py-obj docutils literal notranslate"><span class="pre">f0_to_lf0</span></code></a></p></td>
+<td><p>Convert F0 to log-F0</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/ttslearn.dsp.lf0_to_f0.html#ttslearn.dsp.lf0_to_f0" title="ttslearn.dsp.lf0_to_f0"><code class="xref py py-obj docutils literal notranslate"><span class="pre">lf0_to_f0</span></code></a></p></td>
+<td><p>Convert log-F0 (and V/UV) to F0</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="dynamic-features">
+<h2>Dynamic features<a class="headerlink" href="#dynamic-features" title="Permalink to this headline">¶</a></h2>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/ttslearn.dsp.compute_delta.html#ttslearn.dsp.compute_delta" title="ttslearn.dsp.compute_delta"><code class="xref py py-obj docutils literal notranslate"><span class="pre">compute_delta</span></code></a></p></td>
+<td><p>Compute delta features</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="compression-and-de-compression">
+<h2>Compression and de-compression<a class="headerlink" href="#compression-and-de-compression" title="Permalink to this headline">¶</a></h2>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/ttslearn.dsp.mulaw.html#ttslearn.dsp.mulaw" title="ttslearn.dsp.mulaw"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mulaw</span></code></a></p></td>
+<td><p>Mu-Law companding.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/ttslearn.dsp.mulaw_quantize.html#ttslearn.dsp.mulaw_quantize" title="ttslearn.dsp.mulaw_quantize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mulaw_quantize</span></code></a></p></td>
+<td><p>Mu-law-quantize signal.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/ttslearn.dsp.inv_mulaw.html#ttslearn.dsp.inv_mulaw" title="ttslearn.dsp.inv_mulaw"><code class="xref py py-obj docutils literal notranslate"><span class="pre">inv_mulaw</span></code></a></p></td>
+<td><p>Inverse transformation of mu-law companding</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/ttslearn.dsp.inv_mulaw_quantize.html#ttslearn.dsp.inv_mulaw_quantize" title="ttslearn.dsp.inv_mulaw_quantize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">inv_mulaw_quantize</span></code></a></p></td>
+<td><p>Inverse transformation of mu-law quantization.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="inversion">
+<h2>Inversion<a class="headerlink" href="#inversion" title="Permalink to this headline">¶</a></h2>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/ttslearn.dsp.logmelspectrogram_to_audio.html#ttslearn.dsp.logmelspectrogram_to_audio" title="ttslearn.dsp.logmelspectrogram_to_audio"><code class="xref py py-obj docutils literal notranslate"><span class="pre">logmelspectrogram_to_audio</span></code></a></p></td>
+<td><p>Log-melspectrogram to audio.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="generated/ttslearn.dsp.world_spss_params.html" class="btn btn-neutral float-right" title="ttslearn.dsp.world_spss_params" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="notebooks/ch10_Recipe-Tacotron.html" class="btn btn-neutral float-left" title="第10章 日本語Tacotronに基づく音声合成システムの実装" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Ryuichi Yamamoto.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
