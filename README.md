@@ -21,6 +21,9 @@
 pip install ttslearn
 ```
 
+NOTE: This book is written in Japanese and primarily focuses on Japanese TTS. Some of the functionality (e.g., neural network implementations) in this codebase can be used for other languages. However, we didn't prepare any guide or code for non-Japanese TTS systems.
+We may extend the codebase for other languages in the future but cannot guarantee if we would work on it.
+
 ## リポジトリの構成
 
 - [ttslearn](ttslearn): 「Pythonで学ぶ音声合成」のために作成された、音声合成のコアライブラリです。 `pip install ttslearn` としてインストールされるライブラリの実体です。書籍のサンプルコードとしてだけでなく、汎用的な音声合成のライブラリとしてもご利用いただけます。
