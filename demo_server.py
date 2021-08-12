@@ -43,7 +43,7 @@ if __name__ == "__main__":
             """
 使い方:
 1. 左メニューの Model ID から、学習済みモデルの名前を選択してください。
-   学習済みモデルの説明は、 https://r9y9.github.io/ttslearn/pretrained.html を参照してください。
+   学習済みモデルの説明は、 https://r9y9.github.io/ttslearn/latest/pretrained.html を参照してください。
 2. (Optional) 多話者音声合成の場合は、左メニューに、話者を選択するプルダウンメニューが表示されます。
    好きな話者を選択してください。
 3. 「日本語テキスト入力」から、合成したい日本語テキストを入力してください
