@@ -60,7 +60,6 @@ if [ ${stage} -le 0 ] && [ ${stop_stage} -ge 0 ]; then
     echo "train/dev/eval split"
 
     for spk in $(cat data/spks); do
-        echo $spk
         n=$(( $(wc -l < data/${spk}/utt_list.txt) -10 ))
         head -n $n data/$spk/utt_list.txt > data/$spk/train.list
         tail -10 data/$spk/utt_list.txt > data/$spk/deveval.list

@@ -62,13 +62,11 @@ if [ ${stage} -le 0 ] && [ ${stop_stage} -ge 0 ]; then
     for spk in $(cat data/spks); do
         n=$(( $(wc -l < data/${spk}/utt_list.txt) -10 ))
         if ((n > 90)); then
-            echo $spk, $n
             head -n $n data/$spk/utt_list.txt > data/$spk/train.list
             tail -10 data/$spk/utt_list.txt > data/$spk/deveval.list
             head -n 5 data/$spk/deveval.list > data/$spk/dev.list
             tail -n 5 data/$spk/deveval.list > data/$spk/eval.list
         else
-            echo $spk, $n, no split
             # 発話数が少ない場合、すべて学習データへ
             cat data/$spk/utt_list.txt > data/$spk/train.list
         fi
