@@ -1,6 +1,6 @@
 # commonvoice recipes
 
-## multspk_tacotron2_pwg
+## multspk_tacotron2_pwg_20spks
 
 Multi-speaker Tacotron 2 + Parallel WaveGAN (PWG) による、多話者音声合成のレシピです。
 
@@ -18,6 +18,11 @@ https://commonvoice.mozilla.org/ja/datasets
 Julusによる音素アライメントに失敗した発話は、発話リストから除かれています。
 
 train.tsv, dev.tsv, test.tsv は使用しせず、独自にtrain/dev/test のsplitを行っています（※強い理由はありません。単なる便宜上の理由によるものです）。
+
+## multspk_tacotron2_pwg_368spks
+
+上述のように、発話数が100を超える話者のみに限定せず、使えるデータはすべて使った場合のレシピです。
+話者数は368です。発話数が1の話者が多く学習データに含まれていることに注意してください。
 
 ## Links
 
