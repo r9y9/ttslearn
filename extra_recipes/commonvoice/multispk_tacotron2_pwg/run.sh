@@ -87,7 +87,7 @@ if [ ${stage} -le 1 ] && [ ${stop_stage} -ge 1 ]; then
         for s in ${datasets[@]}; do
             xrun python preprocess.py data/$spk/$s.list $spk_id \
             $db_root/wav --sample_rate $sample_rate \
-            $db_root/lab $dump_org_dir/$s --n_jobs $n_jobs
+            $lab_root $dump_org_dir/$s --n_jobs $n_jobs
         done
     done
 fi

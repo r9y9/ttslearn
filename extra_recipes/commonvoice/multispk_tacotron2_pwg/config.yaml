@@ -20,6 +20,7 @@ cudnn_deterministic: false
 
 # PLEASE CHANGE THE PATH BASED ON YOUR ENVIRONMENT
 db_root: "downloads/cv-corpus-7.0-2021-07-21/ja"
+lab_root: "downloads/commonvoice-lab/cv-corpus-7.0-2021-07-21/ja/lab"
 
 n_jobs: 4
 
