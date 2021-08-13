@@ -95,7 +95,7 @@ fi
 if [ ${stage} -le 2 ] && [ ${stop_stage} -ge 2 ]; then
     echo "stage 2: feature normalization"
 
-    # NOTE: SUTコーパスで計算した統計量をベースに利用する
+    # NOTE: JSUTコーパスで計算した統計量をベースに利用する
     xrun python $COMMON_ROOT/fit_scaler.py data/train.list \
         $dump_org_dir/$train_set/out_tacotron/ \
         $dump_org_dir/out_tacotron_scaler.joblib \
