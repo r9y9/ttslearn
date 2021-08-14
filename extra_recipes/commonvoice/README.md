@@ -19,6 +19,13 @@ Julusによる音素アライメントに失敗した発話は、発話リスト
 
 train.tsv, dev.tsv, test.tsv は使用しせず、独自にtrain/dev/test のsplitを行っています（※強い理由はありません。単なる便宜上の理由によるものです）。
 
+### Label
+
+Juliusで音素アライメント、Open JTalkでフルコンテキストを推定し、フルコンテキストラベルとしてまとめています。
+https://github.com/r9y9/commonvoice-lab
+
+レシピでは、非音声区間の切り詰め、韻律記号付き音素列を求めるために利用しています。
+
 ## multspk_tacotron2_pwg_368spks
 
 上述のように、発話数が100を超える話者のみに限定せず、使えるデータはすべて使った場合のレシピです。
