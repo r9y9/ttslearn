@@ -28,6 +28,15 @@ https://sites.google.com/site/shinnosuketakamichi/research-topics/jvs_corpus
 - ``dnntts``: DNN音声合成（24kHz）
 - ``tacotron2_pwg``: Multi-speaker Tacotron 2 with Parallel WaveGAN (16kHz, 24kHz)
 
+Common voice (ja)
+^^^^^^^^^^^^^^^^^^
+
+https://commonvoice.mozilla.org/ja/datasets
+
+- ``multispk_tacotron2_pwg_20spks``: Multi-speaker Tacotron 2 with Parallel WaveGAN (16kHz, 24kHz)
+- ``multispk_tacotron2_pwg_386spks``: Multi-speaker Tacotron 2 with Parallel WaveGAN (16kHz, 24kHz)
+
+
 その他のコーパスに同様の音声合成の仕組みを応用することは容易ですが、それらは読者に委ねます。
 
 ttslearnのGitHubリポジトリにレシピを追加したい場合は、積極的に検討しますので、お問い合わせください。
