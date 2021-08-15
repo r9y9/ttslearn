@@ -48,7 +48,7 @@ if [ ${stage} -le -1 ] && [ ${stop_stage} -ge -1 ]; then
 
     echo "Please download data manually!"
     echo "JVS corpus: https://sites.google.com/site/shinnosuketakamichi/research-topics/jvs_corpus"
-    echo "After downloading the corpus, please run audio.sh from https://github.com/r9y9/jvs_r9y9"
+    echo "After downloading the corpus, please run audio.bash from https://github.com/r9y9/jvs_r9y9"
     echo "to remove some wrong/missing-label utterances."
     echo "Please make sure to have JVS corpus in 'db_root' in config.yaml."
     exit 1
