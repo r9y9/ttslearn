@@ -70,3 +70,8 @@ pip install ttslearn
 - Tacotron 2の一部ソースコードは、[ESPnet](https://github.com/espnet/espnet)を元に作られました。(thanks to [@kan-bayashi](https://github.com/kan-bayashi))
 - 発展的なレシピの実装のほとんどにおいて、[kan-bayashi/ParallelWaveGAN](https://github.com/kan-bayashi/ParallelWaveGAN)を利用しました。
 - 日本語音声合成のテキスト処理には、[Open JTalk](https://open-jtalk.sp.nitech.ac.jp/) およびその[Pythonラッパー](https://github.com/r9y9/pyopenjtalk)を利用しました。
+
+## リンク
+
+- Amazon: https://www.amazon.co.jp/dp/4295012270/
+- インプレス書籍情報: https://book.impress.co.jp/books/1120101073
