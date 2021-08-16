@@ -104,11 +104,16 @@ fi
 if [ ${stage} -le 2 ] && [ ${stop_stage} -ge 2 ]; then
     echo "stage 2: feature normalization"
 
-    # NOTE: JSUTコーパスで計算した統計量をベースに利用する
+    if [ ${finetuning} = "true" ]; then
+	# NOTE: JSUTコーパスで計算した統計量をベースに利用する
+	extra_args="--external_scaler $PWD/../../jsut/tacotron2_pwg/dump/jsut_sr${sample_rate}/org/out_tacotron_scaler.joblib"
+    else
+	extra_args=""
+    fi
+
     xrun python $COMMON_ROOT/fit_scaler.py data/train.list \
         $dump_org_dir/$train_set/out_tacotron/ \
-        $dump_org_dir/out_tacotron_scaler.joblib \
-        --external_scaler $PWD/../../jsut/tacotron2_pwg/dump/jsut_sr${sample_rate}/org/out_tacotron_scaler.joblib
+        $dump_org_dir/out_tacotron_scaler.joblib $extra_args
 
     mkdir -p $dump_norm_dir
     cp -v $dump_org_dir/*.joblib $dump_norm_dir/
@@ -128,7 +133,7 @@ fi
 
 if [ ${stage} -le 3 ] && [ ${stop_stage} -ge 3 ]; then
     echo "stage 3: Training Tacotron"
-    if [ -z ${pretrained_acoustic_checkpoint} ]; then
+    if [ ${finetuning} = "true" ] && [ -z ${pretrained_acoustic_checkpoint} ]; then
         pretrained_acoustic_checkpoint=$PWD/../../jsut/tacotron2_pwg/exp/jsut_sr${sample_rate}/${acoustic_model}/${acoustic_eval_checkpoint}
         if [ ! -e $pretrained_acoustic_checkpoint ]; then
             echo "Please first train a acoustic model for JSUT corpus!"
@@ -154,7 +159,7 @@ fi
 
 if [ ${stage} -le 4 ] && [ ${stop_stage} -ge 4 ]; then
     echo "stage 4: Training Parallel WaveGAN"
-    if [ -z ${pretrained_vocoder_checkpoint} ]; then
+    if [ ${finetuning} = "true" ] && [ -z ${pretrained_vocoder_checkpoint} ]; then
         voc_expdir=$PWD/../../jsut/tacotron2_pwg/exp/jsut_sr${sample_rate}/${vocoder_model}
         pretrained_vocoder_checkpoint="$(ls -dt "$voc_expdir"/*.pkl | head -1 || true)"
         if [ ! -e $pretrained_vocoder_checkpoint ]; then
@@ -162,12 +167,14 @@ if [ ${stage} -le 4 ] && [ ${stop_stage} -ge 4 ]; then
             echo "Expected model path: $pretrained_vocoder_checkpoint"
             exit 1
         fi
+	extra_args="--resume $pretrained_vocoder_checkpoint"
+    else
+	extra_args=""
     fi
     xrun parallel-wavegan-train --config $parallel_wavegan_config \
         --train-dumpdir $dump_norm_dir/$train_set/out_tacotron \
         --dev-dumpdir $dump_norm_dir/$dev_set/out_tacotron/ \
-        --outdir $expdir/$vocoder_model \
-        --resume $pretrained_vocoder_checkpoint
+        --outdir $expdir/$vocoder_model $extra_args
 fi
 
 if [ ${stage} -le 5 ] && [ ${stop_stage} -ge 5 ]; then

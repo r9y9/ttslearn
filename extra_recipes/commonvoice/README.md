@@ -38,7 +38,10 @@ Common voiceの音声は、収録環境に依存するノイズを含みます�
 このリポジトリに含まれるレシピは、例えば音声認識のモデルを学習する際の data augmumentationに利用できるでしょう。
 また、ノイズありデータからクリーンなTTSを実現する、ノイズロバストTTSのbaselineとしても利用できます。
 
+JSUTコーパスを用いて学習された学習済みモデルからfine tuningする場合は、config.yaml から `finetuning: true` に設定してください。
+その場合、JSUTコーパスの利用規約をご確認の上で、本ソースコードおよび学習したモデルをご利用ください。
 
 ## Links
 
-- https://commonvoice.mozilla.org/ja
+- Common voice: https://commonvoice.mozilla.org/ja
+- JSUTコーパス: https://sites.google.com/site/shinnosuketakamichi/publication/jsut

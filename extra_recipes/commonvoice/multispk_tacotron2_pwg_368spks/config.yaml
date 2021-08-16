@@ -14,6 +14,9 @@ tqdm: tqdm
 cudnn_benchmark: true
 cudnn_deterministic: false
 
+# Fine-tuning from models trained with other corpus
+finetuning: false
+
 ###########################################################
 #                DATA PREPARATION SETTING                 #
 ###########################################################
