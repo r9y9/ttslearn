@@ -3,6 +3,7 @@
 [![][docs-latest-img]][docs-latest-url]
 [![PyPI](https://img.shields.io/pypi/v/ttslearn.svg)](https://pypi.python.org/pypi/ttslearn)
 ![Python package](https://github.com/r9y9/ttslearn/workflows/Python%20package/badge.svg)
+[![Docker Hub](https://github.com/r9y9/ttslearn/actions/workflows/docker-hub-ci.yaml/badge.svg)](https://github.com/r9y9/ttslearn/actions/workflows/docker-hub-ci.yaml)
 ![License](http://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat)
 
 [docs-latest-img]: https://img.shields.io/badge/docs-latest-blue.svg

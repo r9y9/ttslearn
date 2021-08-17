@@ -1,14 +1,8 @@
-name: CI to Docker Hub
+name: Docker Hub
 
 on:
-  push:
-    branches:
-      - 'master'
-    tags:
-      - 'v*'
-  pull_request:
-    branches:
-      - 'master'
+  release:
+    types: [published]
 
 jobs:
   docker:
