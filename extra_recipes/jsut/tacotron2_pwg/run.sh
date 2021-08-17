@@ -155,10 +155,15 @@ fi
 
 if [ ${stage} -le 7 ] && [ ${stop_stage} -ge 7 ]; then
     echo "stage 7: Training Parallel WaveGAN with GTA features"
+    if [ ! -z ${pretrained_vocoder_checkpoint} ]; then
+        extra_args="--resume $pretrained_vocoder_checkpoint"
+    else
+        extra_args=""
+    fi
     xrun parallel-wavegan-train --config $parallel_wavegan_config \
         --train-dumpdir $expdir/gta_${acoustic_model}/$train_set \
         --dev-dumpdir $expdir/gta_${acoustic_model}/$dev_set \
-        --outdir $expdir/${vocoder_model}_gta
+        --outdir $expdir/${vocoder_model}_gta $extra_args
 fi
 
 if [ ${stage} -le 99 ] && [ ${stop_stage} -ge 99 ]; then
