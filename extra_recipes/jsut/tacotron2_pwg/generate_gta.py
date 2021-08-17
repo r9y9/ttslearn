@@ -62,9 +62,23 @@ def my_app(config: DictConfig) -> None:
         in_lens = torch.tensor([in_feats.shape[-1]], dtype=torch.long, device=device)
         out_feats = torch.from_numpy(out_feats).unsqueeze(0).to(device)
 
+        # spk
+        spk_file = in_dir / f"{utt_id.strip()}-spk.npy"
+        if spk_file.exists():
+            spk_id = torch.from_numpy(np.load(spk_file)).unsqueeze(0).to(device)
+        else:
+            spk_id = None
+
         # Run teacher-forcing
         with torch.no_grad():
-            _, pred_out_feats, _, _ = acoustic_model(in_feats, in_lens, out_feats)
+            if spk_id is None:
+                # single speaker
+                _, pred_out_feats, _, _ = acoustic_model(in_feats, in_lens, out_feats)
+            else:
+                # multi-speaker
+                _, pred_out_feats, _, _ = acoustic_model(
+                    in_feats, in_lens, out_feats, spk_id
+                )
         assert pred_out_feats.shape == out_feats.shape
 
         # Save GTA features and its aligned waveform
