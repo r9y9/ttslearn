@@ -194,6 +194,28 @@ if [ ${stage} -le 5 ] && [ ${stop_stage} -ge 5 ]; then
     done
 fi
 
+if [ ${stage} -le 6 ] && [ ${stop_stage} -ge 6 ]; then
+    echo "stage 6: Generate GTA features"
+    for s in ${datasets[@]}; do
+        xrun python generate_gta.py utt_list=./data/$s.list tqdm=$tqdm \
+            in_dir=$dump_norm_dir/$s/in_tacotron \
+            out_dir=$dump_norm_dir/$s/out_tacotron \
+            gta_dir=$expdir/gta_${acoustic_model}/$s \
+            sample_rate=$sample_rate \
+            acoustic.checkpoint=$expdir/${acoustic_model}/$acoustic_eval_checkpoint \
+            acoustic.out_scaler_path=$dump_norm_dir/out_tacotron_scaler.joblib \
+            acoustic.model_yaml=$expdir/${acoustic_model}/model.yaml
+    done
+fi
+
+if [ ${stage} -le 7 ] && [ ${stop_stage} -ge 7 ]; then
+    echo "stage 7: Training Parallel WaveGAN with GTA features"
+    xrun parallel-wavegan-train --config $parallel_wavegan_config \
+        --train-dumpdir $expdir/gta_${acoustic_model}/$train_set \
+        --dev-dumpdir $expdir/gta_${acoustic_model}/$dev_set \
+        --outdir $expdir/${vocoder_model}_gta
+fi
+
 if [ ${stage} -le 99 ] && [ ${stop_stage} -ge 99 ]; then
     echo "Pack models for TTS"
     dst_dir=tts_models/${expname}_${acoustic_model}_${vocoder_model}
