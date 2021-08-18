@@ -163,7 +163,7 @@ if [ ${stage} -le 7 ] && [ ${stop_stage} -ge 7 ]; then
     xrun parallel-wavegan-train --config $parallel_wavegan_config \
         --train-dumpdir $expdir/gta_${acoustic_model}/$train_set \
         --dev-dumpdir $expdir/gta_${acoustic_model}/$dev_set \
-        --outdir $expdir/${vocoder_model}_gta $extra_args
+        --outdir $expdir/${vocoder_model} $extra_args
 fi
 
 if [ ${stage} -le 99 ] && [ ${stop_stage} -ge 99 ]; then
