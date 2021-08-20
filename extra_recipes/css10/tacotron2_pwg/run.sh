@@ -44,7 +44,10 @@ expdir=exp/$expname
 
 if [ ${stage} -le -1 ] && [ ${stop_stage} -ge -1 ]; then
     echo "stage -1: Data download"
-    exit -1
+    mkdir -p downloads
+
+    echo "Please download data manually!"
+    exit 1
 fi
 
 if [ ${stage} -le 0 ] && [ ${stop_stage} -ge 0 ]; then
