@@ -1,3 +1,2 @@
 libsamplerate0
 libsndfile1
-libsndfile1-dev
