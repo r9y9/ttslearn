@@ -1,0 +1,24 @@
+netG:
+  _target_: ttslearn.tacotron.Tacotron2
+  num_vocab: 52
+  reduction_factor: 2
+  embed_dim: 512
+  encoder_hidden_dim: 512
+  decoder_out_dim: 80
+  encoder_conv_layers: 3
+  encoder_conv_channels: 512
+  encoder_conv_kernel_size: 5
+  encoder_dropout: 0.5
+  attention_hidden_dim: 128
+  attention_conv_channels: 32
+  attention_conv_kernel_size: 31
+  decoder_layers: 2
+  decoder_hidden_dim: 1024
+  decoder_prenet_layers: 2
+  decoder_prenet_hidden_dim: 256
+  decoder_prenet_dropout: 0.5
+  postnet_layers: 5
+  postnet_channels: 512
+  postnet_kernel_size: 5
+  postnet_dropout: 0.5
+  decoder_zoneout: 0.1

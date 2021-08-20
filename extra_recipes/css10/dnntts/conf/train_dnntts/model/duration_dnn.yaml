@@ -1,0 +1,9 @@
+netG:
+  _target_: ttslearn.dnntts.DNN
+  in_dim: 325
+  out_dim: 1
+  hidden_dim: 64
+  num_layers: 2
+
+stream_sizes: [1]
+has_dynamic_features: [false]

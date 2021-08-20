@@ -1,0 +1,68 @@
+# General settings.
+spk: "meian"
+
+# exp tag(for managing experiments)
+tag:
+
+# recipes/tacotron 用のPWGを学習する場合は、sample_rate を 16000 にしてください
+# サンプリング周波数に応じて、parallel_waveganのconfigを変更する必要があることに注意してください
+# Tacotronのconfigは、サンプリング周波数に依存せず、そのまま利用できます
+sample_rate: 16000
+
+# 1) none 2) tqdm
+# NOTE: Jupyterノートブックからrun.shを実行する場合は、none推奨
+tqdm: tqdm
+
+# NOTE: benchmarkをtrueにすると、高速化が期待できる分、より多くの
+# GPUリソースを必要とする場合があります
+cudnn_benchmark: true
+cudnn_deterministic: false
+
+###########################################################
+#                DATA PREPARATION SETTING                 #
+###########################################################
+
+# PLEASE CHANGE THE PATH BASED ON YOUR ENVIRONMENT
+wav_root: "downloads/css10/ja/meian"
+lab_root: "downloads/css10-lab/ja/lab"
+
+n_jobs: 4
+
+###########################################################
+#                FEATURE EXTRACTION SETTING               #
+###########################################################
+
+###########################################################
+#                TRAINING SETTING                         #
+###########################################################
+
+acoustic_model: tacotron2_rf2
+
+### Tacotron  ###
+# エポック数を小さくすると、学習は早く終了します。
+tacotron_train_max_train_steps: 100000
+# バッチサイズを小さくすると、GPUメモリ使用量が小さく済みます。
+# 注意: 必要なGPUメモリ（目安）:
+# バッチサイズ16の場合に6GB程度、バッチサイズ32の場合に12GB程度
+# 必要なGPUメモリはミニバッチ内の発話の最大系列長に依存するため、
+# 余裕を持ってより多くのGPUメモリを確保しておくことを推奨します
+tacotron_data_batch_size: 32
+
+# parallel_wavegan 用のconfigファイル
+# https://github.com/kan-bayashi/ParallelWaveGAN
+parallel_wavegan_config: conf/parallel_wavegan_sr24k.yaml
+
+###########################################################
+#                SYNTHESIS SETTING                        #
+###########################################################
+
+# リストの逆順で発話を処理する
+reverse: false
+
+# 生成する発話の数
+# -1 の場合、評価の発話をすべて処理する
+# 音声生成にかかる時間を短縮する場合、小さな値（5など）に設定してください
+num_eval_utts: -1
+
+acoustic_eval_checkpoint: latest.pth
+vocoder_eval_checkpoint:

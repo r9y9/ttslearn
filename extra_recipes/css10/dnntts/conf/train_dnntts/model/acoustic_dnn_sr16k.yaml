@@ -1,0 +1,11 @@
+netG:
+  _target_: ttslearn.dnntts.DNN
+  in_dim: 329
+  out_dim: 127
+  hidden_dim: 256
+  num_layers: 2
+
+# (mgc, lf0, vuv, bap)
+stream_sizes: [120, 3, 1, 3]
+has_dynamic_features: [true, true, false, true]
+num_windows: 3
