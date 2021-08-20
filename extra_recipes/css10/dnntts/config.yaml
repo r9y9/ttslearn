@@ -37,7 +37,7 @@ qst_path: "../../../recipes/common/qst1.hed"
 ###########################################################
 
 duration_model: duration_dnn
-acoustic_model: acoustic_dnn_sr24k
+acoustic_model: acoustic_dnn_sr16k
 
 # その他詳細なパラメータは、conf/train_dnntts を確認してください
 # エポック数を小さくすると、学習は早く終了します。
