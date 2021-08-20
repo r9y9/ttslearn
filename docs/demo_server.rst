@@ -4,6 +4,15 @@ Demo server (with streamlit)
 音声合成を行うデモサーバのソースコードをGitHubリポジトリに含めています。
 ソースコードは、 ``demo_server.py`` です。
 
+オンラインデモ
+------------------
+
+https://share.streamlit.io/r9y9/ttslearn/demo_server.py
+
+
+デモサーバをローカルで立ち上げる場合
+---------------------------------------
+
 デモサーバの実行には、`streamlit <https://streamlit.io/>`_ が必要です。
 streamlitを含め、デモサーバの実行に必要なパッケージをインストールするには、下記のコマンドを実行してください。
 
