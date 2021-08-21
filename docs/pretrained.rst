@@ -30,17 +30,25 @@ Extra pretrained models
 Note that the following models are not explained in our book.
 Those were trained using extra recipes found in our GitHub repository.
 
-+----------------------------------+------------------------------------------------------------+-----------------------------------------------------------------------------------------------------+
-| Model ID                         | Class                                                      | Details of the model                                                                                |
-+----------------------------------+------------------------------------------------------------+-----------------------------------------------------------------------------------------------------+
-| ``tacotron2_pwg_jsut16k``        | :py:class:`ttslearn.contrib.tacotron2_pwg.Tacotron2PWGTTS` | Tacotron 2 with Parallel WaveGAN (PWG). Trained on JSUT corpus. Sampling rate: 16 kHz.              |
-+----------------------------------+------------------------------------------------------------+-----------------------------------------------------------------------------------------------------+
-| ``tacotron2_pwg_jsut24k``        | :py:class:`ttslearn.contrib.tacotron2_pwg.Tacotron2PWGTTS` | Tacotron 2 with Parallel WaveGAN (PWG). Trained on JSUT corpus. Sampling rate: 24 kHz.              |
-+----------------------------------+------------------------------------------------------------+-----------------------------------------------------------------------------------------------------+
-| ``multspk_tacotron2_pwg_jvs16k`` | :py:class:`ttslearn.contrib.tacotron2_pwg.Tacotron2PWGTTS` | Multi-speaker Tacotron 2 with Parallel WaveGAN (PWG). Trained on JVS corpus. Sampling rate: 16 kHz. |
-+----------------------------------+------------------------------------------------------------+-----------------------------------------------------------------------------------------------------+
-| ``multspk_tacotron2_pwg_jvs24k`` | :py:class:`ttslearn.contrib.tacotron2_pwg.Tacotron2PWGTTS` | Multi-speaker Tacotron 2 with Parallel WaveGAN (PWG). Trained on JVS corpus. Sampling rate: 24 kHz. |
-+----------------------------------+------------------------------------------------------------+-----------------------------------------------------------------------------------------------------+
++--------------------------------------+--------------+------------------------------------------------------------+-----------------------------------------------------------------------------------------------------+
+| Model ID                             | Corpus       | Class                                                      | Details of the model                                                                                |
++--------------------------------------+--------------+------------------------------------------------------------+-----------------------------------------------------------------------------------------------------+
+| ``tacotron2_pwg_jsut16k``            | JSUT         | :py:class:`ttslearn.contrib.tacotron2_pwg.Tacotron2PWGTTS` | Tacotron 2 with Parallel WaveGAN (PWG). Trained on JSUT corpus. Sampling rate: 16 kHz.              |
++--------------------------------------+--------------+------------------------------------------------------------+-----------------------------------------------------------------------------------------------------+
+| ``tacotron2_pwg_jsut24k``            | JSUT         | :py:class:`ttslearn.contrib.tacotron2_pwg.Tacotron2PWGTTS` | Tacotron 2 with PWG. Trained on JSUT corpus. Sampling rate: 24 kHz.                                 |
++--------------------------------------+--------------+------------------------------------------------------------+-----------------------------------------------------------------------------------------------------+
+| ``tacotron2_hifipwg_jsut24k``        | JSUT         | :py:class:`ttslearn.contrib.tacotron2_pwg.Tacotron2PWGTTS` | Tacotron 2 with HiFi-GAN. Trained on JSUT corpus. Sampling rate: 24 kHz.                            |
++--------------------------------------+--------------+------------------------------------------------------------+-----------------------------------------------------------------------------------------------------+
+| ``multspk_tacotron2_pwg_jvs16k``     | JVS          | :py:class:`ttslearn.contrib.tacotron2_pwg.Tacotron2PWGTTS` | Multi-speaker Tacotron 2 with PWG. Trained on JVS corpus. Sampling rate: 16 kHz.                    |
++--------------------------------------+--------------+------------------------------------------------------------+-----------------------------------------------------------------------------------------------------+
+| ``multspk_tacotron2_pwg_jvs24k``     | JVS          | :py:class:`ttslearn.contrib.tacotron2_pwg.Tacotron2PWGTTS` | Multi-speaker Tacotron 2 with Parallel WaveGAN (PWG). Trained on JVS corpus. Sampling rate: 24 kHz. |
++--------------------------------------+--------------+------------------------------------------------------------+-----------------------------------------------------------------------------------------------------+
+| ``multspk_tacotron2_hifipwg_jvs24k`` | JVS          | :py:class:`ttslearn.contrib.tacotron2_pwg.Tacotron2PWGTTS` | Multi-speaker Tacotron 2 with HiFi-GAN. Trained on JVS corpus. Sampling rate: 24 kHz.               |
++--------------------------------------+--------------+------------------------------------------------------------+-----------------------------------------------------------------------------------------------------+
+| ``multspk_tacotron2_pwg_cv16k``      | common voice | :py:class:`ttslearn.contrib.tacotron2_pwg.Tacotron2PWGTTS` | Multi-speaker Tacotron 2 with PWG. Trained on common voice (ja) corpus. Sampling rate: 16 kHz.      |
++--------------------------------------+--------------+------------------------------------------------------------+-----------------------------------------------------------------------------------------------------+
+| ``multspk_tacotron2_pwg_cv24k``      | common voice | :py:class:`ttslearn.contrib.tacotron2_pwg.Tacotron2PWGTTS` | Multi-speaker Tacotron 2 with PWG. Trained on common voice (ja) corpus. Sampling rate: 24 kHz.      |
++--------------------------------------+--------------+------------------------------------------------------------+-----------------------------------------------------------------------------------------------------+
 
 Helpers
 --------

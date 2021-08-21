@@ -1,9 +1,12 @@
 Change log
 ==========
 
-v0.2.1 <2021-xx-xx>
+v0.2.1 <2021-08-21>
 -------------------
 
+- pretrained: add PWG TTS models for common voice (ja)
+- pretrained: add HiFi-GAN based TTS models using JVS and JSUT corpus
+- Add HiFi-GAN configs for JVS and JSUT extra recipes
 - `#7`_: Add script to generate ground-truth aligned (GTA) features
 - `#5`_: [docker] Push docker image to Docker Hub
 - `#4`_: [docker] fix docker build fail because no 'gcc' command
