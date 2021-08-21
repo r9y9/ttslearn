@@ -1,0 +1,6 @@
+﻿ttslearn.pretrained.get\_available\_model\_ids
+==============================================
+
+.. currentmodule:: ttslearn.pretrained
+
+.. autofunction:: get_available_model_ids

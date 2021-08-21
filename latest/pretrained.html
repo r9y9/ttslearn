@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>ttslearn.pretrained &mdash; ttslearn 0.2.0 documentation</title>
+  <title>ttslearn.pretrained &mdash; ttslearn 0.2.1 documentation</title>
   
 
   
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                0.2.0
+                0.2.1
               </div>
             
           
@@ -271,30 +271,56 @@ To control the save location, you can manually set it by the environmental varia
 Those were trained using extra recipes found in our GitHub repository.</p>
 <table class="docutils align-default">
 <colgroup>
-<col style="width: 17%" />
-<col style="width: 31%" />
-<col style="width: 52%" />
+<col style="width: 18%" />
+<col style="width: 7%" />
+<col style="width: 28%" />
+<col style="width: 47%" />
 </colgroup>
 <tbody>
 <tr class="row-odd"><td><p>Model ID</p></td>
+<td><p>Corpus</p></td>
 <td><p>Class</p></td>
 <td><p>Details of the model</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">tacotron2_pwg_jsut16k</span></code></p></td>
+<td><p>JSUT</p></td>
 <td><p><a class="reference internal" href="contrib.html#ttslearn.contrib.tacotron2_pwg.Tacotron2PWGTTS" title="ttslearn.contrib.tacotron2_pwg.Tacotron2PWGTTS"><code class="xref py py-class docutils literal notranslate"><span class="pre">ttslearn.contrib.tacotron2_pwg.Tacotron2PWGTTS</span></code></a></p></td>
 <td><p>Tacotron 2 with Parallel WaveGAN (PWG). Trained on JSUT corpus. Sampling rate: 16 kHz.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">tacotron2_pwg_jsut24k</span></code></p></td>
+<td><p>JSUT</p></td>
 <td><p><a class="reference internal" href="contrib.html#ttslearn.contrib.tacotron2_pwg.Tacotron2PWGTTS" title="ttslearn.contrib.tacotron2_pwg.Tacotron2PWGTTS"><code class="xref py py-class docutils literal notranslate"><span class="pre">ttslearn.contrib.tacotron2_pwg.Tacotron2PWGTTS</span></code></a></p></td>
-<td><p>Tacotron 2 with Parallel WaveGAN (PWG). Trained on JSUT corpus. Sampling rate: 24 kHz.</p></td>
+<td><p>Tacotron 2 with PWG. Trained on JSUT corpus. Sampling rate: 24 kHz.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">multspk_tacotron2_pwg_jvs16k</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">tacotron2_hifipwg_jsut24k</span></code></p></td>
+<td><p>JSUT</p></td>
 <td><p><a class="reference internal" href="contrib.html#ttslearn.contrib.tacotron2_pwg.Tacotron2PWGTTS" title="ttslearn.contrib.tacotron2_pwg.Tacotron2PWGTTS"><code class="xref py py-class docutils literal notranslate"><span class="pre">ttslearn.contrib.tacotron2_pwg.Tacotron2PWGTTS</span></code></a></p></td>
-<td><p>Multi-speaker Tacotron 2 with Parallel WaveGAN (PWG). Trained on JVS corpus. Sampling rate: 16 kHz.</p></td>
+<td><p>Tacotron 2 with HiFi-GAN. Trained on JSUT corpus. Sampling rate: 24 kHz.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">multspk_tacotron2_pwg_jvs24k</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">multspk_tacotron2_pwg_jvs16k</span></code></p></td>
+<td><p>JVS</p></td>
+<td><p><a class="reference internal" href="contrib.html#ttslearn.contrib.tacotron2_pwg.Tacotron2PWGTTS" title="ttslearn.contrib.tacotron2_pwg.Tacotron2PWGTTS"><code class="xref py py-class docutils literal notranslate"><span class="pre">ttslearn.contrib.tacotron2_pwg.Tacotron2PWGTTS</span></code></a></p></td>
+<td><p>Multi-speaker Tacotron 2 with PWG. Trained on JVS corpus. Sampling rate: 16 kHz.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">multspk_tacotron2_pwg_jvs24k</span></code></p></td>
+<td><p>JVS</p></td>
 <td><p><a class="reference internal" href="contrib.html#ttslearn.contrib.tacotron2_pwg.Tacotron2PWGTTS" title="ttslearn.contrib.tacotron2_pwg.Tacotron2PWGTTS"><code class="xref py py-class docutils literal notranslate"><span class="pre">ttslearn.contrib.tacotron2_pwg.Tacotron2PWGTTS</span></code></a></p></td>
 <td><p>Multi-speaker Tacotron 2 with Parallel WaveGAN (PWG). Trained on JVS corpus. Sampling rate: 24 kHz.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">multspk_tacotron2_hifipwg_jvs24k</span></code></p></td>
+<td><p>JVS</p></td>
+<td><p><a class="reference internal" href="contrib.html#ttslearn.contrib.tacotron2_pwg.Tacotron2PWGTTS" title="ttslearn.contrib.tacotron2_pwg.Tacotron2PWGTTS"><code class="xref py py-class docutils literal notranslate"><span class="pre">ttslearn.contrib.tacotron2_pwg.Tacotron2PWGTTS</span></code></a></p></td>
+<td><p>Multi-speaker Tacotron 2 with HiFi-GAN. Trained on JVS corpus. Sampling rate: 24 kHz.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">multspk_tacotron2_pwg_cv16k</span></code></p></td>
+<td><p>common voice</p></td>
+<td><p><a class="reference internal" href="contrib.html#ttslearn.contrib.tacotron2_pwg.Tacotron2PWGTTS" title="ttslearn.contrib.tacotron2_pwg.Tacotron2PWGTTS"><code class="xref py py-class docutils literal notranslate"><span class="pre">ttslearn.contrib.tacotron2_pwg.Tacotron2PWGTTS</span></code></a></p></td>
+<td><p>Multi-speaker Tacotron 2 with PWG. Trained on common voice (ja) corpus. Sampling rate: 16 kHz.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">multspk_tacotron2_pwg_cv24k</span></code></p></td>
+<td><p>common voice</p></td>
+<td><p><a class="reference internal" href="contrib.html#ttslearn.contrib.tacotron2_pwg.Tacotron2PWGTTS" title="ttslearn.contrib.tacotron2_pwg.Tacotron2PWGTTS"><code class="xref py py-class docutils literal notranslate"><span class="pre">ttslearn.contrib.tacotron2_pwg.Tacotron2PWGTTS</span></code></a></p></td>
+<td><p>Multi-speaker Tacotron 2 with PWG. Trained on common voice (ja) corpus. Sampling rate: 24 kHz.</p></td>
 </tr>
 </tbody>
 </table>

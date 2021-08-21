@@ -1,0 +1,6 @@
+﻿ttslearn.tacotron.frontend.openjtalk.text\_to\_sequence
+=======================================================
+
+.. currentmodule:: ttslearn.tacotron.frontend.openjtalk
+
+.. autofunction:: text_to_sequence

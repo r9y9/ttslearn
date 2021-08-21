@@ -1,0 +1,6 @@
+﻿ttslearn.dsp.world\_spss\_params
+================================
+
+.. currentmodule:: ttslearn.dsp
+
+.. autofunction:: world_spss_params

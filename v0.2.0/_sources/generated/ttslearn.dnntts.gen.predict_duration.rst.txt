@@ -1,0 +1,6 @@
+﻿ttslearn.dnntts.gen.predict\_duration
+=====================================
+
+.. currentmodule:: ttslearn.dnntts.gen
+
+.. autofunction:: predict_duration

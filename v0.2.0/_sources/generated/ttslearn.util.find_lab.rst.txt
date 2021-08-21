@@ -1,0 +1,6 @@
+﻿ttslearn.util.find\_lab
+=======================
+
+.. currentmodule:: ttslearn.util
+
+.. autofunction:: find_lab

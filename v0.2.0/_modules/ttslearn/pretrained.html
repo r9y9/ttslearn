@@ -1,0 +1,412 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>ttslearn.pretrained &mdash; ttslearn 0.2.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/plot_directive.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> ttslearn
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.2.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Demo</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/ch00_Quick-start.html">Quick start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/ch11_Advanced-demos.html">Advanced TTS demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../demo_server.html">Demo server (with streamlit)</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Chapters</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/ch04_Python-SP.html">第4章 Python による音声信号処理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/ch05_DNNTTS.html">第5章 深層学習に基づく統計的パラメトリック音声合成</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/ch06_Recipe-DNNTTS.html">第6章: 日本語 DNN 音声合成システムの実装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/ch07_WaveNet.html">第7章 WaveNet: 深層学習に基づく音声波形の生成モデル</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/ch08_Recipe-WaveNet.html">第8章 日本語 WaveNet 音声合成システムの実装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/ch09_Tacotron.html">第9章 Tacotron 2: 一貫学習を狙った音声合成</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/ch10_Recipe-Tacotron.html">第10章 日本語Tacotronに基づく音声合成システムの実装</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Core modules</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../dsp.html">ttslearn.dsp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dnntts.html">ttslearn.dnntts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../wavenet.html">ttslearn.wavenet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tacotron.html">ttslearn.tacotron</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Helpers</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../pretrained.html">ttslearn.pretrained</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../util.html">ttslearn.util</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../train_util.html">ttslearn.train_util</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Advanced topics</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../extra_recipes.html">Extra recipes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contrib.html">ttslearn.contrib</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Meta information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Change log</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ttslearn</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>ttslearn.pretrained</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for ttslearn.pretrained</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">shutil</span>
+<span class="kn">import</span> <span class="nn">tarfile</span>
+<span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">join</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span> <span class="nn">urllib.request</span> <span class="kn">import</span> <span class="n">urlretrieve</span>
+
+<span class="kn">from</span> <span class="nn">tqdm.auto</span> <span class="kn">import</span> <span class="n">tqdm</span>
+<span class="kn">from</span> <span class="nn">ttslearn.util</span> <span class="kn">import</span> <span class="n">dynamic_import</span>
+
+<span class="n">_urls</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;v0.2.0&quot;</span><span class="p">:</span> <span class="s2">&quot;https://github.com/r9y9/ttslearn/releases/download/v0.2.0&quot;</span><span class="p">}</span>
+
+<span class="n">DEFAULT_CACHE_DIR</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;HOME&quot;</span><span class="p">],</span> <span class="s2">&quot;.cache&quot;</span><span class="p">,</span> <span class="s2">&quot;ttslearn&quot;</span><span class="p">)</span>
+<span class="n">CACHE_DIR</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;TTSLEARN_CACHE_DIR&quot;</span><span class="p">,</span> <span class="n">DEFAULT_CACHE_DIR</span><span class="p">)</span>
+
+
+<span class="n">model_registry</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;dnntts&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">_urls</span><span class="p">[</span><span class="s1">&#39;v0.2.0&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">/dnntts.tar.gz&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;_target_&quot;</span><span class="p">:</span> <span class="s2">&quot;ttslearn.dnntts:DNNTTS&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;wavenettts&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">_urls</span><span class="p">[</span><span class="s1">&#39;v0.2.0&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">/wavenettts.tar.gz&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;_target_&quot;</span><span class="p">:</span> <span class="s2">&quot;ttslearn.wavenet:WaveNetTTS&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;tacotron2&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">_urls</span><span class="p">[</span><span class="s1">&#39;v0.2.0&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">/tacotron2.tar.gz&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;_target_&quot;</span><span class="p">:</span> <span class="s2">&quot;ttslearn.tacotron:Tacotron2TTS&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;tacotron2_pwg_jsut16k&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">_urls</span><span class="p">[</span><span class="s1">&#39;v0.2.0&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">/tacotron2_pwg_jsut16k.tar.gz&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;_target_&quot;</span><span class="p">:</span> <span class="s2">&quot;ttslearn.contrib:Tacotron2PWGTTS&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;tacotron2_pwg_jsut24k&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">_urls</span><span class="p">[</span><span class="s1">&#39;v0.2.0&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">/tacotron2_pwg_jsut24k.tar.gz&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;_target_&quot;</span><span class="p">:</span> <span class="s2">&quot;ttslearn.contrib:Tacotron2PWGTTS&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;multspk_tacotron2_pwg_jvs16k&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">_urls</span><span class="p">[</span><span class="s1">&#39;v0.2.0&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">/multspk_tacotron2_pwg_jvs16k.tar.gz&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;_target_&quot;</span><span class="p">:</span> <span class="s2">&quot;ttslearn.contrib:Tacotron2PWGTTS&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;multspk_tacotron2_pwg_jvs24k&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">_urls</span><span class="p">[</span><span class="s1">&#39;v0.2.0&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">/multspk_tacotron2_pwg_jvs24k.tar.gz&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;_target_&quot;</span><span class="p">:</span> <span class="s2">&quot;ttslearn.contrib:Tacotron2PWGTTS&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">}</span>
+
+
+<div class="viewcode-block" id="create_tts_engine"><a class="viewcode-back" href="../../generated/ttslearn.pretrained.create_tts_engine.html#ttslearn.pretrained.create_tts_engine">[docs]</a><span class="k">def</span> <span class="nf">create_tts_engine</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Create TTS engine from official pretrained models.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        name (str): Pre-trained model name</span>
+<span class="sd">        args (list): Additional args for instanciation</span>
+<span class="sd">        kwargs (dict): Additional kwargs for instanciation</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        object: instance of TTS engine</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        &gt;&gt;&gt; from ttslearn.pretrained import create_tts_engine</span>
+<span class="sd">        &gt;&gt;&gt; create_tts_engine(&quot;dnntts&quot;)</span>
+<span class="sd">        DNNTTS (sampling rate: 16000)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">model_registry</span><span class="p">:</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">model_id</span> <span class="ow">in</span> <span class="n">get_available_model_ids</span><span class="p">():</span>
+            <span class="n">s</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;&#39;</span><span class="si">{</span><span class="n">model_id</span><span class="si">}</span><span class="s2">&#39;</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">Pretrained model &#39;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39; does not exist!</span>
+
+<span class="s2">Available models:</span>
+<span class="si">{</span><span class="n">s</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;&quot;&quot;</span>
+        <span class="p">)</span>
+
+    <span class="c1"># download if not exists</span>
+    <span class="n">model_dir</span> <span class="o">=</span> <span class="n">retrieve_pretrained_model</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+
+    <span class="c1"># create an instance</span>
+    <span class="k">return</span> <span class="n">dynamic_import</span><span class="p">(</span><span class="n">model_registry</span><span class="p">[</span><span class="n">name</span><span class="p">][</span><span class="s2">&quot;_target_&quot;</span><span class="p">])(</span><span class="n">model_dir</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="get_available_model_ids"><a class="viewcode-back" href="../../generated/ttslearn.pretrained.get_available_model_ids.html#ttslearn.pretrained.get_available_model_ids">[docs]</a><span class="k">def</span> <span class="nf">get_available_model_ids</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Get available pretrained model names.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        list: List of available pretrained model names.</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        &gt;&gt;&gt; from ttslearn.pretrained import get_available_model_ids</span>
+<span class="sd">        &gt;&gt;&gt; get_available_model_ids()[:3]</span>
+<span class="sd">        [&#39;dnntts&#39;, &#39;wavenettts&#39;, &#39;tacotron2&#39;]</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">model_registry</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span></div>
+
+
+<span class="c1"># https://github.com/tqdm/tqdm#hooks-and-callbacks</span>
+<span class="k">class</span> <span class="nc">_TqdmUpTo</span><span class="p">(</span><span class="n">tqdm</span><span class="p">):</span>  <span class="c1"># type: ignore</span>
+    <span class="k">def</span> <span class="nf">update_to</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">bsize</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">tsize</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">tsize</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">total</span> <span class="o">=</span> <span class="n">tsize</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">b</span> <span class="o">*</span> <span class="n">bsize</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">is_pretrained_model_ready</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+    <span class="n">out_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">CACHE_DIR</span><span class="p">)</span> <span class="o">/</span> <span class="n">name</span>
+    <span class="k">if</span> <span class="n">out_dir</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">out_dir</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;*.pth&quot;</span><span class="p">)))</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">return</span> <span class="n">out_dir</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span>
+
+
+<div class="viewcode-block" id="retrieve_pretrained_model"><a class="viewcode-back" href="../../generated/ttslearn.pretrained.retrieve_pretrained_model.html#ttslearn.pretrained.retrieve_pretrained_model">[docs]</a><span class="k">def</span> <span class="nf">retrieve_pretrained_model</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Retrieve pretrained model from local cache or download from GitHub.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        name (str): Name of pretrained model.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: Path to the pretrained model.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: If the pretrained model is not found.</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        &gt;&gt;&gt; from ttslearn.pretrained import retrieve_pretrained_model</span>
+<span class="sd">        &gt;&gt;&gt; from ttslearn.contrib import Tacotron2PWGTTS</span>
+<span class="sd">        &gt;&gt;&gt; model_dir = retrieve_pretrained_model(&quot;tacotron2_pwg_jsut24k&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; engine = Tacotron2PWGTTS(model_dir=model_dir, device=&quot;cpu&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; wav, sr = engine.tts(&quot;センパイ、かっこいいです、ほれちゃいます！&quot;)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">global</span> <span class="n">model_registry</span>
+    <span class="k">if</span> <span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">model_registry</span><span class="p">:</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">model_id</span> <span class="ow">in</span> <span class="n">get_available_model_ids</span><span class="p">():</span>
+            <span class="n">s</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;&#39;</span><span class="si">{</span><span class="n">model_id</span><span class="si">}</span><span class="s2">&#39;</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">Pretrained model &#39;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39; does not exist!</span>
+
+<span class="s2">Available models:</span>
+<span class="si">{</span><span class="n">s</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;&quot;&quot;</span>
+        <span class="p">)</span>
+
+    <span class="n">url</span> <span class="o">=</span> <span class="n">model_registry</span><span class="p">[</span><span class="n">name</span><span class="p">][</span><span class="s2">&quot;url&quot;</span><span class="p">]</span>
+    <span class="c1"># NOTE: assuming that filename and extracted is the same</span>
+    <span class="n">out_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">CACHE_DIR</span><span class="p">)</span> <span class="o">/</span> <span class="n">name</span>
+    <span class="n">out_dir</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">CACHE_DIR</span><span class="p">)</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">.tar.gz&quot;</span>
+
+    <span class="c1"># re-download models</span>
+    <span class="k">if</span> <span class="n">out_dir</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">out_dir</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;*.pth&quot;</span><span class="p">)))</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="n">out_dir</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">out_dir</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Downloading: &quot;</span><span class="si">{}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">url</span><span class="p">))</span>
+        <span class="k">with</span> <span class="n">_TqdmUpTo</span><span class="p">(</span>
+            <span class="n">unit</span><span class="o">=</span><span class="s2">&quot;B&quot;</span><span class="p">,</span>
+            <span class="n">unit_scale</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">unit_divisor</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span>
+            <span class="n">miniters</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+            <span class="n">desc</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">.tar.gz&quot;</span><span class="p">,</span>
+        <span class="p">)</span> <span class="k">as</span> <span class="n">t</span><span class="p">:</span>  <span class="c1"># all optional kwargs</span>
+            <span class="n">urlretrieve</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">reporthook</span><span class="o">=</span><span class="n">t</span><span class="o">.</span><span class="n">update_to</span><span class="p">)</span>
+            <span class="n">t</span><span class="o">.</span><span class="n">total</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">n</span>
+        <span class="k">with</span> <span class="n">tarfile</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;r|gz&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">extractall</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="n">CACHE_DIR</span><span class="p">)</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">out_dir</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Ryuichi Yamamoto.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

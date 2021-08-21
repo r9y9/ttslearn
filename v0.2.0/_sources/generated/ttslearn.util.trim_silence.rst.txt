@@ -1,0 +1,6 @@
+﻿ttslearn.util.trim\_silence
+===========================
+
+.. currentmodule:: ttslearn.util
+
+.. autofunction:: trim_silence

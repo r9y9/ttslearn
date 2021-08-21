@@ -1,0 +1,311 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>ttslearn.wavenet.gen &mdash; ttslearn 0.2.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/plot_directive.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/custom.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> ttslearn
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.2.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Demo</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/ch00_Quick-start.html">Quick start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/ch11_Advanced-demos.html">Advanced TTS demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../demo_server.html">Demo server (with streamlit)</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Chapters</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/ch04_Python-SP.html">第4章 Python による音声信号処理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/ch05_DNNTTS.html">第5章 深層学習に基づく統計的パラメトリック音声合成</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/ch06_Recipe-DNNTTS.html">第6章: 日本語 DNN 音声合成システムの実装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/ch07_WaveNet.html">第7章 WaveNet: 深層学習に基づく音声波形の生成モデル</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/ch08_Recipe-WaveNet.html">第8章 日本語 WaveNet 音声合成システムの実装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/ch09_Tacotron.html">第9章 Tacotron 2: 一貫学習を狙った音声合成</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/ch10_Recipe-Tacotron.html">第10章 日本語Tacotronに基づく音声合成システムの実装</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Core modules</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../dsp.html">ttslearn.dsp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dnntts.html">ttslearn.dnntts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../wavenet.html">ttslearn.wavenet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tacotron.html">ttslearn.tacotron</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Helpers</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../pretrained.html">ttslearn.pretrained</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../util.html">ttslearn.util</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../train_util.html">ttslearn.train_util</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Advanced topics</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../extra_recipes.html">Extra recipes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contrib.html">ttslearn.contrib</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Meta information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Change log</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">ttslearn</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+          <li><a href="../wavenet.html">ttslearn.wavenet</a> &raquo;</li>
+        
+      <li>ttslearn.wavenet.gen</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for ttslearn.wavenet.gen</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">nnmnkwii.frontend</span> <span class="kn">import</span> <span class="n">merlin</span> <span class="k">as</span> <span class="n">fe</span>
+<span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
+<span class="kn">from</span> <span class="nn">ttslearn.dsp</span> <span class="kn">import</span> <span class="n">inv_mulaw_quantize</span>
+
+
+<div class="viewcode-block" id="gen_waveform"><a class="viewcode-back" href="../../../generated/ttslearn.wavenet.gen.gen_waveform.html#ttslearn.wavenet.gen.gen_waveform">[docs]</a><span class="nd">@torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">gen_waveform</span><span class="p">(</span>
+    <span class="n">device</span><span class="p">,</span>  <span class="c1"># cpu or cuda</span>
+    <span class="n">labels</span><span class="p">,</span>  <span class="c1"># フルコンテキストラベル</span>
+    <span class="n">logf0_vuv</span><span class="p">,</span>  <span class="c1"># 連続対数基本周波数と有声 / 無声フラグ</span>
+    <span class="n">wavenet_model</span><span class="p">,</span>  <span class="c1"># 学習済み WaveNet</span>
+    <span class="n">wavenet_in_scaler</span><span class="p">,</span>  <span class="c1"># 条件付け特徴量の正規化用 StandardScaler</span>
+    <span class="n">binary_dict</span><span class="p">,</span>  <span class="c1"># 二値特徴量を抽出する正規表現</span>
+    <span class="n">numeric_dict</span><span class="p">,</span>  <span class="c1"># 数値特徴量を抽出する正規表現</span>
+    <span class="n">tqdm</span><span class="o">=</span><span class="n">tqdm</span><span class="p">,</span>  <span class="c1"># プログレスバー</span>
+<span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Generate waveform from WaveNet.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        device (torch.device): torch.device to use.</span>
+<span class="sd">        labels (nnmnkwii.io.hts.HTSLabel): full context labels.</span>
+<span class="sd">        logf0_vuv (torch.Tensor): Log-f0 and V/UV flag.</span>
+<span class="sd">        wavenet_model (nn.Module): Trained WaveNet.</span>
+<span class="sd">        wavenet_in_scaler (sklearn.preprocessing.StandardScaler):</span>
+<span class="sd">            StandardScaler for WaveNet input.</span>
+<span class="sd">        binary_dict (dict): Dictionary of binary features.</span>
+<span class="sd">        numeric_dict (dict): Dictionary of numeric features.</span>
+<span class="sd">        tqdm (tqdm): tqdm progress bar.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        numpy.ndarray: Generated waveform.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># フレーム単位の言語特徴量の抽出</span>
+    <span class="n">in_feats</span> <span class="o">=</span> <span class="n">fe</span><span class="o">.</span><span class="n">linguistic_features</span><span class="p">(</span>
+        <span class="n">labels</span><span class="p">,</span>
+        <span class="n">binary_dict</span><span class="p">,</span>
+        <span class="n">numeric_dict</span><span class="p">,</span>
+        <span class="n">add_frame_features</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">subphone_features</span><span class="o">=</span><span class="s2">&quot;coarse_coding&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="c1"># フレーム単位の言語特徴量と、対数連続基本周波数・有声/無声フラグを結合</span>
+    <span class="n">in_feats</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">([</span><span class="n">in_feats</span><span class="p">,</span> <span class="n">logf0_vuv</span><span class="p">])</span>
+
+    <span class="c1"># 特徴量の正規化</span>
+    <span class="n">in_feats</span> <span class="o">=</span> <span class="n">wavenet_in_scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">in_feats</span><span class="p">)</span>
+
+    <span class="c1"># 条件付け特徴量を numpy.ndarray から torch.Tensor に変換</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">in_feats</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">()</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+    <span class="c1"># (B, T, C) -&gt; (B, C, T)</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">c</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+    <span class="c1"># 音声波形の長さを計算</span>
+    <span class="n">upsample_scale</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="n">wavenet_model</span><span class="o">.</span><span class="n">upsample_scales</span><span class="p">)</span>
+    <span class="n">time_steps</span> <span class="o">=</span> <span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">wavenet_model</span><span class="o">.</span><span class="n">aux_context_window</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">upsample_scale</span>
+
+    <span class="c1"># WaveNet による音声波形の生成</span>
+    <span class="c1"># NOTE: 計算に時間を要するため、tqdm によるプログレスバーを利用します</span>
+    <span class="n">gen_wav</span> <span class="o">=</span> <span class="n">wavenet_model</span><span class="o">.</span><span class="n">inference</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">time_steps</span><span class="p">,</span> <span class="n">tqdm</span><span class="p">)</span>
+
+    <span class="c1"># One-hot ベクトルから1次元の信号に変換</span>
+    <span class="n">gen_wav</span> <span class="o">=</span> <span class="n">gen_wav</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="mi">1</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">float</span><span class="p">()</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="c1"># Mu-law 量子化の逆変換</span>
+    <span class="n">gen_wav</span> <span class="o">=</span> <span class="n">inv_mulaw_quantize</span><span class="p">(</span><span class="n">gen_wav</span><span class="p">,</span> <span class="n">wavenet_model</span><span class="o">.</span><span class="n">out_channels</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">gen_wav</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Ryuichi Yamamoto.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

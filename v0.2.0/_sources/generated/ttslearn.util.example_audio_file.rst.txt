@@ -1,0 +1,6 @@
+﻿ttslearn.util.example\_audio\_file
+==================================
+
+.. currentmodule:: ttslearn.util
+
+.. autofunction:: example_audio_file

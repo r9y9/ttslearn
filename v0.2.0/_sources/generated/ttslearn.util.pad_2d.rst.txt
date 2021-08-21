@@ -1,0 +1,6 @@
+﻿ttslearn.util.pad\_2d
+=====================
+
+.. currentmodule:: ttslearn.util
+
+.. autofunction:: pad_2d

@@ -1,0 +1,424 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>ttslearn.dnntts.gen &mdash; ttslearn 0.2.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/plot_directive.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/custom.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> ttslearn
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.2.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Demo</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/ch00_Quick-start.html">Quick start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/ch11_Advanced-demos.html">Advanced TTS demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../demo_server.html">Demo server (with streamlit)</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Chapters</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/ch04_Python-SP.html">第4章 Python による音声信号処理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/ch05_DNNTTS.html">第5章 深層学習に基づく統計的パラメトリック音声合成</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/ch06_Recipe-DNNTTS.html">第6章: 日本語 DNN 音声合成システムの実装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/ch07_WaveNet.html">第7章 WaveNet: 深層学習に基づく音声波形の生成モデル</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/ch08_Recipe-WaveNet.html">第8章 日本語 WaveNet 音声合成システムの実装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/ch09_Tacotron.html">第9章 Tacotron 2: 一貫学習を狙った音声合成</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/ch10_Recipe-Tacotron.html">第10章 日本語Tacotronに基づく音声合成システムの実装</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Core modules</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../dsp.html">ttslearn.dsp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dnntts.html">ttslearn.dnntts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../wavenet.html">ttslearn.wavenet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tacotron.html">ttslearn.tacotron</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Helpers</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../pretrained.html">ttslearn.pretrained</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../util.html">ttslearn.util</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../train_util.html">ttslearn.train_util</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Advanced topics</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../extra_recipes.html">Extra recipes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contrib.html">ttslearn.contrib</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Meta information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Change log</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">ttslearn</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>ttslearn.dnntts.gen</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for ttslearn.dnntts.gen</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pysptk</span>
+<span class="kn">import</span> <span class="nn">pyworld</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">nnmnkwii.frontend</span> <span class="kn">import</span> <span class="n">merlin</span> <span class="k">as</span> <span class="n">fe</span>
+<span class="kn">from</span> <span class="nn">nnmnkwii.postfilters</span> <span class="kn">import</span> <span class="n">merlin_post_filter</span>
+<span class="kn">from</span> <span class="nn">ttslearn.dnntts.multistream</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">get_static_stream_sizes</span><span class="p">,</span>
+    <span class="n">get_windows</span><span class="p">,</span>
+    <span class="n">multi_stream_mlpg</span><span class="p">,</span>
+    <span class="n">split_streams</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<div class="viewcode-block" id="predict_duration"><a class="viewcode-back" href="../../../generated/ttslearn.dnntts.gen.predict_duration.html#ttslearn.dnntts.gen.predict_duration">[docs]</a><span class="nd">@torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">predict_duration</span><span class="p">(</span>
+    <span class="n">device</span><span class="p">,</span>  <span class="c1"># cpu or cuda</span>
+    <span class="n">labels</span><span class="p">,</span>  <span class="c1"># フルコンテキストラベル</span>
+    <span class="n">duration_model</span><span class="p">,</span>  <span class="c1"># 学習済み継続長モデル</span>
+    <span class="n">duration_config</span><span class="p">,</span>  <span class="c1"># 継続長モデルの設定</span>
+    <span class="n">duration_in_scaler</span><span class="p">,</span>  <span class="c1"># 言語特徴量の正規化用 StandardScaler</span>
+    <span class="n">duration_out_scaler</span><span class="p">,</span>  <span class="c1"># 音素継続長の正規化用 StandardScaler</span>
+    <span class="n">binary_dict</span><span class="p">,</span>  <span class="c1"># 二値特徴量を抽出する正規表現</span>
+    <span class="n">numeric_dict</span><span class="p">,</span>  <span class="c1"># 数値特徴量を抽出する正規表現</span>
+<span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Predict phoneme durations.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        device (torch.device): pytorch device</span>
+<span class="sd">        labels (list): list of labels</span>
+<span class="sd">        duration_model (nn.Module): trained duration model</span>
+<span class="sd">        duration_config (dict): configuration of duration model</span>
+<span class="sd">        duration_in_scaler (sklearn.preprocessing.StandardScaler):</span>
+<span class="sd">            StandardScaler of duration features</span>
+<span class="sd">        duration_out_scaler (sklearn.preprocessing.StandardScaler):</span>
+<span class="sd">            StandardScaler of duration output</span>
+<span class="sd">        binary_dict (dict): dictionary of binary features</span>
+<span class="sd">        numeric_dict (dict): dictionary of numeric features</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        numpy.ndarray: predicted durations</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># 言語特徴量の抽出</span>
+    <span class="n">in_feats</span> <span class="o">=</span> <span class="n">fe</span><span class="o">.</span><span class="n">linguistic_features</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">binary_dict</span><span class="p">,</span> <span class="n">numeric_dict</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">float32</span>
+    <span class="p">)</span>
+
+    <span class="c1"># 言語特徴量の正規化</span>
+    <span class="n">in_feats</span> <span class="o">=</span> <span class="n">duration_in_scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">in_feats</span><span class="p">)</span>
+
+    <span class="c1"># 継続長の予測</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">in_feats</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">()</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">in_feats</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">pred_durations</span> <span class="o">=</span> <span class="n">duration_model</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+
+    <span class="c1"># 予測された継続長に対して、正規化の逆変換を行います</span>
+    <span class="n">pred_durations</span> <span class="o">=</span> <span class="n">duration_out_scaler</span><span class="o">.</span><span class="n">inverse_transform</span><span class="p">(</span><span class="n">pred_durations</span><span class="p">)</span>
+
+    <span class="c1"># 閾値処理</span>
+    <span class="n">pred_durations</span><span class="p">[</span><span class="n">pred_durations</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">pred_durations</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">pred_durations</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">pred_durations</span></div>
+
+
+<div class="viewcode-block" id="predict_acoustic"><a class="viewcode-back" href="../../../generated/ttslearn.dnntts.gen.predict_acoustic.html#ttslearn.dnntts.gen.predict_acoustic">[docs]</a><span class="nd">@torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">predict_acoustic</span><span class="p">(</span>
+    <span class="n">device</span><span class="p">,</span>  <span class="c1"># CPU or GPU</span>
+    <span class="n">labels</span><span class="p">,</span>  <span class="c1"># フルコンテキストラベル</span>
+    <span class="n">acoustic_model</span><span class="p">,</span>  <span class="c1"># 学習済み音響モデル</span>
+    <span class="n">acoustic_config</span><span class="p">,</span>  <span class="c1"># 音響モデルの設定</span>
+    <span class="n">acoustic_in_scaler</span><span class="p">,</span>  <span class="c1"># 言語特徴量の正規化用 StandardScaler</span>
+    <span class="n">acoustic_out_scaler</span><span class="p">,</span>  <span class="c1"># 音響特徴量の正規化用 StandardScaler</span>
+    <span class="n">binary_dict</span><span class="p">,</span>  <span class="c1"># 二値特徴量を抽出する正規表現</span>
+    <span class="n">numeric_dict</span><span class="p">,</span>  <span class="c1"># 数値特徴量を抽出する正規表現</span>
+    <span class="n">mlpg</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>  <span class="c1"># MLPG を使用するかどうか</span>
+<span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Predict acoustic features.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        device (torch.device): pytorch device</span>
+<span class="sd">        labels (list): list of labels</span>
+<span class="sd">        acoustic_model (nn.Module): trained acoustic model</span>
+<span class="sd">        acoustic_config (dict): configuration of acoustic model</span>
+<span class="sd">        acoustic_in_scaler (sklearn.preprocessing.StandardScaler):</span>
+<span class="sd">            StandardScaler of acoustic features</span>
+<span class="sd">        acoustic_out_scaler (sklearn.preprocessing.StandardScaler):</span>
+<span class="sd">            StandardScaler of acoustic output</span>
+<span class="sd">        binary_dict (dict): dictionary of binary features</span>
+<span class="sd">        numeric_dict (dict): dictionary of numeric features</span>
+<span class="sd">        mlpg (bool): whether to use MLPG</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        numpy.ndarray: predicted acoustic features</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># フレーム単位の言語特徴量の抽出</span>
+    <span class="n">in_feats</span> <span class="o">=</span> <span class="n">fe</span><span class="o">.</span><span class="n">linguistic_features</span><span class="p">(</span>
+        <span class="n">labels</span><span class="p">,</span>
+        <span class="n">binary_dict</span><span class="p">,</span>
+        <span class="n">numeric_dict</span><span class="p">,</span>
+        <span class="n">add_frame_features</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">subphone_features</span><span class="o">=</span><span class="s2">&quot;coarse_coding&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="c1"># 正規化</span>
+    <span class="n">in_feats</span> <span class="o">=</span> <span class="n">acoustic_in_scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">in_feats</span><span class="p">)</span>
+
+    <span class="c1"># 音響特徴量の予測</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">in_feats</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">()</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">in_feats</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">pred_acoustic</span> <span class="o">=</span> <span class="n">acoustic_model</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+
+    <span class="c1"># 予測された音響特徴量に対して、正規化の逆変換を行います</span>
+    <span class="n">pred_acoustic</span> <span class="o">=</span> <span class="n">acoustic_out_scaler</span><span class="o">.</span><span class="n">inverse_transform</span><span class="p">(</span><span class="n">pred_acoustic</span><span class="p">)</span>
+
+    <span class="c1"># パラメータ生成アルゴリズム (MLPG) の実行</span>
+    <span class="k">if</span> <span class="n">mlpg</span> <span class="ow">and</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">acoustic_config</span><span class="o">.</span><span class="n">has_dynamic_features</span><span class="p">):</span>
+        <span class="c1"># (T, D_out) -&gt; (T, static_dim)</span>
+        <span class="n">pred_acoustic</span> <span class="o">=</span> <span class="n">multi_stream_mlpg</span><span class="p">(</span>
+            <span class="n">pred_acoustic</span><span class="p">,</span>
+            <span class="n">acoustic_out_scaler</span><span class="o">.</span><span class="n">var_</span><span class="p">,</span>
+            <span class="n">get_windows</span><span class="p">(</span><span class="n">acoustic_config</span><span class="o">.</span><span class="n">num_windows</span><span class="p">),</span>
+            <span class="n">acoustic_config</span><span class="o">.</span><span class="n">stream_sizes</span><span class="p">,</span>
+            <span class="n">acoustic_config</span><span class="o">.</span><span class="n">has_dynamic_features</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">pred_acoustic</span></div>
+
+
+<div class="viewcode-block" id="gen_waveform"><a class="viewcode-back" href="../../../generated/ttslearn.dnntts.gen.gen_waveform.html#ttslearn.dnntts.gen.gen_waveform">[docs]</a><span class="k">def</span> <span class="nf">gen_waveform</span><span class="p">(</span>
+    <span class="n">sample_rate</span><span class="p">,</span>  <span class="c1"># サンプリング周波数</span>
+    <span class="n">acoustic_features</span><span class="p">,</span>  <span class="c1"># 音響特徴量</span>
+    <span class="n">stream_sizes</span><span class="p">,</span>  <span class="c1"># ストリームサイズ</span>
+    <span class="n">has_dynamic_features</span><span class="p">,</span>  <span class="c1"># 音響特徴量が動的特徴量を含むかどうか</span>
+    <span class="n">num_windows</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>  <span class="c1"># 動的特徴量の計算に使う窓数</span>
+    <span class="n">post_filter</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>  <span class="c1"># フォルマント強調のポストフィルタを使うかどうか</span>
+<span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Generate waveform from acoustic features.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        sample_rate (int): sampling rate</span>
+<span class="sd">        acoustic_features (numpy.ndarray): acoustic features</span>
+<span class="sd">        stream_sizes (list): list of stream sizes</span>
+<span class="sd">        has_dynamic_features (list): whether the acoustic features contains dynamic features</span>
+<span class="sd">        num_windows (int): number of windows</span>
+<span class="sd">        post_filter (bool): whether to use post filter</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        numpy.ndarray: waveform</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># 静的特徴量の次元数を取得</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">has_dynamic_features</span><span class="p">):</span>
+        <span class="n">static_stream_sizes</span> <span class="o">=</span> <span class="n">get_static_stream_sizes</span><span class="p">(</span>
+            <span class="n">stream_sizes</span><span class="p">,</span> <span class="n">has_dynamic_features</span><span class="p">,</span> <span class="n">num_windows</span>
+        <span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">static_stream_sizes</span> <span class="o">=</span> <span class="n">stream_sizes</span>
+
+    <span class="c1"># 結合された音響特徴量をストリーム毎に分離</span>
+    <span class="n">mgc</span><span class="p">,</span> <span class="n">lf0</span><span class="p">,</span> <span class="n">vuv</span><span class="p">,</span> <span class="n">bap</span> <span class="o">=</span> <span class="n">split_streams</span><span class="p">(</span><span class="n">acoustic_features</span><span class="p">,</span> <span class="n">static_stream_sizes</span><span class="p">)</span>
+
+    <span class="n">fftlen</span> <span class="o">=</span> <span class="n">pyworld</span><span class="o">.</span><span class="n">get_cheaptrick_fft_size</span><span class="p">(</span><span class="n">sample_rate</span><span class="p">)</span>
+    <span class="n">alpha</span> <span class="o">=</span> <span class="n">pysptk</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">mcepalpha</span><span class="p">(</span><span class="n">sample_rate</span><span class="p">)</span>
+
+    <span class="c1"># フォルマント強調のポストフィルタ</span>
+    <span class="k">if</span> <span class="n">post_filter</span><span class="p">:</span>
+        <span class="n">mgc</span> <span class="o">=</span> <span class="n">merlin_post_filter</span><span class="p">(</span><span class="n">mgc</span><span class="p">,</span> <span class="n">alpha</span><span class="p">)</span>
+
+    <span class="c1"># 音響特徴量を音声パラメータに変換</span>
+    <span class="n">spectrogram</span> <span class="o">=</span> <span class="n">pysptk</span><span class="o">.</span><span class="n">mc2sp</span><span class="p">(</span><span class="n">mgc</span><span class="p">,</span> <span class="n">fftlen</span><span class="o">=</span><span class="n">fftlen</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">)</span>
+    <span class="n">aperiodicity</span> <span class="o">=</span> <span class="n">pyworld</span><span class="o">.</span><span class="n">decode_aperiodicity</span><span class="p">(</span>
+        <span class="n">bap</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">),</span> <span class="n">sample_rate</span><span class="p">,</span> <span class="n">fftlen</span>
+    <span class="p">)</span>
+    <span class="n">f0</span> <span class="o">=</span> <span class="n">lf0</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">f0</span><span class="p">[</span><span class="n">vuv</span> <span class="o">&lt;</span> <span class="mf">0.5</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">f0</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">f0</span><span class="p">)]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">f0</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">f0</span><span class="p">)])</span>
+
+    <span class="c1"># WORLD ボコーダを利用して音声生成</span>
+    <span class="n">gen_wav</span> <span class="o">=</span> <span class="n">pyworld</span><span class="o">.</span><span class="n">synthesize</span><span class="p">(</span>
+        <span class="n">f0</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">),</span>
+        <span class="n">spectrogram</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">),</span>
+        <span class="n">aperiodicity</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">),</span>
+        <span class="n">sample_rate</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">gen_wav</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Ryuichi Yamamoto.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

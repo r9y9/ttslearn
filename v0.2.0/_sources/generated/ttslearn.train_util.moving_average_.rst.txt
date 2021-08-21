@@ -1,0 +1,6 @@
+﻿ttslearn.train\_util.moving\_average\_
+======================================
+
+.. currentmodule:: ttslearn.train_util
+
+.. autofunction:: moving_average_

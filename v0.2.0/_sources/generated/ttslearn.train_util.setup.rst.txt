@@ -1,0 +1,6 @@
+﻿ttslearn.train\_util.setup
+==========================
+
+.. currentmodule:: ttslearn.train_util
+
+.. autofunction:: setup

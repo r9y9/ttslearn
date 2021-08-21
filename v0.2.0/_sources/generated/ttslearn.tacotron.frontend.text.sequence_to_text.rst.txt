@@ -1,0 +1,6 @@
+﻿ttslearn.tacotron.frontend.text.sequence\_to\_text
+==================================================
+
+.. currentmodule:: ttslearn.tacotron.frontend.text
+
+.. autofunction:: sequence_to_text

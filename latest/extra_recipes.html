@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Extra recipes &mdash; ttslearn 0.2.0 documentation</title>
+  <title>Extra recipes &mdash; ttslearn 0.2.1 documentation</title>
   
 
   
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                0.2.0
+                0.2.1
               </div>
             
           
@@ -126,6 +126,8 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Extra recipes</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#jsut-corpus">JSUT corpus</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#jvs-corpus">JVS corpus</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#common-voice-ja">Common voice (ja)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#css-10-ja">CSS 10 (ja)</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="contrib.html">ttslearn.contrib</a></li>
@@ -246,7 +248,23 @@
 <p><a class="reference external" href="https://sites.google.com/site/shinnosuketakamichi/research-topics/jvs_corpus">https://sites.google.com/site/shinnosuketakamichi/research-topics/jvs_corpus</a></p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">dnntts</span></code>: DNN音声合成（24kHz）</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">tacotron2_pwg</span></code>: Multi-speaker Tacotron 2 with Parallel WaveGAN (16kHz, 24kHz)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">multispk_tacotron2_pwg</span></code>: Multi-speaker Tacotron 2 with Parallel WaveGAN (16kHz, 24kHz)</p></li>
+</ul>
+</div>
+<div class="section" id="common-voice-ja">
+<h2>Common voice (ja)<a class="headerlink" href="#common-voice-ja" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://commonvoice.mozilla.org/ja/datasets">https://commonvoice.mozilla.org/ja/datasets</a></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">multispk_tacotron2_pwg_20spks</span></code>: Multi-speaker Tacotron 2 with Parallel WaveGAN (16kHz, 24kHz)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">multispk_tacotron2_pwg_386spks</span></code>: Multi-speaker Tacotron 2 with Parallel WaveGAN (16kHz, 24kHz)</p></li>
+</ul>
+</div>
+<div class="section" id="css-10-ja">
+<h2>CSS 10 (ja)<a class="headerlink" href="#css-10-ja" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://www.kaggle.com/bryanpark/japanese-single-speaker-speech-dataset">https://www.kaggle.com/bryanpark/japanese-single-speaker-speech-dataset</a></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">dnntts</span></code>: DNN音声合成（16kHz, 24kHz）</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tacotron2_pwg</span></code>: Tacotron 2 with Parallel WaveGAN (16kHz, 24kHz)</p></li>
 </ul>
 <p>その他のコーパスに同様の音声合成の仕組みを応用することは容易ですが、それらは読者に委ねます。</p>
 <p>ttslearnのGitHubリポジトリにレシピを追加したい場合は、積極的に検討しますので、お問い合わせください。</p>

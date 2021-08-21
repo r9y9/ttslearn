@@ -1,0 +1,6 @@
+﻿ttslearn.dnntts.multistream.split\_streams
+==========================================
+
+.. currentmodule:: ttslearn.dnntts.multistream
+
+.. autofunction:: split_streams

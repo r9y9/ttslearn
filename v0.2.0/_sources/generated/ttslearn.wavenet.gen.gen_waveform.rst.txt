@@ -1,0 +1,6 @@
+﻿ttslearn.wavenet.gen.gen\_waveform
+==================================
+
+.. currentmodule:: ttslearn.wavenet.gen
+
+.. autofunction:: gen_waveform

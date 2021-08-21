@@ -1,0 +1,543 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>ttslearn.util &mdash; ttslearn 0.2.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/plot_directive.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> ttslearn
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.2.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Demo</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/ch00_Quick-start.html">Quick start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/ch11_Advanced-demos.html">Advanced TTS demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../demo_server.html">Demo server (with streamlit)</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Chapters</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/ch04_Python-SP.html">第4章 Python による音声信号処理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/ch05_DNNTTS.html">第5章 深層学習に基づく統計的パラメトリック音声合成</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/ch06_Recipe-DNNTTS.html">第6章: 日本語 DNN 音声合成システムの実装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/ch07_WaveNet.html">第7章 WaveNet: 深層学習に基づく音声波形の生成モデル</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/ch08_Recipe-WaveNet.html">第8章 日本語 WaveNet 音声合成システムの実装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/ch09_Tacotron.html">第9章 Tacotron 2: 一貫学習を狙った音声合成</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/ch10_Recipe-Tacotron.html">第10章 日本語Tacotronに基づく音声合成システムの実装</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Core modules</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../dsp.html">ttslearn.dsp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dnntts.html">ttslearn.dnntts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../wavenet.html">ttslearn.wavenet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tacotron.html">ttslearn.tacotron</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Helpers</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../pretrained.html">ttslearn.pretrained</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../util.html">ttslearn.util</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../train_util.html">ttslearn.train_util</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Advanced topics</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../extra_recipes.html">Extra recipes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contrib.html">ttslearn.contrib</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Meta information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Change log</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ttslearn</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>ttslearn.util</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for ttslearn.util</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Acknowledgements:</span>
+<span class="c1"># mask-related functions were adapted from https://github.com/espnet/espnet</span>
+
+<span class="kn">import</span> <span class="nn">importlib</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pkg_resources</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+
+<span class="c1"># see COPYING for the license of the audio file.</span>
+<span class="n">EXAMPLE_AUDIO</span> <span class="o">=</span> <span class="s2">&quot;_example_data/BASIC5000_0001.wav&quot;</span>
+<span class="n">EXAMPLE_LABEL</span> <span class="o">=</span> <span class="s2">&quot;_example_data/BASIC5000_0001.lab&quot;</span>
+<span class="n">EXAMPLE_MONO_LABEL</span> <span class="o">=</span> <span class="s2">&quot;_example_data/BASIC5000_0001_mono.lab&quot;</span>
+<span class="n">EXAMPLE_QST</span> <span class="o">=</span> <span class="s2">&quot;_example_data/qst1.hed&quot;</span>
+
+
+<div class="viewcode-block" id="init_seed"><a class="viewcode-back" href="../../generated/ttslearn.util.init_seed.html#ttslearn.util.init_seed">[docs]</a><span class="k">def</span> <span class="nf">init_seed</span><span class="p">(</span><span class="n">seed</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Initialize random seed.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        seed (int): random seed</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+    <span class="n">torch</span><span class="o">.</span><span class="n">manual_seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">():</span>
+        <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">manual_seed_all</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="dynamic_import"><a class="viewcode-back" href="../../generated/ttslearn.util.dynamic_import.html#ttslearn.util.dynamic_import">[docs]</a><span class="k">def</span> <span class="nf">dynamic_import</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Dynamic import</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        name (str): module_name + &quot;:&quot; + class_name</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Any: class object</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">mod_name</span><span class="p">,</span> <span class="n">class_name</span> <span class="o">=</span> <span class="n">name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">)</span>
+    <span class="n">mod</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span><span class="n">mod_name</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">mod</span><span class="p">,</span> <span class="n">class_name</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="make_pad_mask"><a class="viewcode-back" href="../../generated/ttslearn.util.make_pad_mask.html#ttslearn.util.make_pad_mask">[docs]</a><span class="k">def</span> <span class="nf">make_pad_mask</span><span class="p">(</span><span class="n">lengths</span><span class="p">,</span> <span class="n">maxlen</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Make mask for padding frames</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        lengths (list): list of lengths</span>
+<span class="sd">        maxlen (int, optional): maximum length. If None, use max value of lengths.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        torch.ByteTensor: mask</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">lengths</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="n">lengths</span> <span class="o">=</span> <span class="n">lengths</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+    <span class="n">bs</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">lengths</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">maxlen</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">maxlen</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">lengths</span><span class="p">))</span>
+
+    <span class="n">seq_range</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">maxlen</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
+    <span class="n">seq_range_expand</span> <span class="o">=</span> <span class="n">seq_range</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="n">bs</span><span class="p">,</span> <span class="n">maxlen</span><span class="p">)</span>
+    <span class="n">seq_length_expand</span> <span class="o">=</span> <span class="n">seq_range_expand</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">lengths</span><span class="p">)</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">mask</span> <span class="o">=</span> <span class="n">seq_range_expand</span> <span class="o">&gt;=</span> <span class="n">seq_length_expand</span>
+
+    <span class="k">return</span> <span class="n">mask</span></div>
+
+
+<div class="viewcode-block" id="make_non_pad_mask"><a class="viewcode-back" href="../../generated/ttslearn.util.make_non_pad_mask.html#ttslearn.util.make_non_pad_mask">[docs]</a><span class="k">def</span> <span class="nf">make_non_pad_mask</span><span class="p">(</span><span class="n">lengths</span><span class="p">,</span> <span class="n">maxlen</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Make mask for non-padding frames</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        lengths (list): list of lengths</span>
+<span class="sd">        maxlen (int, optional): maximum length. If None, use max value of lengths.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        torch.ByteTensor: mask</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="o">~</span><span class="n">make_pad_mask</span><span class="p">(</span><span class="n">lengths</span><span class="p">,</span> <span class="n">maxlen</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="example_audio_file"><a class="viewcode-back" href="../../generated/ttslearn.util.example_audio_file.html#ttslearn.util.example_audio_file">[docs]</a><span class="k">def</span> <span class="nf">example_audio_file</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Get the path to an included audio example file.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; from scipy.io import wavfile</span>
+<span class="sd">    &gt;&gt;&gt; fs, x = wavfile.read(pysptk.util.example_audio_file())</span>
+
+<span class="sd">    &gt;&gt;&gt; import matplotlib.pyplot as plt</span>
+<span class="sd">    &gt;&gt;&gt; plt.plot(x, label=&quot;cmu_us_awb_arctic arctic_a0007.wav&quot;)</span>
+<span class="sd">    &gt;&gt;&gt; plt.xlim(0, len(x))</span>
+<span class="sd">    &gt;&gt;&gt; plt.legend()</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">return</span> <span class="n">pkg_resources</span><span class="o">.</span><span class="n">resource_filename</span><span class="p">(</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">EXAMPLE_AUDIO</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="example_label_file"><a class="viewcode-back" href="../../generated/ttslearn.util.example_label_file.html#ttslearn.util.example_label_file">[docs]</a><span class="k">def</span> <span class="nf">example_label_file</span><span class="p">(</span><span class="n">mono</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Get the path to an included label file.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        mono (bool, optional): If True, return monophonic label file.</span>
+<span class="sd">            Default: False</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: path to an example label file</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">mono</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">pkg_resources</span><span class="o">.</span><span class="n">resource_filename</span><span class="p">(</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">EXAMPLE_MONO_LABEL</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">pkg_resources</span><span class="o">.</span><span class="n">resource_filename</span><span class="p">(</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">EXAMPLE_LABEL</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="example_qst_file"><a class="viewcode-back" href="../../generated/ttslearn.util.example_qst_file.html#ttslearn.util.example_qst_file">[docs]</a><span class="k">def</span> <span class="nf">example_qst_file</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Get the path to an included question set file.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: path to an example question file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">pkg_resources</span><span class="o">.</span><span class="n">resource_filename</span><span class="p">(</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">EXAMPLE_QST</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="pad_1d"><a class="viewcode-back" href="../../generated/ttslearn.util.pad_1d.html#ttslearn.util.pad_1d">[docs]</a><span class="k">def</span> <span class="nf">pad_1d</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">max_len</span><span class="p">,</span> <span class="n">constant_values</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Pad a 1d-tensor.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        x (torch.Tensor): tensor to pad</span>
+<span class="sd">        max_len (int): maximum length of the tensor</span>
+<span class="sd">        constant_values (int, optional): value to pad with. Default: 0</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        torch.Tensor: padded tensor</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pad</span><span class="p">(</span>
+        <span class="n">x</span><span class="p">,</span>
+        <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">max_len</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)),</span>
+        <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;constant&quot;</span><span class="p">,</span>
+        <span class="n">constant_values</span><span class="o">=</span><span class="n">constant_values</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">x</span></div>
+
+
+<div class="viewcode-block" id="pad_2d"><a class="viewcode-back" href="../../generated/ttslearn.util.pad_2d.html#ttslearn.util.pad_2d">[docs]</a><span class="k">def</span> <span class="nf">pad_2d</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">max_len</span><span class="p">,</span> <span class="n">constant_values</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Pad a 2d-tensor.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        x (torch.Tensor): tensor to pad</span>
+<span class="sd">        max_len (int): maximum length of the tensor</span>
+<span class="sd">        constant_values (int, optional): value to pad with. Default: 0</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        torch.Tensor: padded tensor</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pad</span><span class="p">(</span>
+        <span class="n">x</span><span class="p">,</span>
+        <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="n">max_len</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)],</span>
+        <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;constant&quot;</span><span class="p">,</span>
+        <span class="n">constant_values</span><span class="o">=</span><span class="n">constant_values</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">x</span></div>
+
+
+<div class="viewcode-block" id="load_utt_list"><a class="viewcode-back" href="../../generated/ttslearn.util.load_utt_list.html#ttslearn.util.load_utt_list">[docs]</a><span class="k">def</span> <span class="nf">load_utt_list</span><span class="p">(</span><span class="n">utt_list</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Load a list of utterances.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        utt_list (str): path to a file containing a list of utterances</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        List[str]: list of utterances</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">utt_ids</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">utt_list</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">utt_id</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">utt_id</span> <span class="o">=</span> <span class="n">utt_id</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">utt_id</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">utt_ids</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">utt_id</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">utt_ids</span></div>
+
+
+<div class="viewcode-block" id="trim_silence"><a class="viewcode-back" href="../../generated/ttslearn.util.trim_silence.html#ttslearn.util.trim_silence">[docs]</a><span class="k">def</span> <span class="nf">trim_silence</span><span class="p">(</span><span class="n">feats</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">start_sec</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">end_sec</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">shift_sec</span><span class="o">=</span><span class="mf">0.005</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Trim silence from input features.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        feats (np.ndarray): input features</span>
+<span class="sd">        labels (np.ndarray): labels</span>
+<span class="sd">        start_sec (float, optional): start time of the trim</span>
+<span class="sd">        end_sec (float, optional): end time of the trim</span>
+<span class="sd">        shift_sec (float, optional): shift of the trim</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        np.ndarray: trimmed features</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">assert</span> <span class="s2">&quot;sil&quot;</span> <span class="ow">in</span> <span class="n">labels</span><span class="o">.</span><span class="n">contexts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">and</span> <span class="s2">&quot;sil&quot;</span> <span class="ow">in</span> <span class="n">labels</span><span class="o">.</span><span class="n">contexts</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">start_frame</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">labels</span><span class="o">.</span><span class="n">start_times</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="mi">50000</span><span class="p">)</span>
+    <span class="n">end_frame</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">labels</span><span class="o">.</span><span class="n">end_times</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">/</span> <span class="mi">50000</span><span class="p">)</span>
+    <span class="n">start_frame</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">start_frame</span> <span class="o">-</span> <span class="nb">int</span><span class="p">(</span><span class="n">start_sec</span> <span class="o">/</span> <span class="n">shift_sec</span><span class="p">))</span>
+    <span class="n">end_frame</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">feats</span><span class="p">),</span> <span class="n">end_frame</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="n">end_sec</span> <span class="o">/</span> <span class="n">shift_sec</span><span class="p">))</span>
+    <span class="n">feats</span> <span class="o">=</span> <span class="n">feats</span><span class="p">[</span><span class="n">start_frame</span><span class="p">:</span><span class="n">end_frame</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">feats</span></div>
+
+
+<div class="viewcode-block" id="find_feats"><a class="viewcode-back" href="../../generated/ttslearn.util.find_feats.html#ttslearn.util.find_feats">[docs]</a><span class="k">def</span> <span class="nf">find_feats</span><span class="p">(</span><span class="n">directory</span><span class="p">,</span> <span class="n">utt_id</span><span class="p">,</span> <span class="n">typ</span><span class="o">=</span><span class="s2">&quot;out_duration&quot;</span><span class="p">,</span> <span class="n">ext</span><span class="o">=</span><span class="s2">&quot;-feats.npy&quot;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Find features for a given utterance.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        directory (str): directory to search</span>
+<span class="sd">        utt_id (str): utterance id</span>
+<span class="sd">        typ (str, optional): type of the feature. Default: &quot;out_duration&quot;</span>
+<span class="sd">        ext (str, optional): extension of the feature. Default: &quot;-feats.npy&quot;</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: path to the feature file</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">directory</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">directory</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">directory</span><span class="p">)</span>
+    <span class="n">ps</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">directory</span><span class="o">.</span><span class="n">rglob</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;**/</span><span class="si">{</span><span class="n">typ</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">utt_id</span><span class="si">}{</span><span class="n">ext</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">ps</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="find_lab"><a class="viewcode-back" href="../../generated/ttslearn.util.find_lab.html#ttslearn.util.find_lab">[docs]</a><span class="k">def</span> <span class="nf">find_lab</span><span class="p">(</span><span class="n">directory</span><span class="p">,</span> <span class="n">utt_id</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Find label for a given utterance.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        directory (str): directory to search</span>
+<span class="sd">        utt_id (str): utterance id</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: path to the label file</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">directory</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">directory</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">directory</span><span class="p">)</span>
+    <span class="n">ps</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">directory</span><span class="o">.</span><span class="n">rglob</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">utt_id</span><span class="si">}</span><span class="s2">.lab&quot;</span><span class="p">))</span>
+    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">ps</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">ps</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="lab2phonemes"><a class="viewcode-back" href="../../generated/ttslearn.util.lab2phonemes.html#ttslearn.util.lab2phonemes">[docs]</a><span class="k">def</span> <span class="nf">lab2phonemes</span><span class="p">(</span><span class="n">labels</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Convert labels to phonemes.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        labels (str): path to a label file</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        List[str]: phoneme sequence</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">phonemes</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">labels</span><span class="o">.</span><span class="n">contexts</span><span class="p">:</span>
+        <span class="k">if</span> <span class="s2">&quot;-&quot;</span> <span class="ow">in</span> <span class="n">c</span><span class="p">:</span>
+            <span class="n">ph</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;+&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">ph</span> <span class="o">=</span> <span class="n">c</span>
+        <span class="n">phonemes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ph</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">phonemes</span></div>
+
+
+<div class="viewcode-block" id="optional_tqdm"><a class="viewcode-back" href="../../generated/ttslearn.util.optional_tqdm.html#ttslearn.util.optional_tqdm">[docs]</a><span class="k">def</span> <span class="nf">optional_tqdm</span><span class="p">(</span><span class="n">tqdm_mode</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Get a tqdm object.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        tqdm_mode (str): tqdm mode</span>
+<span class="sd">        **kwargs: keyword arguments for tqdm</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        callable: tqdm object or an identity function</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">tqdm_mode</span> <span class="o">==</span> <span class="s2">&quot;tqdm&quot;</span><span class="p">:</span>
+        <span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
+
+        <span class="k">return</span> <span class="n">partial</span><span class="p">(</span><span class="n">tqdm</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">tqdm_mode</span> <span class="o">==</span> <span class="s2">&quot;tqdm-notebook&quot;</span><span class="p">:</span>
+        <span class="kn">from</span> <span class="nn">tqdm.notebook</span> <span class="kn">import</span> <span class="n">tqdm</span>
+
+        <span class="k">return</span> <span class="n">partial</span><span class="p">(</span><span class="n">tqdm</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span></div>
+
+
+<span class="k">class</span> <span class="nc">StandardScaler</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;sklearn.preprocess.StandardScaler like class with only</span>
+<span class="sd">    transform functionality</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        mean (np.ndarray): mean</span>
+<span class="sd">        std (np.ndarray): standard deviation</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mean</span><span class="p">,</span> <span class="n">var</span><span class="p">,</span> <span class="n">scale</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mean_</span> <span class="o">=</span> <span class="n">mean</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var_</span> <span class="o">=</span> <span class="n">var</span>
+        <span class="c1"># NOTE: scale may not exactly same as np.sqrt(var)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">scale_</span> <span class="o">=</span> <span class="n">scale</span>
+
+    <span class="k">def</span> <span class="nf">transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">mean_</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">scale_</span>
+
+    <span class="k">def</span> <span class="nf">inverse_transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">scale_</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">mean_</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Ryuichi Yamamoto.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

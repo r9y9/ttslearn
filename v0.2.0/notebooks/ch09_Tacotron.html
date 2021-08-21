@@ -1,0 +1,2040 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>第9章 Tacotron 2: 一貫学習を狙った音声合成 &mdash; ttslearn 0.2.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/plot_directive.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="第10章 日本語Tacotronに基づく音声合成システムの実装" href="ch10_Recipe-Tacotron.html" />
+    <link rel="prev" title="第8章 日本語 WaveNet 音声合成システムの実装" href="ch08_Recipe-WaveNet.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> ttslearn
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.2.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Demo</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch00_Quick-start.html">Quick start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch11_Advanced-demos.html">Advanced TTS demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../demo_server.html">Demo server (with streamlit)</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Chapters</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="ch04_Python-SP.html">第4章 Python による音声信号処理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch05_DNNTTS.html">第5章 深層学習に基づく統計的パラメトリック音声合成</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch06_Recipe-DNNTTS.html">第6章: 日本語 DNN 音声合成システムの実装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch07_WaveNet.html">第7章 WaveNet: 深層学習に基づく音声波形の生成モデル</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch08_Recipe-WaveNet.html">第8章 日本語 WaveNet 音声合成システムの実装</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">第9章 Tacotron 2: 一貫学習を狙った音声合成</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#準備">準備</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#Python-version">Python version</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ttslearn-のインストール">ttslearn のインストール</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#パッケージのインポート">パッケージのインポート</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#描画周りの設定">描画周りの設定</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#9.3-エンコーダ">9.3 エンコーダ</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#文字列から数値列への変換">文字列から数値列への変換</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#文字埋め込み">文字埋め込み</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#1次元畳み込みの導入">1次元畳み込みの導入</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#双方向LSTM-の導入">双方向LSTM の導入</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#9.4-注意機構">9.4 注意機構</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#内容依存の注意機構">内容依存の注意機構</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ハイブリッド注意機構">ハイブリッド注意機構</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#9.5-デコーダ">9.5 デコーダ</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#Pre-Net">Pre-Net</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#注意機構付きデコーダ">注意機構付きデコーダ</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#9.6-Post-Net">9.6 Post-Net</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#9.7-Tacotron-2-の実装">9.7 Tacotron 2 の実装</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#Tacotron-2-のモデル定義">Tacotron 2 のモデル定義</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#トイモデルを利用したTacotron-2の動作確認">トイモデルを利用したTacotron 2の動作確認</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Tacotron-2の損失関数の計算">Tacotron 2の損失関数の計算</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ch10_Recipe-Tacotron.html">第10章 日本語Tacotronに基づく音声合成システムの実装</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Core modules</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dsp.html">ttslearn.dsp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dnntts.html">ttslearn.dnntts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wavenet.html">ttslearn.wavenet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tacotron.html">ttslearn.tacotron</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Helpers</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../pretrained.html">ttslearn.pretrained</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../util.html">ttslearn.util</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../train_util.html">ttslearn.train_util</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Advanced topics</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../extra_recipes.html">Extra recipes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contrib.html">ttslearn.contrib</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Meta information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Change log</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">ttslearn</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>第9章 Tacotron 2: 一貫学習を狙った音声合成</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/notebooks/ch09_Tacotron.ipynb.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt *,
+div.nbinput.container div.input_area pre,
+div.nboutput.container div.output_area pre,
+div.nbinput.container div.input_area .highlight,
+div.nboutput.container div.output_area .highlight {
+    border: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+div.nbinput.container > div[class*=highlight],
+div.nboutput.container > div[class*=highlight] {
+    margin: 0;
+}
+
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt * {
+    background: none;
+}
+
+div.nboutput.container div.output_area .highlight,
+div.nboutput.container div.output_area pre {
+    background: unset;
+}
+
+div.nboutput.container div.output_area div.highlight {
+    color: unset;  /* override Pygments text color */
+}
+
+/* avoid gaps between output lines */
+div.nboutput.container div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput.container,
+div.nboutput.container {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput.container,
+    div.nboutput.container {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput.container {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast.container {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput.container div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput.container div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput.container div.prompt,
+div.nboutput.container div.prompt {
+    width: 4.5ex;
+    padding-top: 5px;
+    position: relative;
+    user-select: none;
+}
+
+div.nbinput.container div.prompt > div,
+div.nboutput.container div.prompt > div {
+    position: absolute;
+    right: 0;
+    margin-right: 0.3ex;
+}
+
+@media (max-width: 540px) {
+    div.nbinput.container div.prompt,
+    div.nboutput.container div.prompt {
+        width: unset;
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput.container div.prompt.empty {
+        padding: 0;
+    }
+
+    div.nbinput.container div.prompt > div,
+    div.nboutput.container div.prompt > div {
+        position: unset;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput.container div.prompt pre,
+div.nboutput.container div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput.container div.input_area,
+div.nboutput.container div.output_area {
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput.container div.input_area,
+    div.nboutput.container div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput.container div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    /*background: #f5f5f5;*/
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput.container div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput.container div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput.container div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+
+div.nbinput.container div.input_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight].math,
+div.nboutput.container div.output_area.rendered_html,
+div.nboutput.container div.output_area > div.output_javascript,
+div.nboutput.container div.output_area:not(.rendered_html) > img{
+    padding: 5px;
+    margin: 0;
+}
+
+/* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
+div.nbinput.container div.input_area > div[class^='highlight'],
+div.nboutput.container div.output_area > div[class^='highlight']{
+    overflow-y: hidden;
+}
+
+/* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
+.prompt a.copybtn {
+    display: none;
+}
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="第9章-Tacotron-2:-一貫学習を狙った音声合成">
+<h1>第9章 Tacotron 2: 一貫学習を狙った音声合成<a class="headerlink" href="#第9章-Tacotron-2:-一貫学習を狙った音声合成" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="https://colab.research.google.com/github/r9y9/ttslearn/blob/master/notebooks/ch09_Tacotron.ipynb"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a></p>
+<div class="section" id="準備">
+<h2>準備<a class="headerlink" href="#準備" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="Python-version">
+<h3>Python version<a class="headerlink" href="#Python-version" title="Permalink to this headline">¶</a></h3>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="o">!</span>python -VV
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Python 3.8.6 | packaged by conda-forge | (default, Dec 26 2020, 05:05:16)
+[GCC 9.3.0]
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="ttslearn-のインストール">
+<h3>ttslearn のインストール<a class="headerlink" href="#ttslearn-のインストール" title="Permalink to this headline">¶</a></h3>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="o">%%capture</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">ttslearn</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="n">ttslearn</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">ttslearn</span>
+<span class="n">ttslearn</span><span class="o">.</span><span class="n">__version__</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&#39;0.2.0&#39;
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="パッケージのインポート">
+<h3>パッケージのインポート<a class="headerlink" href="#パッケージのインポート" title="Permalink to this headline">¶</a></h3>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="o">%</span><span class="k">pylab</span> inline
+<span class="o">%</span><span class="k">load_ext</span> autoreload
+<span class="o">%</span><span class="k">load_ext</span> tensorboard
+<span class="o">%</span><span class="k">autoreload</span>
+<span class="kn">import</span> <span class="nn">IPython</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Audio</span>
+<span class="kn">import</span> <span class="nn">tensorboard</span> <span class="k">as</span> <span class="nn">tb</span>
+<span class="kn">import</span> <span class="nn">os</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Populating the interactive namespace from numpy and matplotlib
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># 数値演算</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">nn</span>
+<span class="c1"># 音声波形の読み込み</span>
+<span class="kn">from</span> <span class="nn">scipy.io</span> <span class="kn">import</span> <span class="n">wavfile</span>
+<span class="c1"># フルコンテキストラベル、質問ファイルの読み込み</span>
+<span class="kn">from</span> <span class="nn">nnmnkwii.io</span> <span class="kn">import</span> <span class="n">hts</span>
+<span class="c1"># 音声分析</span>
+<span class="kn">import</span> <span class="nn">pyworld</span>
+<span class="c1"># 音声分析、可視化</span>
+<span class="kn">import</span> <span class="nn">librosa</span>
+<span class="kn">import</span> <span class="nn">librosa.display</span>
+<span class="c1"># Pythonで学ぶ音声合成</span>
+<span class="kn">import</span> <span class="nn">ttslearn</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># シードの固定</span>
+<span class="kn">from</span> <span class="nn">ttslearn.util</span> <span class="kn">import</span> <span class="n">init_seed</span>
+<span class="n">init_seed</span><span class="p">(</span><span class="mi">773</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">torch</span><span class="o">.</span><span class="n">__version__</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&#39;1.8.1&#39;
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="描画周りの設定">
+<h3>描画周りの設定<a class="headerlink" href="#描画周りの設定" title="Permalink to this headline">¶</a></h3>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">ttslearn.notebook</span> <span class="kn">import</span> <span class="n">get_cmap</span><span class="p">,</span> <span class="n">init_plot_style</span><span class="p">,</span> <span class="n">savefig</span>
+<span class="n">cmap</span> <span class="o">=</span> <span class="n">get_cmap</span><span class="p">()</span>
+<span class="n">init_plot_style</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="9.3-エンコーダ">
+<h2>9.3 エンコーダ<a class="headerlink" href="#9.3-エンコーダ" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="文字列から数値列への変換">
+<h3>文字列から数値列への変換<a class="headerlink" href="#文字列から数値列への変換" title="Permalink to this headline">¶</a></h3>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># 語彙の定義</span>
+<span class="n">characters</span> <span class="o">=</span> <span class="s2">&quot;abcdefghijklmnopqrstuvwxyz!&#39;(),-.:;? &quot;</span>
+<span class="c1"># その他特殊記号</span>
+<span class="n">extra_symbols</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;^&quot;</span><span class="p">,</span>  <span class="c1"># 文の先頭を表す特殊記号 &lt;SOS&gt;</span>
+    <span class="s2">&quot;$&quot;</span><span class="p">,</span>  <span class="c1"># 文の末尾を表す特殊記号 &lt;EOS&gt;</span>
+<span class="p">]</span>
+<span class="n">_pad</span> <span class="o">=</span> <span class="s2">&quot;~&quot;</span>
+
+<span class="c1"># NOTE: パディングを 0 番目に配置</span>
+<span class="n">symbols</span> <span class="o">=</span> <span class="p">[</span><span class="n">_pad</span><span class="p">]</span> <span class="o">+</span> <span class="n">extra_symbols</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="n">characters</span><span class="p">)</span>
+
+<span class="c1"># 文字列⇔数値の相互変換のための辞書</span>
+<span class="n">_symbol_to_id</span> <span class="o">=</span> <span class="p">{</span><span class="n">s</span><span class="p">:</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">symbols</span><span class="p">)}</span>
+<span class="n">_id_to_symbol</span> <span class="o">=</span> <span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="n">s</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">symbols</span><span class="p">)}</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="nb">len</span><span class="p">(</span><span class="n">symbols</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+40
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">def</span> <span class="nf">text_to_sequence</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="c1"># 簡易のため、大文字と小文字を区別せず、全ての大文字を小文字に変換</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+
+    <span class="c1"># &lt;SOS&gt;</span>
+    <span class="n">seq</span> <span class="o">=</span> <span class="p">[</span><span class="n">_symbol_to_id</span><span class="p">[</span><span class="s2">&quot;^&quot;</span><span class="p">]]</span>
+
+    <span class="c1"># 本文</span>
+    <span class="n">seq</span> <span class="o">+=</span> <span class="p">[</span><span class="n">_symbol_to_id</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">text</span><span class="p">]</span>
+
+    <span class="c1"># &lt;EOS&gt;</span>
+    <span class="n">seq</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_symbol_to_id</span><span class="p">[</span><span class="s2">&quot;$&quot;</span><span class="p">])</span>
+
+    <span class="k">return</span> <span class="n">seq</span>
+
+
+<span class="k">def</span> <span class="nf">sequence_to_text</span><span class="p">(</span><span class="n">seq</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">_id_to_symbol</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">seq</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">seq</span> <span class="o">=</span> <span class="n">text_to_sequence</span><span class="p">(</span><span class="s2">&quot;Hello!&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;文字列から数値列への変換: </span><span class="si">{</span><span class="n">seq</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;数値列から文字列への逆変換: </span><span class="si">{</span><span class="n">sequence_to_text</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+文字列から数値列への変換: [1, 10, 7, 14, 14, 17, 29, 2]
+数値列から文字列への逆変換: [&#39;^&#39;, &#39;h&#39;, &#39;e&#39;, &#39;l&#39;, &#39;l&#39;, &#39;o&#39;, &#39;!&#39;, &#39;$&#39;]
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="文字埋め込み">
+<h3>文字埋め込み<a class="headerlink" href="#文字埋め込み" title="Permalink to this headline">¶</a></h3>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">class</span> <span class="nc">SimplestEncoder</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num_vocab</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">embed_dim</span><span class="o">=</span><span class="mi">256</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">embed</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Embedding</span><span class="p">(</span><span class="n">num_vocab</span><span class="p">,</span> <span class="n">embed_dim</span><span class="p">,</span> <span class="n">padding_idx</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">seqs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">embed</span><span class="p">(</span><span class="n">seqs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">SimplestEncoder</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+SimplestEncoder(
+  (embed): Embedding(40, 256, padding_idx=0)
+)
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">ttslearn.util</span> <span class="kn">import</span> <span class="n">pad_1d</span>
+
+<span class="k">def</span> <span class="nf">get_dummy_input</span><span class="p">():</span>
+    <span class="c1"># バッチサイズに 2 を想定して、適当な文字列を作成</span>
+    <span class="n">seqs</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">text_to_sequence</span><span class="p">(</span><span class="s2">&quot;What is your favorite language?&quot;</span><span class="p">),</span>
+        <span class="n">text_to_sequence</span><span class="p">(</span><span class="s2">&quot;Hello world.&quot;</span><span class="p">),</span>
+    <span class="p">]</span>
+    <span class="n">in_lens</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">seqs</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">long</span><span class="p">)</span>
+    <span class="n">max_len</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">seqs</span><span class="p">)</span>
+    <span class="n">seqs</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">pad_1d</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span> <span class="n">max_len</span><span class="p">))</span> <span class="k">for</span> <span class="n">seq</span> <span class="ow">in</span> <span class="n">seqs</span><span class="p">])</span>
+
+    <span class="k">return</span> <span class="n">seqs</span><span class="p">,</span> <span class="n">in_lens</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">seqs</span><span class="p">,</span> <span class="n">in_lens</span> <span class="o">=</span> <span class="n">get_dummy_input</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;入力&quot;</span><span class="p">,</span> <span class="n">seqs</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;系列長:&quot;</span><span class="p">,</span> <span class="n">in_lens</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+入力 tensor([[ 1, 25, 10,  3, 22, 39, 11, 21, 39, 27, 17, 23, 20, 39,  8,  3, 24, 17,
+         20, 11, 22,  7, 39, 14,  3, 16,  9, 23,  3,  9,  7, 38,  2],
+        [ 1, 10,  7, 14, 14, 17, 39, 25, 17, 20, 14,  6, 35,  2,  0,  0,  0,  0,
+          0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]])
+系列長: tensor([33, 14])
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">encoder</span> <span class="o">=</span> <span class="n">SimplestEncoder</span><span class="p">(</span><span class="n">num_vocab</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">embed_dim</span><span class="o">=</span><span class="mi">256</span><span class="p">)</span>
+<span class="n">seqs</span><span class="p">,</span> <span class="n">in_lens</span> <span class="o">=</span> <span class="n">get_dummy_input</span><span class="p">()</span>
+<span class="n">encoder_outs</span> <span class="o">=</span> <span class="n">encoder</span><span class="p">(</span><span class="n">seqs</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;入力のサイズ: </span><span class="si">{</span><span class="nb">tuple</span><span class="p">(</span><span class="n">seqs</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;出力のサイズ: </span><span class="si">{</span><span class="nb">tuple</span><span class="p">(</span><span class="n">encoder_outs</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+入力のサイズ: (2, 33)
+出力のサイズ: (2, 33, 256)
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># パディングの部分は0を取り、それ以外は連続値で表されます</span>
+<span class="n">encoder_outs</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+tensor([[[ 0.7055,  0.6891,  0.0332,  ...,  0.7174,  0.4686,  1.1468],
+         [-0.1568, -0.3719, -1.0086,  ..., -0.9326, -1.2187, -0.0714],
+         [-0.1901, -0.1983,  0.2274,  ...,  0.2284,  1.6452, -0.3408],
+         ...,
+         [-1.9353,  0.2628, -0.1449,  ...,  1.6056, -0.3912, -0.0740],
+         [ 0.4687,  0.3258, -0.6565,  ...,  1.0895,  0.9105,  0.2814],
+         [ 0.8940,  0.3002, -0.2105,  ...,  0.7973,  0.2230, -0.1975]],
+
+        [[ 0.7055,  0.6891,  0.0332,  ...,  0.7174,  0.4686,  1.1468],
+         [-0.1901, -0.1983,  0.2274,  ...,  0.2284,  1.6452, -0.3408],
+         [-1.9353,  0.2628, -0.1449,  ...,  1.6056, -0.3912, -0.0740],
+         ...,
+         [ 0.0000,  0.0000,  0.0000,  ...,  0.0000,  0.0000,  0.0000],
+         [ 0.0000,  0.0000,  0.0000,  ...,  0.0000,  0.0000,  0.0000],
+         [ 0.0000,  0.0000,  0.0000,  ...,  0.0000,  0.0000,  0.0000]]],
+       grad_fn=&lt;EmbeddingBackward&gt;)
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="1次元畳み込みの導入">
+<h3>1次元畳み込みの導入<a class="headerlink" href="#1次元畳み込みの導入" title="Permalink to this headline">¶</a></h3>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">class</span> <span class="nc">ConvEncoder</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">num_vocab</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span>
+        <span class="n">embed_dim</span><span class="o">=</span><span class="mi">256</span><span class="p">,</span>
+        <span class="n">conv_layers</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+        <span class="n">conv_channels</span><span class="o">=</span><span class="mi">256</span><span class="p">,</span>
+        <span class="n">conv_kernel_size</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="c1"># 文字埋め込み</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">embed</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Embedding</span><span class="p">(</span><span class="n">num_vocab</span><span class="p">,</span> <span class="n">embed_dim</span><span class="p">,</span> <span class="n">padding_idx</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+        <span class="c1"># 1次元畳み込みの重ね合わせ：局所的な依存関係のモデル化</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">convs</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">ModuleList</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">conv_layers</span><span class="p">):</span>
+            <span class="n">in_channels</span> <span class="o">=</span> <span class="n">embed_dim</span> <span class="k">if</span> <span class="n">layer</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">conv_channels</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">convs</span> <span class="o">+=</span> <span class="p">[</span>
+                <span class="n">nn</span><span class="o">.</span><span class="n">Conv1d</span><span class="p">(</span>
+                    <span class="n">in_channels</span><span class="p">,</span>
+                    <span class="n">conv_channels</span><span class="p">,</span>
+                    <span class="n">conv_kernel_size</span><span class="p">,</span>
+                    <span class="n">padding</span><span class="o">=</span><span class="p">(</span><span class="n">conv_kernel_size</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span><span class="p">,</span>
+                    <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                <span class="p">),</span>
+                <span class="n">nn</span><span class="o">.</span><span class="n">BatchNorm1d</span><span class="p">(</span><span class="n">conv_channels</span><span class="p">),</span>
+                <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span>
+                <span class="n">nn</span><span class="o">.</span><span class="n">Dropout</span><span class="p">(</span><span class="mf">0.5</span><span class="p">),</span>
+            <span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">convs</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">convs</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">seqs</span><span class="p">):</span>
+        <span class="n">emb</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">embed</span><span class="p">(</span><span class="n">seqs</span><span class="p">)</span>
+        <span class="c1"># 1 次元畳み込みと embedding では、入力のサイズが異なるので注意</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">convs</span><span class="p">(</span><span class="n">emb</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">out</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">ConvEncoder</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+ConvEncoder(
+  (embed): Embedding(40, 256, padding_idx=0)
+  (convs): Sequential(
+    (0): Conv1d(256, 256, kernel_size=(5,), stride=(1,), padding=(2,), bias=False)
+    (1): BatchNorm1d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (2): ReLU()
+    (3): Dropout(p=0.5, inplace=False)
+    (4): Conv1d(256, 256, kernel_size=(5,), stride=(1,), padding=(2,), bias=False)
+    (5): BatchNorm1d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (6): ReLU()
+    (7): Dropout(p=0.5, inplace=False)
+    (8): Conv1d(256, 256, kernel_size=(5,), stride=(1,), padding=(2,), bias=False)
+    (9): BatchNorm1d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (10): ReLU()
+    (11): Dropout(p=0.5, inplace=False)
+  )
+)
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">encoder</span> <span class="o">=</span> <span class="n">ConvEncoder</span><span class="p">(</span><span class="n">num_vocab</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">embed_dim</span><span class="o">=</span><span class="mi">256</span><span class="p">)</span>
+<span class="n">seqs</span><span class="p">,</span> <span class="n">in_lens</span> <span class="o">=</span> <span class="n">get_dummy_input</span><span class="p">()</span>
+<span class="n">encoder_outs</span> <span class="o">=</span> <span class="n">encoder</span><span class="p">(</span><span class="n">seqs</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;入力のサイズ: </span><span class="si">{</span><span class="nb">tuple</span><span class="p">(</span><span class="n">seqs</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;出力のサイズ: </span><span class="si">{</span><span class="nb">tuple</span><span class="p">(</span><span class="n">encoder_outs</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+入力のサイズ: (2, 33)
+出力のサイズ: (2, 33, 256)
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="双方向LSTM-の導入">
+<h3>双方向LSTM の導入<a class="headerlink" href="#双方向LSTM-の導入" title="Permalink to this headline">¶</a></h3>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">torch.nn.utils.rnn</span> <span class="kn">import</span> <span class="n">pack_padded_sequence</span><span class="p">,</span> <span class="n">pad_packed_sequence</span>
+
+<span class="k">class</span> <span class="nc">Encoder</span><span class="p">(</span><span class="n">ConvEncoder</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">num_vocab</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span>
+        <span class="n">embed_dim</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span>
+        <span class="n">hidden_dim</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span>
+        <span class="n">conv_layers</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+        <span class="n">conv_channels</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span>
+        <span class="n">conv_kernel_size</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">num_vocab</span><span class="p">,</span> <span class="n">embed_dim</span><span class="p">,</span> <span class="n">conv_layers</span><span class="p">,</span> <span class="n">conv_channels</span><span class="p">,</span> <span class="n">conv_kernel_size</span>
+        <span class="p">)</span>
+        <span class="c1"># 双方向 LSTM による長期依存関係のモデル化</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">blstm</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">LSTM</span><span class="p">(</span>
+            <span class="n">conv_channels</span><span class="p">,</span> <span class="n">hidden_dim</span> <span class="o">//</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">batch_first</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">bidirectional</span><span class="o">=</span><span class="kc">True</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">seqs</span><span class="p">,</span> <span class="n">in_lens</span><span class="p">):</span>
+        <span class="n">emb</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">embed</span><span class="p">(</span><span class="n">seqs</span><span class="p">)</span>
+        <span class="c1"># 1 次元畳み込みと embedding では、入力のサイズ が異なるので注意</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">convs</span><span class="p">(</span><span class="n">emb</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+        <span class="c1"># 双方向 LSTM の計算</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">pack_padded_sequence</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">in_lens</span><span class="p">,</span> <span class="n">batch_first</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">out</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">blstm</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
+        <span class="n">out</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">pad_packed_sequence</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">batch_first</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">out</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">Encoder</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Encoder(
+  (embed): Embedding(40, 512, padding_idx=0)
+  (convs): Sequential(
+    (0): Conv1d(512, 512, kernel_size=(5,), stride=(1,), padding=(2,), bias=False)
+    (1): BatchNorm1d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (2): ReLU()
+    (3): Dropout(p=0.5, inplace=False)
+    (4): Conv1d(512, 512, kernel_size=(5,), stride=(1,), padding=(2,), bias=False)
+    (5): BatchNorm1d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (6): ReLU()
+    (7): Dropout(p=0.5, inplace=False)
+    (8): Conv1d(512, 512, kernel_size=(5,), stride=(1,), padding=(2,), bias=False)
+    (9): BatchNorm1d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (10): ReLU()
+    (11): Dropout(p=0.5, inplace=False)
+  )
+  (blstm): LSTM(512, 256, batch_first=True, bidirectional=True)
+)
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">encoder</span> <span class="o">=</span> <span class="n">Encoder</span><span class="p">(</span><span class="n">num_vocab</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">embed_dim</span><span class="o">=</span><span class="mi">256</span><span class="p">)</span>
+<span class="n">seqs</span><span class="p">,</span> <span class="n">in_lens</span> <span class="o">=</span> <span class="n">get_dummy_input</span><span class="p">()</span>
+<span class="n">in_lens</span><span class="p">,</span> <span class="n">indices</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">in_lens</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">descending</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">seqs</span> <span class="o">=</span> <span class="n">seqs</span><span class="p">[</span><span class="n">indices</span><span class="p">]</span>
+
+<span class="n">encoder_outs</span> <span class="o">=</span> <span class="n">encoder</span><span class="p">(</span><span class="n">seqs</span><span class="p">,</span> <span class="n">in_lens</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;入力のサイズ: </span><span class="si">{</span><span class="nb">tuple</span><span class="p">(</span><span class="n">seqs</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;出力のサイズ: </span><span class="si">{</span><span class="nb">tuple</span><span class="p">(</span><span class="n">encoder_outs</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+入力のサイズ: (2, 33)
+出力のサイズ: (2, 33, 512)
+</pre></div></div>
+</div>
+</div>
+</div>
+<div class="section" id="9.4-注意機構">
+<h2>9.4 注意機構<a class="headerlink" href="#9.4-注意機構" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="内容依存の注意機構">
+<h3>内容依存の注意機構<a class="headerlink" href="#内容依存の注意機構" title="Permalink to this headline">¶</a></h3>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">torch.nn</span> <span class="kn">import</span> <span class="n">functional</span> <span class="k">as</span> <span class="n">F</span>
+
+<span class="c1"># 書籍中の数式に沿って、わかりやすさを重視した実装</span>
+<span class="k">class</span> <span class="nc">BahdanauAttention</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">encoder_dim</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span> <span class="n">decoder_dim</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="o">=</span><span class="mi">128</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">V</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">encoder_dim</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">W</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">decoder_dim</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="c1"># NOTE: 本書の数式通りに実装するなら bias=False ですが、実用上は bias=True としても問題ありません</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">w</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">encoder_out</span><span class="p">,</span> <span class="n">decoder_state</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="c1"># 式 (9.11) の計算</span>
+        <span class="n">erg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">w</span><span class="p">(</span>
+            <span class="n">torch</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">W</span><span class="p">(</span><span class="n">decoder_state</span><span class="p">)</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">V</span><span class="p">(</span><span class="n">encoder_outs</span><span class="p">))</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">mask</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">erg</span><span class="o">.</span><span class="n">masked_fill_</span><span class="p">(</span><span class="n">mask</span><span class="p">,</span> <span class="o">-</span><span class="nb">float</span><span class="p">(</span><span class="s2">&quot;inf&quot;</span><span class="p">))</span>
+
+        <span class="n">attention_weights</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">erg</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="c1"># エンコーダ出力の長さ方向に対して重み付き和を取ります</span>
+        <span class="n">attention_context</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span>
+            <span class="n">encoder_outs</span> <span class="o">*</span> <span class="n">attention_weights</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span>
+        <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">attention_context</span><span class="p">,</span> <span class="n">attention_weights</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">BahdanauAttention</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+BahdanauAttention(
+  (V): Linear(in_features=512, out_features=128, bias=True)
+  (W): Linear(in_features=1024, out_features=128, bias=False)
+  (w): Linear(in_features=128, out_features=1, bias=True)
+)
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">ttslearn.util</span> <span class="kn">import</span> <span class="n">make_pad_mask</span>
+
+<span class="n">mask</span> <span class="o">=</span>  <span class="n">make_pad_mask</span><span class="p">(</span><span class="n">in_lens</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">encoder_outs</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+<span class="n">attention</span> <span class="o">=</span> <span class="n">BahdanauAttention</span><span class="p">()</span>
+
+<span class="n">decoder_input</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">seqs</span><span class="p">),</span> <span class="mi">1024</span><span class="p">)</span>
+
+<span class="n">attention_context</span><span class="p">,</span> <span class="n">attention_weights</span> <span class="o">=</span> <span class="n">attention</span><span class="p">(</span><span class="n">encoder_outs</span><span class="p">,</span> <span class="n">decoder_input</span><span class="p">,</span> <span class="n">mask</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;エンコーダの出力のサイズ: </span><span class="si">{</span><span class="nb">tuple</span><span class="p">(</span><span class="n">encoder_outs</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;デコーダの隠れ状態のサイズ: </span><span class="si">{</span><span class="nb">tuple</span><span class="p">(</span><span class="n">decoder_input</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;コンテキストベクトルのサイズ: </span><span class="si">{</span><span class="nb">tuple</span><span class="p">(</span><span class="n">attention_context</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;アテンション重みのサイズ: </span><span class="si">{</span><span class="nb">tuple</span><span class="p">(</span><span class="n">attention_weights</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+エンコーダの出力のサイズ: (2, 33, 512)
+デコーダの隠れ状態のサイズ: (2, 1024)
+コンテキストベクトルのサイズ: (2, 512)
+アテンション重みのサイズ: (2, 33)
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="ハイブリッド注意機構">
+<h3>ハイブリッド注意機構<a class="headerlink" href="#ハイブリッド注意機構" title="Permalink to this headline">¶</a></h3>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">class</span> <span class="nc">LocationSensitiveAttention</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">encoder_dim</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span>
+        <span class="n">decoder_dim</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span>
+        <span class="n">hidden_dim</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span>
+        <span class="n">conv_channels</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span>
+        <span class="n">conv_kernel_size</span><span class="o">=</span><span class="mi">31</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">V</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">encoder_dim</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">W</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">decoder_dim</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">U</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">conv_channels</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">F</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Conv1d</span><span class="p">(</span>
+            <span class="mi">1</span><span class="p">,</span>
+            <span class="n">conv_channels</span><span class="p">,</span>
+            <span class="n">conv_kernel_size</span><span class="p">,</span>
+            <span class="n">padding</span><span class="o">=</span><span class="p">(</span><span class="n">conv_kernel_size</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span><span class="p">,</span>
+            <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="c1"># NOTE: 本書の数式通りに実装するなら bias=False ですが、実用上は bias=True としても問題ありません</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">w</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">encoder_outs</span><span class="p">,</span> <span class="n">src_lens</span><span class="p">,</span> <span class="n">decoder_state</span><span class="p">,</span> <span class="n">att_prev</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="c1"># アテンション重みを一様分布で初期化</span>
+        <span class="k">if</span> <span class="n">att_prev</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">att_prev</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="n">make_pad_mask</span><span class="p">(</span><span class="n">src_lens</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span>
+                <span class="n">device</span><span class="o">=</span><span class="n">decoder_state</span><span class="o">.</span><span class="n">device</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">decoder_state</span><span class="o">.</span><span class="n">dtype</span>
+            <span class="p">)</span>
+            <span class="n">att_prev</span> <span class="o">=</span> <span class="n">att_prev</span> <span class="o">/</span> <span class="n">src_lens</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">encoder_outs</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+
+        <span class="c1"># (B x T_enc) -&gt; (B x 1 x T_enc) -&gt; (B x conv_channels x T_enc) -&gt;</span>
+        <span class="c1"># (B x T_enc x conv_channels)</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">F</span><span class="p">(</span><span class="n">att_prev</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+        <span class="c1"># 式 (9.13) の計算</span>
+        <span class="n">erg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">w</span><span class="p">(</span>
+            <span class="n">torch</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">W</span><span class="p">(</span><span class="n">decoder_state</span><span class="p">)</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">V</span><span class="p">(</span><span class="n">encoder_outs</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">U</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+            <span class="p">)</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">mask</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">erg</span><span class="o">.</span><span class="n">masked_fill_</span><span class="p">(</span><span class="n">mask</span><span class="p">,</span> <span class="o">-</span><span class="nb">float</span><span class="p">(</span><span class="s2">&quot;inf&quot;</span><span class="p">))</span>
+
+        <span class="n">attention_weights</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">erg</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="c1"># エンコーダ出力の長さ方向に対して重み付き和を取ります</span>
+        <span class="n">attention_context</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span>
+            <span class="n">encoder_outs</span> <span class="o">*</span> <span class="n">attention_weights</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span>
+        <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">attention_context</span><span class="p">,</span> <span class="n">attention_weights</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">LocationSensitiveAttention</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+LocationSensitiveAttention(
+  (V): Linear(in_features=512, out_features=128, bias=True)
+  (W): Linear(in_features=1024, out_features=128, bias=False)
+  (U): Linear(in_features=32, out_features=128, bias=False)
+  (F): Conv1d(1, 32, kernel_size=(31,), stride=(1,), padding=(15,), bias=False)
+  (w): Linear(in_features=128, out_features=1, bias=True)
+)
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[30]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">ttslearn.util</span> <span class="kn">import</span> <span class="n">make_pad_mask</span>
+
+<span class="n">mask</span> <span class="o">=</span>  <span class="n">make_pad_mask</span><span class="p">(</span><span class="n">in_lens</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">encoder_outs</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+<span class="n">attention</span> <span class="o">=</span> <span class="n">LocationSensitiveAttention</span><span class="p">()</span>
+
+<span class="n">decoder_input</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">seqs</span><span class="p">),</span> <span class="mi">1024</span><span class="p">)</span>
+
+<span class="n">attention_context</span><span class="p">,</span> <span class="n">attention_weights</span> <span class="o">=</span> <span class="n">attention</span><span class="p">(</span><span class="n">encoder_outs</span><span class="p">,</span> <span class="n">in_lens</span><span class="p">,</span> <span class="n">decoder_input</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">mask</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;エンコーダの出力のサイズ: </span><span class="si">{</span><span class="nb">tuple</span><span class="p">(</span><span class="n">encoder_outs</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;デコーダの隠れ状態のサイズ: </span><span class="si">{</span><span class="nb">tuple</span><span class="p">(</span><span class="n">decoder_input</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;コンテキストベクトルのサイズ: </span><span class="si">{</span><span class="nb">tuple</span><span class="p">(</span><span class="n">attention_context</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;アテンション重みのサイズ: </span><span class="si">{</span><span class="nb">tuple</span><span class="p">(</span><span class="n">attention_weights</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+エンコーダの出力のサイズ: (2, 33, 512)
+デコーダの隠れ状態のサイズ: (2, 1024)
+コンテキストベクトルのサイズ: (2, 512)
+アテンション重みのサイズ: (2, 33)
+</pre></div></div>
+</div>
+</div>
+</div>
+<div class="section" id="9.5-デコーダ">
+<h2>9.5 デコーダ<a class="headerlink" href="#9.5-デコーダ" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="Pre-Net">
+<h3>Pre-Net<a class="headerlink" href="#Pre-Net" title="Permalink to this headline">¶</a></h3>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[31]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">class</span> <span class="nc">Prenet</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">in_dim</span><span class="p">,</span> <span class="n">layers</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="o">=</span><span class="mi">256</span><span class="p">,</span> <span class="n">dropout</span><span class="o">=</span><span class="mf">0.5</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dropout</span> <span class="o">=</span> <span class="n">dropout</span>
+        <span class="n">prenet</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">ModuleList</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">layers</span><span class="p">):</span>
+            <span class="n">prenet</span> <span class="o">+=</span> <span class="p">[</span>
+                <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">in_dim</span> <span class="k">if</span> <span class="n">layer</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">hidden_dim</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="p">),</span>
+                <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span>
+            <span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">prenet</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span><span class="o">*</span><span class="n">prenet</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">prenet</span><span class="p">:</span>
+            <span class="c1"># 学習時、推論時の両方で Dropout を適用します</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">dropout</span><span class="p">(</span><span class="n">layer</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">dropout</span><span class="p">,</span> <span class="n">training</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">x</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[32]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">Prenet</span><span class="p">(</span><span class="mi">80</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[32]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Prenet(
+  (prenet): Sequential(
+    (0): Linear(in_features=80, out_features=256, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=256, out_features=256, bias=True)
+    (3): ReLU()
+  )
+)
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[33]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">decoder_input</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">seqs</span><span class="p">),</span> <span class="mi">80</span><span class="p">)</span>
+
+<span class="n">prenet</span> <span class="o">=</span> <span class="n">Prenet</span><span class="p">(</span><span class="mi">80</span><span class="p">)</span>
+<span class="n">out</span> <span class="o">=</span> <span class="n">prenet</span><span class="p">(</span><span class="n">decoder_input</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;デコーダの入力のサイズ: </span><span class="si">{</span><span class="nb">tuple</span><span class="p">(</span><span class="n">decoder_input</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Pre-Net の出力のサイズ: </span><span class="si">{</span><span class="nb">tuple</span><span class="p">(</span><span class="n">out</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+デコーダの入力のサイズ: (2, 80)
+Pre-Net の出力のサイズ: (2, 256)
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="注意機構付きデコーダ">
+<h3>注意機構付きデコーダ<a class="headerlink" href="#注意機構付きデコーダ" title="Permalink to this headline">¶</a></h3>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[34]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">ttslearn.tacotron.decoder</span> <span class="kn">import</span> <span class="n">ZoneOutCell</span>
+
+<span class="k">class</span> <span class="nc">Decoder</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">encoder_hidden_dim</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span>
+        <span class="n">out_dim</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span>
+        <span class="n">layers</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+        <span class="n">hidden_dim</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span>
+        <span class="n">prenet_layers</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+        <span class="n">prenet_hidden_dim</span><span class="o">=</span><span class="mi">256</span><span class="p">,</span>
+        <span class="n">prenet_dropout</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+        <span class="n">zoneout</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+        <span class="n">reduction_factor</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">attention_hidden_dim</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span>
+        <span class="n">attention_conv_channels</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span>
+        <span class="n">attention_conv_kernel_size</span><span class="o">=</span><span class="mi">31</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">out_dim</span> <span class="o">=</span> <span class="n">out_dim</span>
+
+        <span class="c1"># 注意機構</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">attention</span> <span class="o">=</span> <span class="n">LocationSensitiveAttention</span><span class="p">(</span>
+            <span class="n">encoder_hidden_dim</span><span class="p">,</span>
+            <span class="n">hidden_dim</span><span class="p">,</span>
+            <span class="n">attention_hidden_dim</span><span class="p">,</span>
+            <span class="n">attention_conv_channels</span><span class="p">,</span>
+            <span class="n">attention_conv_kernel_size</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reduction_factor</span> <span class="o">=</span> <span class="n">reduction_factor</span>
+
+        <span class="c1"># Prenet</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">prenet</span> <span class="o">=</span> <span class="n">Prenet</span><span class="p">(</span><span class="n">out_dim</span><span class="p">,</span> <span class="n">prenet_layers</span><span class="p">,</span> <span class="n">prenet_hidden_dim</span><span class="p">,</span> <span class="n">prenet_dropout</span><span class="p">)</span>
+
+        <span class="c1"># 片方向LSTM</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lstm</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">ModuleList</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">layers</span><span class="p">):</span>
+            <span class="n">lstm</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">LSTMCell</span><span class="p">(</span>
+                <span class="n">encoder_hidden_dim</span> <span class="o">+</span> <span class="n">prenet_hidden_dim</span> <span class="k">if</span> <span class="n">layer</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">hidden_dim</span><span class="p">,</span>
+                <span class="n">hidden_dim</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="n">lstm</span> <span class="o">=</span> <span class="n">ZoneOutCell</span><span class="p">(</span><span class="n">lstm</span><span class="p">,</span> <span class="n">zoneout</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">lstm</span> <span class="o">+=</span> <span class="p">[</span><span class="n">lstm</span><span class="p">]</span>
+
+        <span class="c1"># 出力への projection 層</span>
+        <span class="n">proj_in_dim</span> <span class="o">=</span> <span class="n">encoder_hidden_dim</span> <span class="o">+</span> <span class="n">hidden_dim</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">feat_out</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">proj_in_dim</span><span class="p">,</span> <span class="n">out_dim</span> <span class="o">*</span> <span class="n">reduction_factor</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">prob_out</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">proj_in_dim</span><span class="p">,</span> <span class="n">reduction_factor</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_zero_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hs</span><span class="p">):</span>
+        <span class="n">init_hs</span> <span class="o">=</span> <span class="n">hs</span><span class="o">.</span><span class="n">new_zeros</span><span class="p">(</span><span class="n">hs</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">lstm</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">hidden_size</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">init_hs</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">encoder_outs</span><span class="p">,</span> <span class="n">in_lens</span><span class="p">,</span> <span class="n">decoder_targets</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="n">is_inference</span> <span class="o">=</span> <span class="n">decoder_targets</span> <span class="ow">is</span> <span class="kc">None</span>
+
+        <span class="c1"># Reduction factor に基づくフレーム数の調整</span>
+        <span class="c1"># (B, Lmax, out_dim) -&gt;  (B, Lmax/r, out_dim)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">reduction_factor</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">is_inference</span><span class="p">:</span>
+            <span class="n">decoder_targets</span> <span class="o">=</span> <span class="n">decoder_targets</span><span class="p">[</span>
+                <span class="p">:,</span> <span class="bp">self</span><span class="o">.</span><span class="n">reduction_factor</span> <span class="o">-</span> <span class="mi">1</span> <span class="p">::</span> <span class="bp">self</span><span class="o">.</span><span class="n">reduction_factor</span>
+            <span class="p">]</span>
+
+        <span class="c1"># デコーダの系列長を保持</span>
+        <span class="c1"># 推論時は、エンコーダの系列長から経験的に上限を定める</span>
+        <span class="k">if</span> <span class="n">is_inference</span><span class="p">:</span>
+            <span class="n">max_decoder_time_steps</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">encoder_outs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="mf">10.0</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">max_decoder_time_steps</span> <span class="o">=</span> <span class="n">decoder_targets</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="c1"># ゼロパディングされた部分に対するマスク</span>
+        <span class="n">mask</span> <span class="o">=</span> <span class="n">make_pad_mask</span><span class="p">(</span><span class="n">in_lens</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">encoder_outs</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+
+        <span class="c1"># LSTM の状態をゼロで初期化</span>
+        <span class="n">h_list</span><span class="p">,</span> <span class="n">c_list</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lstm</span><span class="p">)):</span>
+            <span class="n">h_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_zero_state</span><span class="p">(</span><span class="n">encoder_outs</span><span class="p">))</span>
+            <span class="n">c_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_zero_state</span><span class="p">(</span><span class="n">encoder_outs</span><span class="p">))</span>
+
+        <span class="c1"># デコーダの最初の入力</span>
+        <span class="n">go_frame</span> <span class="o">=</span> <span class="n">encoder_outs</span><span class="o">.</span><span class="n">new_zeros</span><span class="p">(</span><span class="n">encoder_outs</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">out_dim</span><span class="p">)</span>
+        <span class="n">prev_out</span> <span class="o">=</span> <span class="n">go_frame</span>
+
+        <span class="c1"># 1つ前の時刻のアテンション重み</span>
+        <span class="n">prev_att_w</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="c1"># メインループ</span>
+        <span class="n">outs</span><span class="p">,</span> <span class="n">logits</span><span class="p">,</span> <span class="n">att_ws</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[]</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="c1"># コンテキストベクトル、アテンション重みの計算</span>
+            <span class="n">att_c</span><span class="p">,</span> <span class="n">att_w</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">attention</span><span class="p">(</span>
+                <span class="n">encoder_outs</span><span class="p">,</span> <span class="n">in_lens</span><span class="p">,</span> <span class="n">h_list</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">prev_att_w</span><span class="p">,</span> <span class="n">mask</span>
+            <span class="p">)</span>
+
+            <span class="c1"># Pre-Net</span>
+            <span class="n">prenet_out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">prenet</span><span class="p">(</span><span class="n">prev_out</span><span class="p">)</span>
+
+            <span class="c1"># LSTM</span>
+            <span class="n">xs</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">att_c</span><span class="p">,</span> <span class="n">prenet_out</span><span class="p">],</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">h_list</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">c_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lstm</span><span class="p">[</span><span class="mi">0</span><span class="p">](</span><span class="n">xs</span><span class="p">,</span> <span class="p">(</span><span class="n">h_list</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">c_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lstm</span><span class="p">)):</span>
+                <span class="n">h_list</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">c_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lstm</span><span class="p">[</span><span class="n">i</span><span class="p">](</span>
+                    <span class="n">h_list</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">],</span> <span class="p">(</span><span class="n">h_list</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">c_list</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+                <span class="p">)</span>
+            <span class="c1"># 出力の計算</span>
+            <span class="n">hcs</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">h_list</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">att_c</span><span class="p">],</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">outs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">feat_out</span><span class="p">(</span><span class="n">hcs</span><span class="p">)</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">encoder_outs</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">out_dim</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+            <span class="n">logits</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">prob_out</span><span class="p">(</span><span class="n">hcs</span><span class="p">))</span>
+            <span class="n">att_ws</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">att_w</span><span class="p">)</span>
+
+            <span class="c1"># 次の時刻のデコーダの入力を更新</span>
+            <span class="k">if</span> <span class="n">is_inference</span><span class="p">:</span>
+                <span class="n">prev_out</span> <span class="o">=</span> <span class="n">outs</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][:,</span> <span class="p">:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>  <span class="c1"># (1, out_dim)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># Teacher forcing</span>
+                <span class="n">prev_out</span> <span class="o">=</span> <span class="n">decoder_targets</span><span class="p">[:,</span> <span class="n">t</span><span class="p">,</span> <span class="p">:]</span>
+
+            <span class="c1"># 累積アテンション重み</span>
+            <span class="n">prev_att_w</span> <span class="o">=</span> <span class="n">att_w</span> <span class="k">if</span> <span class="n">prev_att_w</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">prev_att_w</span> <span class="o">+</span> <span class="n">att_w</span>
+
+            <span class="n">t</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="c1"># 停止条件のチェック</span>
+            <span class="k">if</span> <span class="n">t</span> <span class="o">&gt;=</span> <span class="n">max_decoder_time_steps</span><span class="p">:</span>
+                <span class="k">break</span>
+            <span class="k">if</span> <span class="n">is_inference</span> <span class="ow">and</span> <span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">sigmoid</span><span class="p">(</span><span class="n">logits</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">&gt;=</span> <span class="mf">0.5</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
+                <span class="k">break</span>
+
+        <span class="c1"># 各時刻の出力を結合</span>
+        <span class="n">logits</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">(</span><span class="n">logits</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># (B, Lmax)</span>
+        <span class="n">outs</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">(</span><span class="n">outs</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># (B, out_dim, Lmax)</span>
+        <span class="n">att_ws</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">att_ws</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># (B, Lmax, Tmax)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">reduction_factor</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">outs</span> <span class="o">=</span> <span class="n">outs</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">outs</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">out_dim</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># (B, out_dim, Lmax)</span>
+
+        <span class="k">return</span> <span class="n">outs</span><span class="p">,</span> <span class="n">logits</span><span class="p">,</span> <span class="n">att_ws</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[35]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">Decoder</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[35]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Decoder(
+  (attention): LocationSensitiveAttention(
+    (V): Linear(in_features=512, out_features=128, bias=True)
+    (W): Linear(in_features=1024, out_features=128, bias=False)
+    (U): Linear(in_features=32, out_features=128, bias=False)
+    (F): Conv1d(1, 32, kernel_size=(31,), stride=(1,), padding=(15,), bias=False)
+    (w): Linear(in_features=128, out_features=1, bias=True)
+  )
+  (prenet): Prenet(
+    (prenet): Sequential(
+      (0): Linear(in_features=80, out_features=256, bias=True)
+      (1): ReLU()
+      (2): Linear(in_features=256, out_features=256, bias=True)
+      (3): ReLU()
+    )
+  )
+  (lstm): ModuleList(
+    (0): ZoneOutCell(
+      (cell): LSTMCell(768, 1024)
+    )
+    (1): ZoneOutCell(
+      (cell): LSTMCell(1024, 1024)
+    )
+  )
+  (feat_out): Linear(in_features=1536, out_features=80, bias=False)
+  (prob_out): Linear(in_features=1536, out_features=1, bias=True)
+)
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[36]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">decoder_targets</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">encoder_outs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">120</span><span class="p">,</span> <span class="mi">80</span><span class="p">)</span>
+<span class="n">decoder</span> <span class="o">=</span> <span class="n">Decoder</span><span class="p">(</span><span class="n">encoder_outs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="mi">80</span><span class="p">)</span>
+
+<span class="c1"># Teaccher forcing: decoder_targets (教師データ) を与える</span>
+<span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+    <span class="n">outs</span><span class="p">,</span> <span class="n">logits</span><span class="p">,</span> <span class="n">att_ws</span> <span class="o">=</span> <span class="n">decoder</span><span class="p">(</span><span class="n">encoder_outs</span><span class="p">,</span> <span class="n">in_lens</span><span class="p">,</span> <span class="n">decoder_targets</span><span class="p">);</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;デコーダの入力のサイズ: </span><span class="si">{</span><span class="nb">tuple</span><span class="p">(</span><span class="n">decoder_input</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;デコーダの出力のサイズ: </span><span class="si">{</span><span class="nb">tuple</span><span class="p">(</span><span class="n">outs</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;stop token (logits) のサイズ: </span><span class="si">{</span><span class="nb">tuple</span><span class="p">(</span><span class="n">logits</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;アテンション重みのサイズ: </span><span class="si">{</span><span class="nb">tuple</span><span class="p">(</span><span class="n">att_ws</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+デコーダの入力のサイズ: (2, 80)
+デコーダの出力のサイズ: (2, 80, 120)
+stop token (logits) のサイズ: (2, 120)
+アテンション重みのサイズ: (2, 120, 33)
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[37]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># 自己回帰に基づく推論</span>
+<span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+    <span class="n">decoder</span><span class="p">(</span><span class="n">encoder_outs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="n">in_lens</span><span class="p">[</span><span class="mi">0</span><span class="p">]]))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="9.6-Post-Net">
+<h2>9.6 Post-Net<a class="headerlink" href="#9.6-Post-Net" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[38]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">class</span> <span class="nc">Postnet</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">in_dim</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span>
+        <span class="n">layers</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+        <span class="n">channels</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span>
+        <span class="n">kernel_size</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+        <span class="n">dropout</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="n">postnet</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">ModuleList</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">layers</span><span class="p">):</span>
+            <span class="n">in_channels</span> <span class="o">=</span> <span class="n">in_dim</span> <span class="k">if</span> <span class="n">layer</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">channels</span>
+            <span class="n">out_channels</span> <span class="o">=</span> <span class="n">in_dim</span> <span class="k">if</span> <span class="n">layer</span> <span class="o">==</span> <span class="n">layers</span> <span class="o">-</span> <span class="mi">1</span> <span class="k">else</span> <span class="n">channels</span>
+            <span class="n">postnet</span> <span class="o">+=</span> <span class="p">[</span>
+                <span class="n">nn</span><span class="o">.</span><span class="n">Conv1d</span><span class="p">(</span>
+                    <span class="n">in_channels</span><span class="p">,</span>
+                    <span class="n">out_channels</span><span class="p">,</span>
+                    <span class="n">kernel_size</span><span class="p">,</span>
+                    <span class="n">stride</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                    <span class="n">padding</span><span class="o">=</span><span class="p">(</span><span class="n">kernel_size</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span><span class="p">,</span>
+                    <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                <span class="p">),</span>
+                <span class="n">nn</span><span class="o">.</span><span class="n">BatchNorm1d</span><span class="p">(</span><span class="n">out_channels</span><span class="p">),</span>
+            <span class="p">]</span>
+            <span class="k">if</span> <span class="n">layer</span> <span class="o">!=</span> <span class="n">layers</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">postnet</span> <span class="o">+=</span> <span class="p">[</span><span class="n">nn</span><span class="o">.</span><span class="n">Tanh</span><span class="p">()]</span>
+            <span class="n">postnet</span> <span class="o">+=</span> <span class="p">[</span><span class="n">nn</span><span class="o">.</span><span class="n">Dropout</span><span class="p">(</span><span class="n">dropout</span><span class="p">)]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">postnet</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span><span class="o">*</span><span class="n">postnet</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">postnet</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[39]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">Postnet</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[39]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Postnet(
+  (postnet): Sequential(
+    (0): Conv1d(80, 512, kernel_size=(5,), stride=(1,), padding=(2,), bias=False)
+    (1): BatchNorm1d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (2): Tanh()
+    (3): Dropout(p=0.5, inplace=False)
+    (4): Conv1d(512, 512, kernel_size=(5,), stride=(1,), padding=(2,), bias=False)
+    (5): BatchNorm1d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (6): Tanh()
+    (7): Dropout(p=0.5, inplace=False)
+    (8): Conv1d(512, 512, kernel_size=(5,), stride=(1,), padding=(2,), bias=False)
+    (9): BatchNorm1d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (10): Tanh()
+    (11): Dropout(p=0.5, inplace=False)
+    (12): Conv1d(512, 512, kernel_size=(5,), stride=(1,), padding=(2,), bias=False)
+    (13): BatchNorm1d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (14): Tanh()
+    (15): Dropout(p=0.5, inplace=False)
+    (16): Conv1d(512, 80, kernel_size=(5,), stride=(1,), padding=(2,), bias=False)
+    (17): BatchNorm1d(80, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (18): Dropout(p=0.5, inplace=False)
+  )
+)
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[40]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">postnet</span> <span class="o">=</span> <span class="n">Postnet</span><span class="p">(</span><span class="mi">80</span><span class="p">)</span>
+<span class="n">residual</span> <span class="o">=</span> <span class="n">postnet</span><span class="p">(</span><span class="n">outs</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;入力のサイズ: </span><span class="si">{</span><span class="nb">tuple</span><span class="p">(</span><span class="n">outs</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;出力のサイズ: </span><span class="si">{</span><span class="nb">tuple</span><span class="p">(</span><span class="n">residual</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+入力のサイズ: (2, 80, 120)
+出力のサイズ: (2, 80, 120)
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="9.7-Tacotron-2-の実装">
+<h2>9.7 Tacotron 2 の実装<a class="headerlink" href="#9.7-Tacotron-2-の実装" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="Tacotron-2-のモデル定義">
+<h3>Tacotron 2 のモデル定義<a class="headerlink" href="#Tacotron-2-のモデル定義" title="Permalink to this headline">¶</a></h3>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[41]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">class</span> <span class="nc">Tacotron2</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span>
+    <span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">encoder</span> <span class="o">=</span> <span class="n">Encoder</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">decoder</span> <span class="o">=</span> <span class="n">Decoder</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">postnet</span> <span class="o">=</span> <span class="n">Postnet</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">seq</span><span class="p">,</span> <span class="n">in_lens</span><span class="p">,</span> <span class="n">decoder_targets</span><span class="p">):</span>
+        <span class="c1"># エンコーダによるテキストに潜在する表現の獲得</span>
+        <span class="n">encoder_outs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">encoder</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span> <span class="n">in_lens</span><span class="p">)</span>
+
+        <span class="c1"># デコーダによるメルスペクトログラム、stop token の予測</span>
+        <span class="n">outs</span><span class="p">,</span> <span class="n">logits</span><span class="p">,</span> <span class="n">att_ws</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">decoder</span><span class="p">(</span><span class="n">encoder_outs</span><span class="p">,</span> <span class="n">in_lens</span><span class="p">,</span> <span class="n">decoder_targets</span><span class="p">)</span>
+
+        <span class="c1"># Post-Net によるメルスペクトログラムの残差の予測</span>
+        <span class="n">outs_fine</span> <span class="o">=</span> <span class="n">outs</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">postnet</span><span class="p">(</span><span class="n">outs</span><span class="p">)</span>
+
+        <span class="c1"># (B, C, T) -&gt; (B, T, C)</span>
+        <span class="n">outs</span> <span class="o">=</span> <span class="n">outs</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">outs_fine</span> <span class="o">=</span> <span class="n">outs_fine</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">outs</span><span class="p">,</span> <span class="n">outs_fine</span><span class="p">,</span> <span class="n">logits</span><span class="p">,</span> <span class="n">att_ws</span>
+
+    <span class="k">def</span> <span class="nf">inference</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">seq</span><span class="p">):</span>
+        <span class="n">seq</span> <span class="o">=</span> <span class="n">seq</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">seq</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="n">seq</span>
+        <span class="n">in_lens</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="n">seq</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">long</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">seq</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span> <span class="n">in_lens</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[42]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">seqs</span><span class="p">,</span> <span class="n">in_lens</span> <span class="o">=</span> <span class="n">get_dummy_input</span><span class="p">()</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">Tacotron2</span><span class="p">()</span>
+
+<span class="c1"># Tacotron 2 の計算</span>
+<span class="n">outs</span><span class="p">,</span> <span class="n">outs_fine</span><span class="p">,</span> <span class="n">logits</span><span class="p">,</span> <span class="n">att_ws</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">seqs</span><span class="p">,</span> <span class="n">in_lens</span><span class="p">,</span> <span class="n">decoder_targets</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;入力のサイズ: </span><span class="si">{</span><span class="nb">tuple</span><span class="p">(</span><span class="n">seqs</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;デコーダの出力のサイズ: </span><span class="si">{</span><span class="nb">tuple</span><span class="p">(</span><span class="n">outs</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Post-Netの出力のサイズ: </span><span class="si">{</span><span class="nb">tuple</span><span class="p">(</span><span class="n">outs_fine</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;stop token (logits) のサイズ: </span><span class="si">{</span><span class="nb">tuple</span><span class="p">(</span><span class="n">logits</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;アテンション重みのサイズ: </span><span class="si">{</span><span class="nb">tuple</span><span class="p">(</span><span class="n">att_ws</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+入力のサイズ: (2, 33)
+デコーダの出力のサイズ: (2, 120, 80)
+Post-Netの出力のサイズ: (2, 120, 80)
+stop token (logits) のサイズ: (2, 120)
+アテンション重みのサイズ: (2, 120, 33)
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[43]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">model</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[43]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Tacotron2(
+  (encoder): Encoder(
+    (embed): Embedding(40, 512, padding_idx=0)
+    (convs): Sequential(
+      (0): Conv1d(512, 512, kernel_size=(5,), stride=(1,), padding=(2,), bias=False)
+      (1): BatchNorm1d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (2): ReLU()
+      (3): Dropout(p=0.5, inplace=False)
+      (4): Conv1d(512, 512, kernel_size=(5,), stride=(1,), padding=(2,), bias=False)
+      (5): BatchNorm1d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (6): ReLU()
+      (7): Dropout(p=0.5, inplace=False)
+      (8): Conv1d(512, 512, kernel_size=(5,), stride=(1,), padding=(2,), bias=False)
+      (9): BatchNorm1d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (10): ReLU()
+      (11): Dropout(p=0.5, inplace=False)
+    )
+    (blstm): LSTM(512, 256, batch_first=True, bidirectional=True)
+  )
+  (decoder): Decoder(
+    (attention): LocationSensitiveAttention(
+      (V): Linear(in_features=512, out_features=128, bias=True)
+      (W): Linear(in_features=1024, out_features=128, bias=False)
+      (U): Linear(in_features=32, out_features=128, bias=False)
+      (F): Conv1d(1, 32, kernel_size=(31,), stride=(1,), padding=(15,), bias=False)
+      (w): Linear(in_features=128, out_features=1, bias=True)
+    )
+    (prenet): Prenet(
+      (prenet): Sequential(
+        (0): Linear(in_features=80, out_features=256, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=256, out_features=256, bias=True)
+        (3): ReLU()
+      )
+    )
+    (lstm): ModuleList(
+      (0): ZoneOutCell(
+        (cell): LSTMCell(768, 1024)
+      )
+      (1): ZoneOutCell(
+        (cell): LSTMCell(1024, 1024)
+      )
+    )
+    (feat_out): Linear(in_features=1536, out_features=80, bias=False)
+    (prob_out): Linear(in_features=1536, out_features=1, bias=True)
+  )
+  (postnet): Postnet(
+    (postnet): Sequential(
+      (0): Conv1d(80, 512, kernel_size=(5,), stride=(1,), padding=(2,), bias=False)
+      (1): BatchNorm1d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (2): Tanh()
+      (3): Dropout(p=0.5, inplace=False)
+      (4): Conv1d(512, 512, kernel_size=(5,), stride=(1,), padding=(2,), bias=False)
+      (5): BatchNorm1d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (6): Tanh()
+      (7): Dropout(p=0.5, inplace=False)
+      (8): Conv1d(512, 512, kernel_size=(5,), stride=(1,), padding=(2,), bias=False)
+      (9): BatchNorm1d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (10): Tanh()
+      (11): Dropout(p=0.5, inplace=False)
+      (12): Conv1d(512, 512, kernel_size=(5,), stride=(1,), padding=(2,), bias=False)
+      (13): BatchNorm1d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (14): Tanh()
+      (15): Dropout(p=0.5, inplace=False)
+      (16): Conv1d(512, 80, kernel_size=(5,), stride=(1,), padding=(2,), bias=False)
+      (17): BatchNorm1d(80, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (18): Dropout(p=0.5, inplace=False)
+    )
+  )
+)
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="トイモデルを利用したTacotron-2の動作確認">
+<h3>トイモデルを利用したTacotron 2の動作確認<a class="headerlink" href="#トイモデルを利用したTacotron-2の動作確認" title="Permalink to this headline">¶</a></h3>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[44]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">ttslearn.tacotron</span> <span class="kn">import</span> <span class="n">Tacotron2</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">Tacotron2</span><span class="p">(</span><span class="n">encoder_conv_layers</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">decoder_prenet_layers</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">decoder_layers</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">postnet_layers</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[45]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">def</span> <span class="nf">get_dummy_inout</span><span class="p">():</span>
+    <span class="n">seqs</span><span class="p">,</span> <span class="n">in_lens</span> <span class="o">=</span> <span class="n">get_dummy_input</span><span class="p">()</span>
+
+    <span class="c1"># デコーダの出力（メルスペクトログラム）の教師データ</span>
+    <span class="n">decoder_targets</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">120</span><span class="p">,</span> <span class="mi">80</span><span class="p">)</span>
+
+    <span class="c1"># stop token の教師データ</span>
+    <span class="c1"># stop token の予測値は確率ですが、教師データは 二値のラベルです</span>
+    <span class="c1"># 1 は、デコーダの出力が完了したことを表します</span>
+    <span class="n">stop_tokens</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">120</span><span class="p">)</span>
+    <span class="n">stop_tokens</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">:]</span> <span class="o">=</span> <span class="mf">1.0</span>
+
+    <span class="k">return</span> <span class="n">seqs</span><span class="p">,</span> <span class="n">in_lens</span><span class="p">,</span> <span class="n">decoder_targets</span><span class="p">,</span> <span class="n">stop_tokens</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[46]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># 適当な入出力を生成</span>
+<span class="n">seqs</span><span class="p">,</span> <span class="n">in_lens</span><span class="p">,</span> <span class="n">decoder_targets</span><span class="p">,</span> <span class="n">stop_tokens</span> <span class="o">=</span> <span class="n">get_dummy_inout</span><span class="p">()</span>
+
+<span class="c1"># Tacotron 2 の出力を計算</span>
+<span class="c1"># NOTE: teacher-forcing のため、 decoder targets を明示的に与える</span>
+<span class="n">outs</span><span class="p">,</span> <span class="n">outs_fine</span><span class="p">,</span> <span class="n">logits</span><span class="p">,</span> <span class="n">att_ws</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">seqs</span><span class="p">,</span> <span class="n">in_lens</span><span class="p">,</span> <span class="n">decoder_targets</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;入力のサイズ:&quot;</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">seqs</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;デコーダの出力のサイズ:&quot;</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">outs</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Stop token のサイズ:&quot;</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">logits</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;アテンション重みのサイズ:&quot;</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">att_ws</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+入力のサイズ: (2, 33)
+デコーダの出力のサイズ: (2, 120, 80)
+Stop token のサイズ: (2, 120)
+アテンション重みのサイズ: (2, 120, 33)
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="Tacotron-2の損失関数の計算">
+<h3>Tacotron 2の損失関数の計算<a class="headerlink" href="#Tacotron-2の損失関数の計算" title="Permalink to this headline">¶</a></h3>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[47]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># 1. デコーダの出力に対する損失</span>
+<span class="n">out_loss</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">MSELoss</span><span class="p">()(</span><span class="n">outs</span><span class="p">,</span> <span class="n">decoder_targets</span><span class="p">)</span>
+<span class="c1"># 2. Post-Net のあとの出力に対する損失</span>
+<span class="n">out_fine_loss</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">MSELoss</span><span class="p">()(</span><span class="n">outs_fine</span><span class="p">,</span> <span class="n">decoder_targets</span><span class="p">)</span>
+<span class="c1"># 3. Stop token に対する損失</span>
+<span class="n">stop_token_loss</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">BCEWithLogitsLoss</span><span class="p">()(</span><span class="n">logits</span><span class="p">,</span> <span class="n">stop_tokens</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[48]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;out_loss: &quot;</span><span class="p">,</span> <span class="n">out_loss</span><span class="o">.</span><span class="n">item</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;out_fine_loss: &quot;</span><span class="p">,</span> <span class="n">out_fine_loss</span><span class="o">.</span><span class="n">item</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;stop_token_loss: &quot;</span><span class="p">,</span> <span class="n">stop_token_loss</span><span class="o">.</span><span class="n">item</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+out_loss:  0.9949015378952026
+out_fine_loss:  2.896300792694092
+stop_token_loss:  0.6844527125358582
+</pre></div></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="ch10_Recipe-Tacotron.html" class="btn btn-neutral float-right" title="第10章 日本語Tacotronに基づく音声合成システムの実装" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="ch08_Recipe-WaveNet.html" class="btn btn-neutral float-left" title="第8章 日本語 WaveNet 音声合成システムの実装" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Ryuichi Yamamoto.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

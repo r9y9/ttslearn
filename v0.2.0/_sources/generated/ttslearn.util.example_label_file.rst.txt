@@ -1,0 +1,6 @@
+﻿ttslearn.util.example\_label\_file
+==================================
+
+.. currentmodule:: ttslearn.util
+
+.. autofunction:: example_label_file

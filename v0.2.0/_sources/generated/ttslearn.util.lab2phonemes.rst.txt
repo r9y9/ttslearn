@@ -1,0 +1,6 @@
+﻿ttslearn.util.lab2phonemes
+==========================
+
+.. currentmodule:: ttslearn.util
+
+.. autofunction:: lab2phonemes

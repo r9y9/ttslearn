@@ -1,0 +1,6 @@
+﻿ttslearn.dsp.mulaw\_quantize
+============================
+
+.. currentmodule:: ttslearn.dsp
+
+.. autofunction:: mulaw_quantize

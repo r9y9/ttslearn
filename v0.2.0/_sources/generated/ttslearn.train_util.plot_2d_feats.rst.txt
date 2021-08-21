@@ -1,0 +1,6 @@
+﻿ttslearn.train\_util.plot\_2d\_feats
+====================================
+
+.. currentmodule:: ttslearn.train_util
+
+.. autofunction:: plot_2d_feats

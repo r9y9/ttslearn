@@ -1,0 +1,6 @@
+﻿ttslearn.util.init\_seed
+========================
+
+.. currentmodule:: ttslearn.util
+
+.. autofunction:: init_seed

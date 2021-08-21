@@ -1,0 +1,6 @@
+﻿ttslearn.contrib.multispk\_util.get\_data\_loaders
+==================================================
+
+.. currentmodule:: ttslearn.contrib.multispk_util
+
+.. autofunction:: get_data_loaders

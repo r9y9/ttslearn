@@ -1,0 +1,6 @@
+﻿ttslearn.train\_util.collate\_fn\_dnntts
+========================================
+
+.. currentmodule:: ttslearn.train_util
+
+.. autofunction:: collate_fn_dnntts

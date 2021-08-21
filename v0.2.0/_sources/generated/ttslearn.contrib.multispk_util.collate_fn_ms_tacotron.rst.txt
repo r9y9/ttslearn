@@ -1,0 +1,6 @@
+﻿ttslearn.contrib.multispk\_util.collate\_fn\_ms\_tacotron
+=========================================================
+
+.. currentmodule:: ttslearn.contrib.multispk_util
+
+.. autofunction:: collate_fn_ms_tacotron

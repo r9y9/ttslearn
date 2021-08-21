@@ -1,0 +1,621 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>ttslearn.dsp &mdash; ttslearn 0.2.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/plot_directive.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> ttslearn
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.2.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Demo</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/ch00_Quick-start.html">Quick start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/ch11_Advanced-demos.html">Advanced TTS demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../demo_server.html">Demo server (with streamlit)</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Chapters</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/ch04_Python-SP.html">第4章 Python による音声信号処理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/ch05_DNNTTS.html">第5章 深層学習に基づく統計的パラメトリック音声合成</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/ch06_Recipe-DNNTTS.html">第6章: 日本語 DNN 音声合成システムの実装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/ch07_WaveNet.html">第7章 WaveNet: 深層学習に基づく音声波形の生成モデル</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/ch08_Recipe-WaveNet.html">第8章 日本語 WaveNet 音声合成システムの実装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/ch09_Tacotron.html">第9章 Tacotron 2: 一貫学習を狙った音声合成</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/ch10_Recipe-Tacotron.html">第10章 日本語Tacotronに基づく音声合成システムの実装</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Core modules</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../dsp.html">ttslearn.dsp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dnntts.html">ttslearn.dnntts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../wavenet.html">ttslearn.wavenet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tacotron.html">ttslearn.tacotron</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Helpers</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../pretrained.html">ttslearn.pretrained</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../util.html">ttslearn.util</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../train_util.html">ttslearn.train_util</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Advanced topics</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../extra_recipes.html">Extra recipes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contrib.html">ttslearn.contrib</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Meta information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Change log</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ttslearn</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>ttslearn.dsp</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for ttslearn.dsp</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">librosa</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pysptk</span>
+<span class="kn">import</span> <span class="nn">pyworld</span>
+<span class="kn">from</span> <span class="nn">nnmnkwii.preprocessing</span> <span class="kn">import</span> <span class="n">delta_features</span>
+<span class="kn">from</span> <span class="nn">nnmnkwii.preprocessing.f0</span> <span class="kn">import</span> <span class="n">interp1d</span>
+
+
+<div class="viewcode-block" id="f0_to_lf0"><a class="viewcode-back" href="../../generated/ttslearn.dsp.f0_to_lf0.html#ttslearn.dsp.f0_to_lf0">[docs]</a><span class="k">def</span> <span class="nf">f0_to_lf0</span><span class="p">(</span><span class="n">f0</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Convert F0 to log-F0</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        f0 (ndarray): F0 in Hz.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        ndarray: log-F0.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">lf0</span> <span class="o">=</span> <span class="n">f0</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">nonzero_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">f0</span><span class="p">)</span>
+    <span class="n">lf0</span><span class="p">[</span><span class="n">nonzero_indices</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">f0</span><span class="p">[</span><span class="n">nonzero_indices</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">lf0</span></div>
+
+
+<div class="viewcode-block" id="lf0_to_f0"><a class="viewcode-back" href="../../generated/ttslearn.dsp.lf0_to_f0.html#ttslearn.dsp.lf0_to_f0">[docs]</a><span class="k">def</span> <span class="nf">lf0_to_f0</span><span class="p">(</span><span class="n">lf0</span><span class="p">,</span> <span class="n">vuv</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Convert log-F0 (and V/UV) to F0</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        lf0 (ndarray): F0 in Hz.</span>
+<span class="sd">        vuv (ndarray): V/UV.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        ndarray: F0 in Hz.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">f0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">lf0</span><span class="p">)</span>
+    <span class="n">f0</span><span class="p">[</span><span class="n">vuv</span> <span class="o">&lt;</span> <span class="mf">0.5</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">return</span> <span class="n">f0</span></div>
+
+
+<div class="viewcode-block" id="compute_delta"><a class="viewcode-back" href="../../generated/ttslearn.dsp.compute_delta.html#ttslearn.dsp.compute_delta">[docs]</a><span class="k">def</span> <span class="nf">compute_delta</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">coef</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Compute delta features</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        x (ndarray): Feature vector.</span>
+<span class="sd">        coef (ndarray): Coefficients.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        ndarray: Delta features.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="c1"># 特徴量の次元ごとに動的特徴量を計算</span>
+    <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+        <span class="n">y</span><span class="p">[:,</span> <span class="n">d</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">correlate</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="n">d</span><span class="p">],</span> <span class="n">coef</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;same&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">y</span></div>
+
+
+<div class="viewcode-block" id="world_log_f0_vuv"><a class="viewcode-back" href="../../generated/ttslearn.dsp.world_log_f0_vuv.html#ttslearn.dsp.world_log_f0_vuv">[docs]</a><span class="k">def</span> <span class="nf">world_log_f0_vuv</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">sr</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;WORLD-based log-F0 and V/UV extraction</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        x (numpy.ndarray): Waveform.</span>
+<span class="sd">        sr (int): Sampling rate.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        ndarray: Log-F0 and V/UV.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">f0</span><span class="p">,</span> <span class="n">timeaxis</span> <span class="o">=</span> <span class="n">pyworld</span><span class="o">.</span><span class="n">dio</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">sr</span><span class="p">)</span>
+    <span class="c1"># (Optinal) Stonemask によってF0の推定結果をrefineする</span>
+    <span class="n">f0</span> <span class="o">=</span> <span class="n">pyworld</span><span class="o">.</span><span class="n">stonemask</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f0</span><span class="p">,</span> <span class="n">timeaxis</span><span class="p">,</span> <span class="n">sr</span><span class="p">)</span>
+    <span class="n">vuv</span> <span class="o">=</span> <span class="p">(</span><span class="n">f0</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+
+    <span class="c1"># 連続対数基本周波数</span>
+    <span class="n">lf0</span> <span class="o">=</span> <span class="n">f0_to_lf0</span><span class="p">(</span><span class="n">f0</span><span class="p">)</span>
+    <span class="n">lf0</span> <span class="o">=</span> <span class="n">interp1d</span><span class="p">(</span><span class="n">lf0</span><span class="p">)</span>
+
+    <span class="c1"># 連続対数基本周波数と有声/無声フラグを2次元の行列の形にしておく</span>
+    <span class="n">lf0</span> <span class="o">=</span> <span class="n">lf0</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">lf0</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="n">lf0</span>
+    <span class="n">vuv</span> <span class="o">=</span> <span class="n">vuv</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">vuv</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="n">vuv</span>
+
+    <span class="c1"># 動的特徴量の計算</span>
+    <span class="n">windows</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">[</span><span class="mf">1.0</span><span class="p">],</span>  <span class="c1"># 静的特徴量に対する窓</span>
+        <span class="p">[</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">],</span>  <span class="c1"># 1次動的特徴量に対する窓</span>
+        <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span>  <span class="c1"># 2次動的特徴量に対する窓</span>
+    <span class="p">]</span>
+    <span class="n">lf0</span> <span class="o">=</span> <span class="n">delta_features</span><span class="p">(</span><span class="n">lf0</span><span class="p">,</span> <span class="n">windows</span><span class="p">)</span>
+
+    <span class="c1"># すべての特徴量を結合</span>
+    <span class="n">feats</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">([</span><span class="n">lf0</span><span class="p">,</span> <span class="n">vuv</span><span class="p">])</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">feats</span></div>
+
+
+<div class="viewcode-block" id="world_spss_params"><a class="viewcode-back" href="../../generated/ttslearn.dsp.world_spss_params.html#ttslearn.dsp.world_spss_params">[docs]</a><span class="k">def</span> <span class="nf">world_spss_params</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">sr</span><span class="p">,</span> <span class="n">mgc_order</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;WORLD-based acoustic feature extraction</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        x (ndarray): Waveform.</span>
+<span class="sd">        sr (int): Sampling rate.</span>
+<span class="sd">        mgc_order (int, optional): MGC order. Defaults to None.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        ndarray: WORLD features.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">f0</span><span class="p">,</span> <span class="n">timeaxis</span> <span class="o">=</span> <span class="n">pyworld</span><span class="o">.</span><span class="n">dio</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">sr</span><span class="p">)</span>
+    <span class="c1"># (Optinal) Stonemask によってF0の推定結果をrefineする</span>
+    <span class="n">f0</span> <span class="o">=</span> <span class="n">pyworld</span><span class="o">.</span><span class="n">stonemask</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f0</span><span class="p">,</span> <span class="n">timeaxis</span><span class="p">,</span> <span class="n">sr</span><span class="p">)</span>
+
+    <span class="n">sp</span> <span class="o">=</span> <span class="n">pyworld</span><span class="o">.</span><span class="n">cheaptrick</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f0</span><span class="p">,</span> <span class="n">timeaxis</span><span class="p">,</span> <span class="n">sr</span><span class="p">)</span>
+    <span class="n">ap</span> <span class="o">=</span> <span class="n">pyworld</span><span class="o">.</span><span class="n">d4c</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f0</span><span class="p">,</span> <span class="n">timeaxis</span><span class="p">,</span> <span class="n">sr</span><span class="p">)</span>
+
+    <span class="n">alpha</span> <span class="o">=</span> <span class="n">pysptk</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">mcepalpha</span><span class="p">(</span><span class="n">sr</span><span class="p">)</span>
+    <span class="c1"># メルケプストラムの次元数（※過去の論文にならい、16kHzの際に</span>
+    <span class="c1"># 次元数が40（mgc_order + 1）になるように設定する</span>
+    <span class="c1"># ただし、上限を 60 (59 + 1) とします</span>
+    <span class="c1"># [Zen 2013] Statistical parametric speech synthesis using deep neural networks</span>
+    <span class="k">if</span> <span class="n">mgc_order</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">mgc_order</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">sr</span> <span class="o">/</span> <span class="mf">16000.0</span> <span class="o">*</span> <span class="mi">40</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">59</span><span class="p">)</span>
+    <span class="n">mgc</span> <span class="o">=</span> <span class="n">pysptk</span><span class="o">.</span><span class="n">sp2mc</span><span class="p">(</span><span class="n">sp</span><span class="p">,</span> <span class="n">mgc_order</span><span class="p">,</span> <span class="n">alpha</span><span class="p">)</span>
+
+    <span class="c1"># 有声/無声フラグ</span>
+    <span class="n">vuv</span> <span class="o">=</span> <span class="p">(</span><span class="n">f0</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+
+    <span class="c1"># 連続対数F0</span>
+    <span class="n">lf0</span> <span class="o">=</span> <span class="n">f0_to_lf0</span><span class="p">(</span><span class="n">f0</span><span class="p">)</span>
+    <span class="n">lf0</span> <span class="o">=</span> <span class="n">interp1d</span><span class="p">(</span><span class="n">lf0</span><span class="p">)</span>
+    <span class="c1"># 帯域非周期性指標</span>
+    <span class="n">bap</span> <span class="o">=</span> <span class="n">pyworld</span><span class="o">.</span><span class="n">code_aperiodicity</span><span class="p">(</span><span class="n">ap</span><span class="p">,</span> <span class="n">sr</span><span class="p">)</span>
+
+    <span class="c1"># F0とvuvを二次元の行列の形にしておく</span>
+    <span class="n">lf0</span> <span class="o">=</span> <span class="n">lf0</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">lf0</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="n">lf0</span>
+    <span class="n">vuv</span> <span class="o">=</span> <span class="n">vuv</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">vuv</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="n">vuv</span>
+
+    <span class="c1"># 動的特徴量の計算</span>
+    <span class="n">windows</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">[</span><span class="mf">1.0</span><span class="p">],</span>  <span class="c1"># 静的特徴量に対する窓</span>
+        <span class="p">[</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">],</span>  <span class="c1"># 1次動的特徴量に対する窓</span>
+        <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span>  <span class="c1"># 2次動的特徴量に対する窓</span>
+    <span class="p">]</span>
+    <span class="n">mgc</span> <span class="o">=</span> <span class="n">delta_features</span><span class="p">(</span><span class="n">mgc</span><span class="p">,</span> <span class="n">windows</span><span class="p">)</span>
+    <span class="n">lf0</span> <span class="o">=</span> <span class="n">delta_features</span><span class="p">(</span><span class="n">lf0</span><span class="p">,</span> <span class="n">windows</span><span class="p">)</span>
+    <span class="n">bap</span> <span class="o">=</span> <span class="n">delta_features</span><span class="p">(</span><span class="n">bap</span><span class="p">,</span> <span class="n">windows</span><span class="p">)</span>
+
+    <span class="n">feats</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">([</span><span class="n">mgc</span><span class="p">,</span> <span class="n">lf0</span><span class="p">,</span> <span class="n">vuv</span><span class="p">,</span> <span class="n">bap</span><span class="p">])</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">feats</span></div>
+
+
+<div class="viewcode-block" id="mulaw"><a class="viewcode-back" href="../../generated/ttslearn.dsp.mulaw.html#ttslearn.dsp.mulaw">[docs]</a><span class="k">def</span> <span class="nf">mulaw</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">255</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Mu-Law companding.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        x (ndarray): Input signal.</span>
+<span class="sd">        mu (int): Mu.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        ndarray: Compressed signal.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log1p</span><span class="p">(</span><span class="n">mu</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">log1p</span><span class="p">(</span><span class="n">mu</span><span class="p">)</span></div>
+
+
+<span class="k">def</span> <span class="nf">quantize</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">255</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Quantize the signal</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        y (ndarray): Input signal.</span>
+<span class="sd">        mu (int): Mu.</span>
+<span class="sd">        offset (int): Offset.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        ndarray: Quantized signal.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># [-1, 1] -&gt; [0, 2] -&gt; [0, 1] -&gt; [0, mu]</span>
+    <span class="k">return</span> <span class="p">((</span><span class="n">y</span> <span class="o">+</span> <span class="n">offset</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">mu</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="mulaw_quantize"><a class="viewcode-back" href="../../generated/ttslearn.dsp.mulaw_quantize.html#ttslearn.dsp.mulaw_quantize">[docs]</a><span class="k">def</span> <span class="nf">mulaw_quantize</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">255</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Mu-law-quantize signal.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        x (ndarray): Input signal.</span>
+<span class="sd">        mu (int): Mu.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        ndarray: Quantized signal.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">quantize</span><span class="p">(</span><span class="n">mulaw</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">mu</span><span class="p">),</span> <span class="n">mu</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="inv_mulaw"><a class="viewcode-back" href="../../generated/ttslearn.dsp.inv_mulaw.html#ttslearn.dsp.inv_mulaw">[docs]</a><span class="k">def</span> <span class="nf">inv_mulaw</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">255</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Inverse transformation of mu-law companding</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        y (ndarray): Input signal.</span>
+<span class="sd">        mu (int): Mu.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        ndarray: Uncompressed signal.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">/</span> <span class="n">mu</span><span class="p">)</span> <span class="o">*</span> <span class="p">((</span><span class="mf">1.0</span> <span class="o">+</span> <span class="n">mu</span><span class="p">)</span> <span class="o">**</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">-</span> <span class="mf">1.0</span><span class="p">)</span></div>
+
+
+<span class="k">def</span> <span class="nf">inv_quantize</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">mu</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;De-quantization.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        y (ndarray): Input signal.</span>
+<span class="sd">        mu (int): Mu.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        ndarray: Unquantized signal.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># [0, mu] -&gt; [-1, 1]</span>
+    <span class="k">return</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">y</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span> <span class="o">/</span> <span class="n">mu</span> <span class="o">-</span> <span class="mi">1</span>
+
+
+<div class="viewcode-block" id="inv_mulaw_quantize"><a class="viewcode-back" href="../../generated/ttslearn.dsp.inv_mulaw_quantize.html#ttslearn.dsp.inv_mulaw_quantize">[docs]</a><span class="k">def</span> <span class="nf">inv_mulaw_quantize</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">255</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Inverse transformation of mu-law quantization.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        y (ndarray): Input signal.</span>
+<span class="sd">        mu (int): Mu.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        ndarray: Unquantized signal.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">inv_mulaw</span><span class="p">(</span><span class="n">inv_quantize</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">mu</span><span class="p">),</span> <span class="n">mu</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="logspectrogram"><a class="viewcode-back" href="../../generated/ttslearn.dsp.logspectrogram.html#ttslearn.dsp.logspectrogram">[docs]</a><span class="k">def</span> <span class="nf">logspectrogram</span><span class="p">(</span>
+    <span class="n">y</span><span class="p">,</span>
+    <span class="n">sr</span><span class="p">,</span>
+    <span class="n">n_fft</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">hop_length</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">win_length</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">clip</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Compute log-spectrogram.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        y (ndarray): Waveform.</span>
+<span class="sd">        sr (int): Sampling rate.</span>
+<span class="sd">        n_fft (int, optional): FFT size.</span>
+<span class="sd">        hop_length (int, optional): Hop length. Defaults to 12.5ms.</span>
+<span class="sd">        win_length (int, optional): Window length. Defaults to 50 ms.</span>
+<span class="sd">        clip (float, optional): Clip the magnitude. Defaults to 0.001.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        numpy.ndarray: Log-spectrogram.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">hop_length</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">hop_length</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">sr</span> <span class="o">*</span> <span class="mf">0.0125</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">win_length</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">win_length</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">sr</span> <span class="o">*</span> <span class="mf">0.050</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">n_fft</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">n_fft</span> <span class="o">=</span> <span class="n">next_power_of_2</span><span class="p">(</span><span class="n">win_length</span><span class="p">)</span>
+
+    <span class="n">S</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">stft</span><span class="p">(</span>
+        <span class="n">y</span><span class="p">,</span> <span class="n">n_fft</span><span class="o">=</span><span class="n">n_fft</span><span class="p">,</span> <span class="n">hop_length</span><span class="o">=</span><span class="n">hop_length</span><span class="p">,</span> <span class="n">win_length</span><span class="o">=</span><span class="n">win_length</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="s2">&quot;hanning&quot;</span>
+    <span class="p">)</span>
+    <span class="c1"># スペクトログラムのクリッピング</span>
+    <span class="c1"># NOTE: クリッピングの値は、データに依存して調整する必要があります。</span>
+    <span class="c1"># Tacotron 2の論文では 0.01 です</span>
+    <span class="n">S</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">S</span><span class="p">),</span> <span class="n">clip</span><span class="p">)</span>
+
+    <span class="c1"># 対数を取る</span>
+    <span class="n">S</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>
+
+    <span class="c1"># Time first: (T, N)</span>
+    <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">T</span></div>
+
+
+<span class="k">def</span> <span class="nf">next_power_of_2</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">2</span> <span class="o">**</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">bit_length</span><span class="p">()</span>
+
+
+<div class="viewcode-block" id="logmelspectrogram"><a class="viewcode-back" href="../../generated/ttslearn.dsp.logmelspectrogram.html#ttslearn.dsp.logmelspectrogram">[docs]</a><span class="k">def</span> <span class="nf">logmelspectrogram</span><span class="p">(</span>
+    <span class="n">y</span><span class="p">,</span>
+    <span class="n">sr</span><span class="p">,</span>
+    <span class="n">n_fft</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">hop_length</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">win_length</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">n_mels</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span>
+    <span class="n">fmin</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">fmax</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">clip</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Compute log-melspectrogram.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        y (ndarray): Waveform.</span>
+<span class="sd">        sr (int): Sampling rate.</span>
+<span class="sd">        n_fft (int, optional): FFT size.</span>
+<span class="sd">        hop_length (int, optional): Hop length. Defaults to 12.5ms.</span>
+<span class="sd">        win_length (int, optional): Window length. Defaults to 50 ms.</span>
+<span class="sd">        n_mels (int, optional): Number of mel bins. Defaults to 80.</span>
+<span class="sd">        fmin (int, optional): Minimum frequency. Defaults to 0.</span>
+<span class="sd">        fmax (int, optional): Maximum frequency. Defaults to sr / 2.</span>
+<span class="sd">        clip (float, optional): Clip the magnitude. Defaults to 0.001.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        numpy.ndarray: Log-melspectrogram.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">hop_length</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">hop_length</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">sr</span> <span class="o">*</span> <span class="mf">0.0125</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">win_length</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">win_length</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">sr</span> <span class="o">*</span> <span class="mf">0.050</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">n_fft</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">n_fft</span> <span class="o">=</span> <span class="n">next_power_of_2</span><span class="p">(</span><span class="n">win_length</span><span class="p">)</span>
+
+    <span class="n">S</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">stft</span><span class="p">(</span>
+        <span class="n">y</span><span class="p">,</span> <span class="n">n_fft</span><span class="o">=</span><span class="n">n_fft</span><span class="p">,</span> <span class="n">hop_length</span><span class="o">=</span><span class="n">hop_length</span><span class="p">,</span> <span class="n">win_length</span><span class="o">=</span><span class="n">win_length</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="s2">&quot;hanning&quot;</span>
+    <span class="p">)</span>
+
+    <span class="n">fmin</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">fmin</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">fmin</span>
+    <span class="n">fmax</span> <span class="o">=</span> <span class="n">sr</span> <span class="o">//</span> <span class="mi">2</span> <span class="k">if</span> <span class="n">fmax</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">fmax</span>
+
+    <span class="c1"># メルフィルタバンク</span>
+    <span class="n">mel_basis</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">filters</span><span class="o">.</span><span class="n">mel</span><span class="p">(</span><span class="n">sr</span><span class="p">,</span> <span class="n">n_fft</span><span class="p">,</span> <span class="n">fmin</span><span class="o">=</span><span class="n">fmin</span><span class="p">,</span> <span class="n">fmax</span><span class="o">=</span><span class="n">fmax</span><span class="p">,</span> <span class="n">n_mels</span><span class="o">=</span><span class="n">n_mels</span><span class="p">)</span>
+    <span class="c1"># スペクトログラム -&gt; メルスペクトログラム</span>
+    <span class="n">S</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">mel_basis</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">S</span><span class="p">))</span>
+
+    <span class="c1"># クリッピング</span>
+    <span class="n">S</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">clip</span><span class="p">)</span>
+
+    <span class="c1"># 対数を取る</span>
+    <span class="n">S</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>
+
+    <span class="c1"># Time first: (T, N)</span>
+    <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">T</span></div>
+
+
+<div class="viewcode-block" id="logmelspectrogram_to_audio"><a class="viewcode-back" href="../../generated/ttslearn.dsp.logmelspectrogram_to_audio.html#ttslearn.dsp.logmelspectrogram_to_audio">[docs]</a><span class="k">def</span> <span class="nf">logmelspectrogram_to_audio</span><span class="p">(</span>
+    <span class="n">logmel</span><span class="p">,</span>
+    <span class="n">sr</span><span class="p">,</span>
+    <span class="n">n_fft</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">hop_length</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">win_length</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">fmin</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">fmax</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">n_iter</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Log-melspectrogram to audio.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        logmel (ndarray): Log-melspectrogram.</span>
+<span class="sd">        sr (int): Sampling rate.</span>
+<span class="sd">        n_fft (int, optional): FFT size.</span>
+<span class="sd">        hop_length (int, optional): Hop length. Defaults to 12.5ms.</span>
+<span class="sd">        win_length (int, optional): Window length. Defaults to 50 ms.</span>
+<span class="sd">        fmin (int, optional): Minimum frequency. Defaults to 0.</span>
+<span class="sd">        fmax (int, optional): Maximum frequency. Defaults to sr / 2.</span>
+<span class="sd">        n_iter (int, optional): Number of power iterations. Defaults to 4.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        numpy.ndarray: Waveform.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">hop_length</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">hop_length</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">sr</span> <span class="o">*</span> <span class="mf">0.0125</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">win_length</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">win_length</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">sr</span> <span class="o">*</span> <span class="mf">0.050</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">n_fft</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">n_fft</span> <span class="o">=</span> <span class="n">next_power_of_2</span><span class="p">(</span><span class="n">win_length</span><span class="p">)</span>
+
+    <span class="n">fmin</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">fmin</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">fmin</span>
+    <span class="n">fmax</span> <span class="o">=</span> <span class="n">sr</span> <span class="o">//</span> <span class="mi">2</span> <span class="k">if</span> <span class="n">fmax</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">fmax</span>
+
+    <span class="n">mel</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">logmel</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span><span class="o">.</span><span class="n">T</span>
+    <span class="n">S</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">feature</span><span class="o">.</span><span class="n">inverse</span><span class="o">.</span><span class="n">mel_to_stft</span><span class="p">(</span>
+        <span class="n">mel</span><span class="p">,</span>
+        <span class="n">n_fft</span><span class="o">=</span><span class="n">n_fft</span><span class="p">,</span>
+        <span class="n">power</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+        <span class="n">sr</span><span class="o">=</span><span class="n">sr</span><span class="p">,</span>
+        <span class="n">fmin</span><span class="o">=</span><span class="n">fmin</span><span class="p">,</span>
+        <span class="n">fmax</span><span class="o">=</span><span class="n">fmax</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">griffinlim</span><span class="p">(</span>
+        <span class="n">S</span><span class="p">,</span> <span class="n">hop_length</span><span class="o">=</span><span class="n">hop_length</span><span class="p">,</span> <span class="n">win_length</span><span class="o">=</span><span class="n">win_length</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="s2">&quot;hanning&quot;</span><span class="p">,</span> <span class="n">n_iter</span><span class="o">=</span><span class="n">n_iter</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">y</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Ryuichi Yamamoto.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

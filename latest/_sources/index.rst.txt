@@ -6,7 +6,8 @@
 Pythonで学ぶ音声合成 (Text-to-speech with Python)
 ========================================================
 
-- 書籍: https://book.impress.co.jp/books/1120101073
+- Amazon: https://www.amazon.co.jp/dp/4295012270/
+- インプレス書籍情報: https://book.impress.co.jp/books/1120101073
 - GitHub: https://github.com/r9y9/ttslearn
 
 .. image:: _static/image/ttslearn.jpg

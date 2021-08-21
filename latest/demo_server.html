@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Demo server (with streamlit) &mdash; ttslearn 0.2.0 documentation</title>
+  <title>Demo server (with streamlit) &mdash; ttslearn 0.2.1 documentation</title>
   
 
   
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                0.2.0
+                0.2.1
               </div>
             
           
@@ -96,7 +96,11 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="notebooks/ch00_Quick-start.html">Quick start</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notebooks/ch11_Advanced-demos.html">Advanced TTS demos</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Demo server (with streamlit)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Demo server (with streamlit)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">オンラインデモ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">デモサーバをローカルで立ち上げる場合</a></li>
+</ul>
+</li>
 </ul>
 <p class="caption"><span class="caption-text">Chapters</span></p>
 <ul>
@@ -224,6 +228,12 @@
 <h1>Demo server (with streamlit)<a class="headerlink" href="#demo-server-with-streamlit" title="Permalink to this headline">¶</a></h1>
 <p>音声合成を行うデモサーバのソースコードをGitHubリポジトリに含めています。
 ソースコードは、 <code class="docutils literal notranslate"><span class="pre">demo_server.py</span></code> です。</p>
+<div class="section" id="id1">
+<h2>オンラインデモ<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://share.streamlit.io/r9y9/ttslearn/demo_server.py">https://share.streamlit.io/r9y9/ttslearn/demo_server.py</a></p>
+</div>
+<div class="section" id="id2">
+<h2>デモサーバをローカルで立ち上げる場合<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <p>デモサーバの実行には、<a class="reference external" href="https://streamlit.io/">streamlit</a> が必要です。
 streamlitを含め、デモサーバの実行に必要なパッケージをインストールするには、下記のコマンドを実行してください。</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="s2">&quot;ttslearn[demo]&quot;</span>
@@ -243,6 +253,7 @@ streamlitを含め、デモサーバの実行に必要なパッケージをイ�
 右側の日本語テキスト入力から、任意のテキストを入力し、音声合成の結果をブラウザ上から確認できます。
 なお、ノートブック形式で提供している機能と本質的には同じです。</p>
 <p>プログラマブルなインタフェースが好みであればJupyterノートブックを、単に音声合成の機能が必要なだけであればデモサーバを利用すると良いでしょう。</p>
+</div>
 </div>
 
 

@@ -1,0 +1,6 @@
+﻿ttslearn.util.example\_qst\_file
+================================
+
+.. currentmodule:: ttslearn.util
+
+.. autofunction:: example_qst_file

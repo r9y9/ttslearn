@@ -1,0 +1,6 @@
+﻿ttslearn.util.optional\_tqdm
+============================
+
+.. currentmodule:: ttslearn.util
+
+.. autofunction:: optional_tqdm
