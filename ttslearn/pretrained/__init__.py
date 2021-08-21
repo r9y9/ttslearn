@@ -154,6 +154,10 @@ Available models:
         shutil.rmtree(out_dir)
 
     if not out_dir.exists():
+        print(
+            """The use of pre-trained models is permitted for non-commercial use only.
+Please visit https://github.com/r9y9/ttslearn to confirm the license."""
+        )
         print('Downloading: "{}"'.format(url))
         with _TqdmUpTo(
             unit="B",
