@@ -52,6 +52,9 @@ tacotron_data_batch_size: 32
 # https://github.com/kan-bayashi/ParallelWaveGAN
 parallel_wavegan_config: conf/parallel_wavegan_sr24k.yaml
 
+# ファインチューニングの元となるチェックポイント
+pretrained_vocoder_checkpoint:
+
 ###########################################################
 #                SYNTHESIS SETTING                        #
 ###########################################################

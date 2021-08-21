@@ -1,0 +1,28 @@
+# @package _global_
+
+verbose: 100
+
+# 1) none 2) tqdm
+tqdm: tqdm
+
+device: cuda # or cpu
+
+utt_list:
+
+# Tacotron の入力
+in_dir:
+# Tacotron の出力
+# ※混乱を生むのは理解していますが、out_dir は、
+# スクリプトの処理結果が保存されるディレクトリとして
+# 利用しません
+out_dir:
+# スクリプトの処理結果が保存されます
+gta_dir:
+
+sample_rate: 16000
+
+acoustic:
+  checkpoint:
+  in_scaler_path:
+  out_scaler_path:
+  model_yaml:

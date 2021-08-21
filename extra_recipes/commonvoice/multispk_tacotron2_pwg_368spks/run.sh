@@ -105,10 +105,10 @@ if [ ${stage} -le 2 ] && [ ${stop_stage} -ge 2 ]; then
     echo "stage 2: feature normalization"
 
     if [ ${finetuning} = "true" ]; then
-	# NOTE: JSUTコーパスで計算した統計量をベースに利用する
-	extra_args="--external_scaler $PWD/../../jsut/tacotron2_pwg/dump/jsut_sr${sample_rate}/org/out_tacotron_scaler.joblib"
+        # NOTE: JSUTコーパスで計算した統計量をベースに利用する
+        extra_args="--external_scaler $PWD/../../jsut/tacotron2_pwg/dump/jsut_sr${sample_rate}/org/out_tacotron_scaler.joblib"
     else
-	extra_args=""
+        extra_args=""
     fi
 
     xrun python $COMMON_ROOT/fit_scaler.py data/train.list \
@@ -167,9 +167,9 @@ if [ ${stage} -le 4 ] && [ ${stop_stage} -ge 4 ]; then
             echo "Expected model path: $pretrained_vocoder_checkpoint"
             exit 1
         fi
-	extra_args="--resume $pretrained_vocoder_checkpoint"
+        extra_args="--resume $pretrained_vocoder_checkpoint"
     else
-	extra_args=""
+        extra_args=""
     fi
     xrun parallel-wavegan-train --config $parallel_wavegan_config \
         --train-dumpdir $dump_norm_dir/$train_set/out_tacotron \
