@@ -4,9 +4,7 @@ import hydra
 import numpy as np
 import torch
 from hydra.utils import to_absolute_path
-from nnmnkwii.io import hts
 from omegaconf import DictConfig, OmegaConf
-from tqdm import tqdm
 from ttslearn.train_util import ensure_divisible_by
 from ttslearn.util import load_utt_list, optional_tqdm
 
