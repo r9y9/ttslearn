@@ -5,7 +5,7 @@ def get_cmap():
     """Gets the colormap (default: ``viridis``)
 
     The colormap can be set by the environment variable ``TTSLEARN_CMAP``
-    for convienence.
+    for convenience.
 
     Returns:
         str: The name of the current colormap.
@@ -35,7 +35,7 @@ def savefig(name, dpi=350, *args, **kwargs):
     """Saves the figure to a file.
 
     By default, a figure is saved as a .png file. The extension of the file can be set by
-    the environment variable ``TTSLEARN_EXT`` for convienence.
+    the environment variable ``TTSLEARN_EXT`` for convenience.
     If the environment variable ``TTSLEARN_SAVEFIG`` is set to 0, figures will not be saved
     and this function do nothing.
 
