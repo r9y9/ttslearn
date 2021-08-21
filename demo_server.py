@@ -37,11 +37,10 @@ if __name__ == "__main__":
     logger.info("Using device: {}".format(args.device))
 
     st.title("Pythonで学ぶ音声合成のデモ")
-    st.text(f"ttslearn's version: {ttslearn.__version__}")
 
     with st.expander("利用方法・規約を見る"):
         st.text(
-            """
+            f"""
 使い方:
 1. 左メニューの Model ID から、学習済みモデルの名前を選択してください。
    学習済みモデルの説明は、 https://r9y9.github.io/ttslearn/latest/pretrained.html を参照してください。
@@ -57,6 +56,8 @@ if __name__ == "__main__":
 3. 本デモページに入力されたテキストは、研究目的のためのサンプルデータとして利用されることがあります。但し、個人が特定されることはありません。
 4. 作者は、本デモページの利用による一切の請求、損害、その他の義務について何らの責任も負わないものとします。
 5. 本利用規約は、予告なく変更されることがあります。
+
+ttslearn's version: {ttslearn.__version__}
 """
         )
 
