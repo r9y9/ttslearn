@@ -6,6 +6,7 @@
 [![Docker Hub](https://github.com/r9y9/ttslearn/actions/workflows/docker-hub-ci.yaml/badge.svg)](https://github.com/r9y9/ttslearn/actions/workflows/docker-hub-ci.yaml)
 [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://share.streamlit.io/r9y9/ttslearn/demo_server.py)
 ![License](http://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat)
+[![DOI](https://zenodo.org/badge/378789439.svg)](https://zenodo.org/badge/latestdoi/378789439)
 
 [docs-latest-img]: https://img.shields.io/badge/docs-latest-blue.svg
 [docs-latest-url]: https://r9y9.github.io/ttslearn/
