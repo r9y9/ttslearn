@@ -8,13 +8,17 @@ from urllib.request import urlretrieve
 from tqdm.auto import tqdm
 from ttslearn.util import dynamic_import
 
-_urls = {"v0.2.0": "https://github.com/r9y9/ttslearn/releases/download/v0.2.0"}
+_urls = {
+    "v0.2.0": "https://github.com/r9y9/ttslearn/releases/download/v0.2.0",
+    "v0.2.1": "https://github.com/r9y9/ttslearn/releases/download/v0.2.1",
+}
 
 DEFAULT_CACHE_DIR = join(os.environ["HOME"], ".cache", "ttslearn")
 CACHE_DIR = os.environ.get("TTSLEARN_CACHE_DIR", DEFAULT_CACHE_DIR)
 
 
 model_registry = {
+    # v0.2.0
     "dnntts": {
         "url": f"{_urls['v0.2.0']}/dnntts.tar.gz",
         "_target_": "ttslearn.dnntts:DNNTTS",
@@ -41,6 +45,23 @@ model_registry = {
     },
     "multspk_tacotron2_pwg_jvs24k": {
         "url": f"{_urls['v0.2.0']}/multspk_tacotron2_pwg_jvs24k.tar.gz",
+        "_target_": "ttslearn.contrib:Tacotron2PWGTTS",
+    },
+    # v0.2.1
+    "tacotron2_hifipwg_jsut24k": {
+        "url": f"{_urls['v0.2.1']}/tacotron2_hifipwg_jsut24k.tar.gz",
+        "_target_": "ttslearn.contrib:Tacotron2PWGTTS",
+    },
+    "multspk_tacotron2_hifipwg_jvs24k": {
+        "url": f"{_urls['v0.2.1']}/multspk_tacotron2_hifipwg_jvs24k.tar.gz",
+        "_target_": "ttslearn.contrib:Tacotron2PWGTTS",
+    },
+    "multspk_tacotron2_pwg_cv16k": {
+        "url": f"{_urls['v0.2.1']}/multspk_tacotron2_pwg_cv16k.tar.gz",
+        "_target_": "ttslearn.contrib:Tacotron2PWGTTS",
+    },
+    "multspk_tacotron2_pwg_cv24k": {
+        "url": f"{_urls['v0.2.1']}/multspk_tacotron2_pwg_cv24k.tar.gz",
         "_target_": "ttslearn.contrib:Tacotron2PWGTTS",
     },
 }
