@@ -16,7 +16,7 @@ def get_parser():
     parser.add_argument(
         "--device", type=str, default="cpu", help="Device (cpu or cuda)"
     )
-    parser.add_argument("--verbose", type=int, default=0, help="Verbose level")
+    parser.add_argument("--verbose", type=int, default=1, help="Verbose level")
     parser.add_argument("--model_ids", type=str, default=None, help="Path to model ids")
 
     return parser
