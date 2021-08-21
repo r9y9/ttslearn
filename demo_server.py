@@ -17,6 +17,7 @@ def get_parser():
         "--device", type=str, default="cpu", help="Device (cpu or cuda)"
     )
     parser.add_argument("--verbose", type=int, default=1, help="Verbose level")
+    parser.add_argument("--model_ids", type=str, default=None, help="Path to model ids")
 
     return parser
 
@@ -36,11 +37,10 @@ if __name__ == "__main__":
     logger.info("Using device: {}".format(args.device))
 
     st.title("Pythonで学ぶ音声合成のデモ")
-    st.text(f"ttslearn's version: {ttslearn.__version__}")
 
-    with st.expander("利用方法を見る"):
+    with st.expander("利用方法・規約を見る"):
         st.text(
-            """
+            f"""
 使い方:
 1. 左メニューの Model ID から、学習済みモデルの名前を選択してください。
    学習済みモデルの説明は、 https://r9y9.github.io/ttslearn/latest/pretrained.html を参照してください。
@@ -49,11 +49,30 @@ if __name__ == "__main__":
 3. 「日本語テキスト入力」から、合成したい日本語テキストを入力してください
 4. 合成ボタンを押して下さい。
 5. 音声を再生するボタンを押すと、合成音声が再生されます。
+
+利用規約:
+1. 公序良俗に反しない範囲で、「非商用目的」に限り、本デモページおよび合成された音声を無償で利用できます。
+2. 本デモページによって合成された音声を公開・配布する場合は、本デモサイトを利用したことを明記してください。
+3. 本デモページに入力されたテキストは、研究目的のためのサンプルデータとして利用されることがあります。但し、個人が特定されることはありません。
+4. 作者は、本デモページの利用による一切の請求、損害、その他の義務について何らの責任も負わないものとします。
+5. 本利用規約は、予告なく変更されることがあります。
+
+ttslearn's version: {ttslearn.__version__}
 """
         )
 
+    if args.model_ids is not None:
+        model_ids = []
+        with open(args.model_ids) as f:
+            for line in f:
+                s = line.strip()
+                if len(s) > 0:
+                    model_ids.append(s)
+    else:
+        model_ids = get_available_model_ids()
+
     # 音声合成エンジンのインスタンス化
-    model_id = st.sidebar.selectbox("Model ID", get_available_model_ids())
+    model_id = st.sidebar.selectbox("Model ID", model_ids)
     engine = create_tts_engine(model_id, args.device)
 
     # Multi-speaker TTSの場合、話者情報が必要
