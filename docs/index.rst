@@ -47,6 +47,14 @@ Linux環境を自前で用意するのが難しい読者のために、すべて
 
 Google Colabの基本的な使い方は、https://colab.research.google.com/ を参照してください。
 
+Docker を利用する場合
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Docker hub でイメージを公開してるので、そちらを利用してください。
+https://hub.docker.com/r/r9y9/ttslearn
+
+
+
 インストール
 -------------
 
