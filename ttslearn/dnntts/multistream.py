@@ -139,7 +139,7 @@ def multi_stream_mlpg(
     """
     T, D = inputs.shape
     if D != sum(stream_sizes):
-        raise RuntimeError("You probably have specified wrong dimention params.")
+        raise RuntimeError("You probably have specified wrong dimension params.")
     if streams is None:
         streams = [True] * len(stream_sizes)
 

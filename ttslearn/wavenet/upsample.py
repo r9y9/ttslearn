@@ -80,7 +80,7 @@ class ConvInUpsampleNetwork(nn.Module):
     Args:
         upsample_scales (list): list of scales to upsample
         cin_channels (int): number of input channels
-        aux_context_window (int): size of the auxilary context window
+        aux_context_window (int): size of the auxiliary context window
     """
 
     def __init__(self, upsample_scales, cin_channels, aux_context_window):
@@ -107,7 +107,7 @@ class ConvTransposeUpsampleNetwork(nn.Module):
 
     Args:
         upsample_scales (list): list of scales to upsample
-        aux_context_window (int): size of the auxilary context window
+        aux_context_window (int): size of the auxiliary context window
     """
 
     def __init__(self, upsample_scales, aux_context_window):

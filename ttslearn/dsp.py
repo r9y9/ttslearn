@@ -64,7 +64,7 @@ def world_log_f0_vuv(x, sr):
         ndarray: Log-F0 and V/UV.
     """
     f0, timeaxis = pyworld.dio(x, sr)
-    # (Optinal) Stonemask によってF0の推定結果をrefineする
+    # (Optional) Stonemask によってF0の推定結果をrefineする
     f0 = pyworld.stonemask(x, f0, timeaxis, sr)
     vuv = (f0 > 0).astype(np.float32)
 
@@ -102,7 +102,7 @@ def world_spss_params(x, sr, mgc_order=None):
         ndarray: WORLD features.
     """
     f0, timeaxis = pyworld.dio(x, sr)
-    # (Optinal) Stonemask によってF0の推定結果をrefineする
+    # (Optional) Stonemask によってF0の推定結果をrefineする
     f0 = pyworld.stonemask(x, f0, timeaxis, sr)
 
     sp = pyworld.cheaptrick(x, f0, timeaxis, sr)

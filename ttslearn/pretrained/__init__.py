@@ -72,8 +72,8 @@ def create_tts_engine(name, *args, **kwargs):
 
     Args:
         name (str): Pre-trained model name
-        args (list): Additional args for instanciation
-        kwargs (dict): Additional kwargs for instanciation
+        args (list): Additional args for instantiation
+        kwargs (dict): Additional kwargs for instantiation
 
     Returns:
         object: instance of TTS engine
