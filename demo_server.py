@@ -1,4 +1,5 @@
 import argparse
+import os
 import tempfile
 
 import numpy as np
@@ -38,6 +39,17 @@ if __name__ == "__main__":
 
     st.title("Pythonで学ぶ音声合成のデモ")
 
+    on_streamlit_share = int(os.environ.get("ON_STREAMLIT_SHARE", 0))
+    if on_streamlit_share == 1:
+        extra_usage = """
+注意事項:
+サーバがダウンする現象を避けるために、提供する学習済みモデルの一部のみを左メニューに表示しています。
+書籍中で解説したWaveNetとTacotron2は、処理速度が遅いため、除いていることに注意してください。
+すべての学習済みモデルにアクセスするためには、ローカルでdemo_server.pyを実行してください。
+"""
+    else:
+        extra_usage = ""
+
     with st.expander("利用方法・規約を見る"):
         st.text(
             f"""
@@ -49,7 +61,7 @@ if __name__ == "__main__":
 3. 「日本語テキスト入力」から、合成したい日本語テキストを入力してください
 4. 合成ボタンを押して下さい。
 5. 音声を再生するボタンを押すと、合成音声が再生されます。
-
+{extra_usage}
 利用規約:
 1. 公序良俗に反しない範囲で、「非商用目的」に限り、本デモページおよび合成された音声を無償で利用できます。
 2. 本デモページによって合成された音声を公開・配布する場合は、本デモサイトを利用したことを明記してください。
@@ -68,6 +80,9 @@ ttslearn's version: {ttslearn.__version__}
                 s = line.strip()
                 if len(s) > 0:
                     model_ids.append(s)
+    elif os.environ.get("TTSLEARN_TTS_MODEL_IDS") is not None:
+        # This is mostly for streamlit share apps, where we have no control on app argments
+        model_ids = os.environ.get("TTSLEARN_TTS_MODEL_IDS").split(",")
     else:
         model_ids = get_available_model_ids()
 
