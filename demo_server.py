@@ -81,7 +81,7 @@ ttslearn's version: {ttslearn.__version__}
                 if len(s) > 0:
                     model_ids.append(s)
     elif os.environ.get("TTSLEARN_TTS_MODEL_IDS") is not None:
-        # This is mostly for streamlit share apps, where we have no control on app argments
+        # This is mostly for streamlit share apps, where we have no control on app arguments
         model_ids = os.environ.get("TTSLEARN_TTS_MODEL_IDS").split(",")
     else:
         model_ids = get_available_model_ids()
