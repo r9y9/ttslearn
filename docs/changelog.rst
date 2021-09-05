@@ -1,6 +1,11 @@
 Change log
 ==========
 
+v0.2.2 <2021-xx-xx>
+-------------------
+
+- `#11`_: Add warning for streamlit online demo
+
 v0.2.1 <2021-08-21>
 -------------------
 
@@ -23,3 +28,4 @@ The first public release!
 .. _#4: https://github.com/r9y9/ttslearn/pull/4
 .. _#5: https://github.com/r9y9/ttslearn/pull/5
 .. _#7: https://github.com/r9y9/ttslearn/pull/7
+.. _#11: https://github.com/r9y9/ttslearn/pull/11

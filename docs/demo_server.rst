@@ -10,6 +10,10 @@ Demo server (with streamlit)
 https://share.streamlit.io/r9y9/ttslearn/demo_server.py
 
 
+.. warning::
+    上記URLのオンラインデモは、steamlit shareの都合でサーバに負荷がかかると停止する場合があります。
+    安定した動作のためには、後述するようにローカルで ``demo_server.py`` を実行してください。
+
 デモサーバをローカルで立ち上げる場合
 ---------------------------------------
 
