@@ -4,6 +4,7 @@ Change log
 v0.2.2 <2021-xx-xx>
 -------------------
 
+- `#12`_: Fix `#10`_ 書籍 p.82 code4.9 関数stftの誤植
 - `#11`_: Add warning for streamlit online demo
 
 v0.2.1 <2021-08-21>
@@ -28,4 +29,7 @@ The first public release!
 .. _#4: https://github.com/r9y9/ttslearn/pull/4
 .. _#5: https://github.com/r9y9/ttslearn/pull/5
 .. _#7: https://github.com/r9y9/ttslearn/pull/7
+.. _#10: https://github.com/r9y9/ttslearn/issues/10
 .. _#11: https://github.com/r9y9/ttslearn/pull/11
+.. _#12: https://github.com/r9y9/ttslearn/pull/12
+
