@@ -42,7 +42,7 @@ expdir=exp/$expname
 if [ ${stage} -le -1 ] && [ ${stop_stage} -ge -1 ]; then
     echo "stage -1: Data download"
     mkdir -p downloads
-    if [ ! -d downloads/jsut_ver1 ]; then
+    if [ ! -d downloads/jsut_ver1.1 ]; then
         cd downloads
         curl -LO http://ss-takashi.sakura.ne.jp/corpus/jsut_ver1.1.zip
         unzip -o jsut_ver1.1.zip
