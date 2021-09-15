@@ -13,7 +13,7 @@ _urls = {
     "v0.2.1": "https://github.com/r9y9/ttslearn/releases/download/v0.2.1",
 }
 
-DEFAULT_CACHE_DIR = join(os.environ["HOME"], ".cache", "ttslearn")
+DEFAULT_CACHE_DIR = join(os.path.expanduser("~"), ".cache", "ttslearn")
 CACHE_DIR = os.environ.get("TTSLEARN_CACHE_DIR", DEFAULT_CACHE_DIR)
 
 
