@@ -30,12 +30,12 @@ def test_incremental_causal_conv1d(kernel_size, dilation):
     # 2. 逐次的に計算
     for t in range(T):
         # (B, C, 1) -> (B, 1, C)
-        xt = x[:, :, t:t+1].transpose(1,2)
+        xt = x[:, :, t : t + 1].transpose(1, 2)
         # (B, 1, C)
         with torch.no_grad():
             yt = conv1d_inc.incremental_forward(xt)
         # (B, 1, C) -> (B, C, 1)
-        y2[:, :, t:t+1] = yt.transpose(1,2)
+        y2[:, :, t : t + 1] = yt.transpose(1, 2)
 
     # 並列計算の場合と逐次計算の場合で、計算結果は一致する
     assert (y1 == y2).all()

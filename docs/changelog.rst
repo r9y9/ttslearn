@@ -5,7 +5,7 @@ v0.2.2 <2021-xx-xx>
 -------------------
 
 - `#17`_: Add conv1d test to ensure forward/incremental_forward correctness
-- `#14`_: windows: use expanduser instread of os.environ["HOME"]
+- `#14`_: windows: use expanduser instead of os.environ["HOME"]
 - `#13`_: Fix: 毎回JSUTダウンロードをやり直す
 - `#12`_: Fix `#10`_ 書籍 p.82 code4.9 関数stftの誤植
 - `#11`_: Add warning for streamlit online demo
