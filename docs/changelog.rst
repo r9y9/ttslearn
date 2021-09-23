@@ -4,6 +4,9 @@ Change log
 v0.2.2 <2021-xx-xx>
 -------------------
 
+- `#17`_: Add conv1d test to ensure forward/incremental_forward correctness
+- `#14`_: windows: use expanduser instread of os.environ["HOME"]
+- `#13`_: Fix: 毎回JSUTダウンロードをやり直す
 - `#12`_: Fix `#10`_ 書籍 p.82 code4.9 関数stftの誤植
 - `#11`_: Add warning for streamlit online demo
 
@@ -32,4 +35,7 @@ The first public release!
 .. _#10: https://github.com/r9y9/ttslearn/issues/10
 .. _#11: https://github.com/r9y9/ttslearn/pull/11
 .. _#12: https://github.com/r9y9/ttslearn/pull/12
+.. _#13: https://github.com/r9y9/ttslearn/pull/13
+.. _#14: https://github.com/r9y9/ttslearn/pull/14
+.. _#17: https://github.com/r9y9/ttslearn/pull/17
 
