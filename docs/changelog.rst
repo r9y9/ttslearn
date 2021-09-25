@@ -4,6 +4,7 @@ Change log
 v0.2.2 <2021-xx-xx>
 -------------------
 
+- `#19`_: Enable Windows CI
 - `#17`_: Add conv1d test to ensure forward/incremental_forward correctness
 - `#14`_: windows: use expanduser instead of os.environ["HOME"]
 - `#13`_: Fix: 毎回JSUTダウンロードをやり直す
@@ -38,4 +39,5 @@ The first public release!
 .. _#13: https://github.com/r9y9/ttslearn/pull/13
 .. _#14: https://github.com/r9y9/ttslearn/pull/14
 .. _#17: https://github.com/r9y9/ttslearn/pull/17
+.. _#19: https://github.com/r9y9/ttslearn/pull/19
 
