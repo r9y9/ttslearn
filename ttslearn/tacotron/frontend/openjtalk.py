@@ -148,7 +148,7 @@ def pp_symbols(labels, drop_unvoiced_vowels=True):
         a2_next = numeric_feature_by_regex(r"\+(\d+)\+", labels[n + 1])
 
         # アクセント句境界
-        if a3 == 1 and a2_next == 1:
+        if a3 == 1 and a2_next == 1 and p3 in "aeiouAEIOUNcl":
             PP.append("#")
         # ピッチの立ち下がり（アクセント核）
         elif a1 == 0 and a2_next == a2 + 1 and a2 != f1:
