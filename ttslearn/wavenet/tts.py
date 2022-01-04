@@ -23,7 +23,7 @@ class WaveNetTTS(object):
         device (str): cpu or cuda.
 
     Examples:
-        >>> from ttslearn.dnntts import WaveNetTTS
+        >>> from ttslearn.wavenet import WaveNetTTS
         >>> engine = WaveNetTTS()
         >>> wav, sr = engine.tts("今日もいい天気ですね。")
     """
