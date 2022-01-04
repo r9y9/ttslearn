@@ -1,9 +1,10 @@
 Change log
 ==========
 
-v0.2.2 <2021-xx-xx>
+v0.2.2 <2022-01-04>
 -------------------
 
+- `#30`_: Fix typo in WaveNetTTS docs
 - `#26`_: Fix accent phrase border in pp_symbols
 - `#22`_: Fix wrong wavenet loss calculation (addresses `#21`_)
 - `#20`_: Fix: 毎回JSUTダウンロードをやり直す（全てのrun.shをFix）
@@ -47,4 +48,4 @@ The first public release!
 .. _#21: https://github.com/r9y9/ttslearn/issues/21
 .. _#22: https://github.com/r9y9/ttslearn/pull/22
 .. _#26: https://github.com/r9y9/ttslearn/issues/26
-
+.. _#30: https://github.com/r9y9/ttslearn/issues/30
