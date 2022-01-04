@@ -26,21 +26,14 @@
   {
    "cell_type": "code",
    "execution_count": 1,
-   "metadata": {
-    "execution": {
-     "iopub.execute_input": "2021-08-21T07:40:22.232416Z",
-     "iopub.status.busy": "2021-08-21T07:40:22.232115Z",
-     "iopub.status.idle": "2021-08-21T07:40:22.343013Z",
-     "shell.execute_reply": "2021-08-21T07:40:22.342650Z"
-    }
-   },
+   "metadata": {},
    "outputs": [
     {
      "name": "stdout",
      "output_type": "stream",
      "text": [
-      "Python 3.8.6 | packaged by conda-forge | (default, Dec 26 2020, 05:05:16) \r\n",
-      "[GCC 9.3.0]\r\n"
+      "Python 3.9.1 (default, Feb  5 2021, 16:06:04) \n",
+      "[GCC 9.3.0]\n"
      ]
     }
    ],
@@ -58,14 +51,7 @@
   {
    "cell_type": "code",
    "execution_count": 2,
-   "metadata": {
-    "execution": {
-     "iopub.execute_input": "2021-08-21T07:40:22.346614Z",
-     "iopub.status.busy": "2021-08-21T07:40:22.346239Z",
-     "iopub.status.idle": "2021-08-21T07:40:22.799014Z",
-     "shell.execute_reply": "2021-08-21T07:40:22.798647Z"
-    }
-   },
+   "metadata": {},
    "outputs": [],
    "source": [
     "%%capture\n",
@@ -78,22 +64,15 @@
   {
    "cell_type": "code",
    "execution_count": 3,
-   "metadata": {
-    "execution": {
-     "iopub.execute_input": "2021-08-21T07:40:22.804003Z",
-     "iopub.status.busy": "2021-08-21T07:40:22.803724Z",
-     "iopub.status.idle": "2021-08-21T07:40:22.805794Z",
-     "shell.execute_reply": "2021-08-21T07:40:22.805545Z"
-    }
-   },
+   "metadata": {},
    "outputs": [
     {
      "data": {
       "text/plain": [
-       "'0.2.1'"
+       "'0.2.2'"
       ]
      },
-     "execution_count": 1,
+     "execution_count": 3,
      "metadata": {},
      "output_type": "execute_result"
     }
@@ -113,14 +92,7 @@
   {
    "cell_type": "code",
    "execution_count": 4,
-   "metadata": {
-    "execution": {
-     "iopub.execute_input": "2021-08-21T07:40:22.808044Z",
-     "iopub.status.busy": "2021-08-21T07:40:22.807763Z",
-     "iopub.status.idle": "2021-08-21T07:40:23.615360Z",
-     "shell.execute_reply": "2021-08-21T07:40:23.615645Z"
-    }
-   },
+   "metadata": {},
    "outputs": [
     {
      "data": {
@@ -136,7 +108,7 @@
        "<IPython.lib.display.Audio object>"
       ]
      },
-     "execution_count": 1,
+     "execution_count": 4,
      "metadata": {},
      "output_type": "execute_result"
     }
@@ -153,14 +125,7 @@
   {
    "cell_type": "code",
    "execution_count": 5,
-   "metadata": {
-    "execution": {
-     "iopub.execute_input": "2021-08-21T07:40:23.618135Z",
-     "iopub.status.busy": "2021-08-21T07:40:23.617849Z",
-     "iopub.status.idle": "2021-08-21T07:40:24.192207Z",
-     "shell.execute_reply": "2021-08-21T07:40:24.191914Z"
-    }
-   },
+   "metadata": {},
    "outputs": [
     {
      "data": {
@@ -197,14 +162,7 @@
   {
    "cell_type": "code",
    "execution_count": 6,
-   "metadata": {
-    "execution": {
-     "iopub.execute_input": "2021-08-21T07:40:24.197341Z",
-     "iopub.status.busy": "2021-08-21T07:40:24.197056Z",
-     "iopub.status.idle": "2021-08-21T07:40:24.219945Z",
-     "shell.execute_reply": "2021-08-21T07:40:24.219649Z"
-    }
-   },
+   "metadata": {},
    "outputs": [
     {
      "name": "stdout",
@@ -226,14 +184,7 @@
   {
    "cell_type": "code",
    "execution_count": 7,
-   "metadata": {
-    "execution": {
-     "iopub.execute_input": "2021-08-21T07:40:24.222394Z",
-     "iopub.status.busy": "2021-08-21T07:40:24.222116Z",
-     "iopub.status.idle": "2021-08-21T07:40:24.254958Z",
-     "shell.execute_reply": "2021-08-21T07:40:24.254683Z"
-    }
-   },
+   "metadata": {},
    "outputs": [],
    "source": [
     "# シードの固定\n",
@@ -251,14 +202,7 @@
   {
    "cell_type": "code",
    "execution_count": 8,
-   "metadata": {
-    "execution": {
-     "iopub.execute_input": "2021-08-21T07:40:24.256985Z",
-     "iopub.status.busy": "2021-08-21T07:40:24.256697Z",
-     "iopub.status.idle": "2021-08-21T07:40:24.259514Z",
-     "shell.execute_reply": "2021-08-21T07:40:24.259219Z"
-    }
-   },
+   "metadata": {},
    "outputs": [],
    "source": [
     "from ttslearn.notebook import get_cmap, init_plot_style, savefig\n",
@@ -283,14 +227,7 @@
   {
    "cell_type": "code",
    "execution_count": 9,
-   "metadata": {
-    "execution": {
-     "iopub.execute_input": "2021-08-21T07:40:24.261462Z",
-     "iopub.status.busy": "2021-08-21T07:40:24.261155Z",
-     "iopub.status.idle": "2021-08-21T07:40:24.262653Z",
-     "shell.execute_reply": "2021-08-21T07:40:24.262356Z"
-    }
-   },
+   "metadata": {},
    "outputs": [],
    "source": [
     "import numpy as np\n",
@@ -300,14 +237,7 @@
   {
    "cell_type": "code",
    "execution_count": 10,
-   "metadata": {
-    "execution": {
-     "iopub.execute_input": "2021-08-21T07:40:24.264913Z",
-     "iopub.status.busy": "2021-08-21T07:40:24.264610Z",
-     "iopub.status.idle": "2021-08-21T07:40:24.266722Z",
-     "shell.execute_reply": "2021-08-21T07:40:24.266426Z"
-    }
-   },
+   "metadata": {},
    "outputs": [
     {
      "data": {
@@ -316,7 +246,7 @@
        "       [0., 0.]], dtype=float32)"
       ]
      },
-     "execution_count": 1,
+     "execution_count": 10,
      "metadata": {},
      "output_type": "execute_result"
     }
@@ -329,14 +259,7 @@
   {
    "cell_type": "code",
    "execution_count": 11,
-   "metadata": {
-    "execution": {
-     "iopub.execute_input": "2021-08-21T07:40:24.269779Z",
-     "iopub.status.busy": "2021-08-21T07:40:24.269504Z",
-     "iopub.status.idle": "2021-08-21T07:40:24.278425Z",
-     "shell.execute_reply": "2021-08-21T07:40:24.278133Z"
-    }
-   },
+   "metadata": {},
    "outputs": [
     {
      "data": {
@@ -345,7 +268,7 @@
        "        [0., 0.]])"
       ]
      },
-     "execution_count": 1,
+     "execution_count": 11,
      "metadata": {},
      "output_type": "execute_result"
     }
@@ -358,14 +281,7 @@
   {
    "cell_type": "code",
    "execution_count": 12,
-   "metadata": {
-    "execution": {
-     "iopub.execute_input": "2021-08-21T07:40:24.280438Z",
-     "iopub.status.busy": "2021-08-21T07:40:24.280144Z",
-     "iopub.status.idle": "2021-08-21T07:40:24.281797Z",
-     "shell.execute_reply": "2021-08-21T07:40:24.282074Z"
-    }
-   },
+   "metadata": {},
    "outputs": [
     {
      "data": {
@@ -373,7 +289,7 @@
        "numpy.ndarray"
       ]
      },
-     "execution_count": 1,
+     "execution_count": 12,
      "metadata": {},
      "output_type": "execute_result"
     }
@@ -385,14 +301,7 @@
   {
    "cell_type": "code",
    "execution_count": 13,
-   "metadata": {
-    "execution": {
-     "iopub.execute_input": "2021-08-21T07:40:24.284082Z",
-     "iopub.status.busy": "2021-08-21T07:40:24.283696Z",
-     "iopub.status.idle": "2021-08-21T07:40:24.285861Z",
-     "shell.execute_reply": "2021-08-21T07:40:24.285568Z"
-    }
-   },
+   "metadata": {},
    "outputs": [
     {
      "data": {
@@ -400,7 +309,7 @@
        "torch.Tensor"
       ]
      },
-     "execution_count": 1,
+     "execution_count": 13,
      "metadata": {},
      "output_type": "execute_result"
     }
@@ -419,14 +328,7 @@
   {
    "cell_type": "code",
    "execution_count": 14,
-   "metadata": {
-    "execution": {
-     "iopub.execute_input": "2021-08-21T07:40:24.288159Z",
-     "iopub.status.busy": "2021-08-21T07:40:24.287816Z",
-     "iopub.status.idle": "2021-08-21T07:40:24.289950Z",
-     "shell.execute_reply": "2021-08-21T07:40:24.289652Z"
-    }
-   },
+   "metadata": {},
    "outputs": [
     {
      "data": {
@@ -435,7 +337,7 @@
        "        [0., 0., 0.]]], dtype=float32)"
       ]
      },
-     "execution_count": 1,
+     "execution_count": 14,
      "metadata": {},
      "output_type": "execute_result"
     }
@@ -449,14 +351,7 @@
   {
    "cell_type": "code",
    "execution_count": 15,
-   "metadata": {
-    "execution": {
-     "iopub.execute_input": "2021-08-21T07:40:24.292042Z",
-     "iopub.status.busy": "2021-08-21T07:40:24.291712Z",
-     "iopub.status.idle": "2021-08-21T07:40:24.294100Z",
-     "shell.execute_reply": "2021-08-21T07:40:24.293812Z"
-    }
-   },
+   "metadata": {},
    "outputs": [
     {
      "data": {
@@ -465,7 +360,7 @@
        "         [0., 0., 0.]]])"
       ]
      },
-     "execution_count": 1,
+     "execution_count": 15,
      "metadata": {},
      "output_type": "execute_result"
     }
@@ -479,14 +374,7 @@
   {
    "cell_type": "code",
    "execution_count": 16,
-   "metadata": {
-    "execution": {
-     "iopub.execute_input": "2021-08-21T07:40:24.296159Z",
-     "iopub.status.busy": "2021-08-21T07:40:24.295801Z",
-     "iopub.status.idle": "2021-08-21T07:40:24.298082Z",
-     "shell.execute_reply": "2021-08-21T07:40:24.297788Z"
-    }
-   },
+   "metadata": {},
    "outputs": [
     {
      "data": {
@@ -494,7 +382,7 @@
        "True"
       ]
      },
-     "execution_count": 1,
+     "execution_count": 16,
      "metadata": {},
      "output_type": "execute_result"
     }
@@ -513,14 +401,7 @@
   {
    "cell_type": "code",
    "execution_count": 17,
-   "metadata": {
-    "execution": {
-     "iopub.execute_input": "2021-08-21T07:40:24.300281Z",
-     "iopub.status.busy": "2021-08-21T07:40:24.299997Z",
-     "iopub.status.idle": "2021-08-21T07:40:24.301149Z",
-     "shell.execute_reply": "2021-08-21T07:40:24.301419Z"
-    }
-   },
+   "metadata": {},
    "outputs": [],
    "source": [
     "x = np.zeros((2,2), dtype=np.float32)"
@@ -529,14 +410,7 @@
   {
    "cell_type": "code",
    "execution_count": 18,
-   "metadata": {
-    "execution": {
-     "iopub.execute_input": "2021-08-21T07:40:24.303499Z",
-     "iopub.status.busy": "2021-08-21T07:40:24.303211Z",
-     "iopub.status.idle": "2021-08-21T07:40:24.304774Z",
-     "shell.execute_reply": "2021-08-21T07:40:24.304487Z"
-    }
-   },
+   "metadata": {},
    "outputs": [],
    "source": [
     "y = torch.zeros((2,2), dtype=torch.float32)"
@@ -545,14 +419,7 @@
   {
    "cell_type": "code",
    "execution_count": 19,
-   "metadata": {
-    "execution": {
-     "iopub.execute_input": "2021-08-21T07:40:24.306710Z",
-     "iopub.status.busy": "2021-08-21T07:40:24.306373Z",
-     "iopub.status.idle": "2021-08-21T07:40:24.308282Z",
-     "shell.execute_reply": "2021-08-21T07:40:24.308509Z"
-    }
-   },
+   "metadata": {},
    "outputs": [
     {
      "data": {
@@ -560,7 +427,7 @@
        "numpy.ndarray"
       ]
      },
-     "execution_count": 1,
+     "execution_count": 19,
      "metadata": {},
      "output_type": "execute_result"
     }
@@ -573,14 +440,7 @@
   {
    "cell_type": "code",
    "execution_count": 20,
-   "metadata": {
-    "execution": {
-     "iopub.execute_input": "2021-08-21T07:40:24.310589Z",
-     "iopub.status.busy": "2021-08-21T07:40:24.310278Z",
-     "iopub.status.idle": "2021-08-21T07:40:24.312254Z",
-     "shell.execute_reply": "2021-08-21T07:40:24.311966Z"
-    }
-   },
+   "metadata": {},
    "outputs": [
     {
      "data": {
@@ -588,7 +448,7 @@
        "torch.Tensor"
       ]
      },
-     "execution_count": 1,
+     "execution_count": 20,
      "metadata": {},
      "output_type": "execute_result"
     }
@@ -608,14 +468,7 @@
   {
    "cell_type": "code",
    "execution_count": 21,
-   "metadata": {
-    "execution": {
-     "iopub.execute_input": "2021-08-21T07:40:24.314416Z",
-     "iopub.status.busy": "2021-08-21T07:40:24.314143Z",
-     "iopub.status.idle": "2021-08-21T07:40:24.316276Z",
-     "shell.execute_reply": "2021-08-21T07:40:24.315989Z"
-    }
-   },
+   "metadata": {},
    "outputs": [
     {
      "data": {
@@ -624,7 +477,7 @@
        "       [0., 0.]], dtype=float32)"
       ]
      },
-     "execution_count": 1,
+     "execution_count": 21,
      "metadata": {},
      "output_type": "execute_result"
     }
@@ -637,14 +490,7 @@
   {
    "cell_type": "code",
    "execution_count": 22,
-   "metadata": {
-    "execution": {
-     "iopub.execute_input": "2021-08-21T07:40:24.318165Z",
-     "iopub.status.busy": "2021-08-21T07:40:24.317893Z",
-     "iopub.status.idle": "2021-08-21T07:40:24.320047Z",
-     "shell.execute_reply": "2021-08-21T07:40:24.320271Z"
-    }
-   },
+   "metadata": {},
    "outputs": [
     {
      "data": {
@@ -653,7 +499,7 @@
        "        [0., 0.]])"
       ]
      },
-     "execution_count": 1,
+     "execution_count": 22,
      "metadata": {},
      "output_type": "execute_result"
     }
@@ -666,14 +512,7 @@
   {
    "cell_type": "code",
    "execution_count": 23,
-   "metadata": {
-    "execution": {
-     "iopub.execute_input": "2021-08-21T07:40:24.322454Z",
-     "iopub.status.busy": "2021-08-21T07:40:24.322168Z",
-     "iopub.status.idle": "2021-08-21T07:40:24.323605Z",
-     "shell.execute_reply": "2021-08-21T07:40:24.323312Z"
-    }
-   },
+   "metadata": {},
    "outputs": [],
    "source": [
     "x[0,0] = 1.0 # メモリが共有されているため、 x への変更は y にも反映されます"
@@ -682,14 +521,7 @@
   {
    "cell_type": "code",
    "execution_count": 24,
-   "metadata": {
-    "execution": {
-     "iopub.execute_input": "2021-08-21T07:40:24.325683Z",
-     "iopub.status.busy": "2021-08-21T07:40:24.325379Z",
-     "iopub.status.idle": "2021-08-21T07:40:24.327559Z",
-     "shell.execute_reply": "2021-08-21T07:40:24.327265Z"
-    }
-   },
+   "metadata": {},
    "outputs": [
     {
      "data": {
@@ -698,7 +530,7 @@
        "       [0., 0.]], dtype=float32)"
       ]
      },
-     "execution_count": 1,
+     "execution_count": 24,
      "metadata": {},
      "output_type": "execute_result"
     }
@@ -710,14 +542,7 @@
   {
    "cell_type": "code",
    "execution_count": 25,
-   "metadata": {
-    "execution": {
-     "iopub.execute_input": "2021-08-21T07:40:24.329280Z",
-     "iopub.status.busy": "2021-08-21T07:40:24.329010Z",
-     "iopub.status.idle": "2021-08-21T07:40:24.335779Z",
-     "shell.execute_reply": "2021-08-21T07:40:24.335482Z"
-    }
-   },
+   "metadata": {},
    "outputs": [
     {
      "data": {
@@ -726,7 +551,7 @@
        "        [0., 0.]])"
       ]
      },
-     "execution_count": 1,
+     "execution_count": 25,
      "metadata": {},
      "output_type": "execute_result"
     }
@@ -752,14 +577,7 @@
   {
    "cell_type": "code",
    "execution_count": 26,
-   "metadata": {
-    "execution": {
-     "iopub.execute_input": "2021-08-21T07:40:24.337726Z",
-     "iopub.status.busy": "2021-08-21T07:40:24.337446Z",
-     "iopub.status.idle": "2021-08-21T07:40:24.353265Z",
-     "shell.execute_reply": "2021-08-21T07:40:24.352951Z"
-    }
-   },
+   "metadata": {},
    "outputs": [],
    "source": [
     "from scipy.io import wavfile\n",
@@ -769,14 +587,7 @@
   {
    "cell_type": "code",
    "execution_count": 27,
-   "metadata": {
-    "execution": {
-     "iopub.execute_input": "2021-08-21T07:40:24.355110Z",
-     "iopub.status.busy": "2021-08-21T07:40:24.354839Z",
-     "iopub.status.idle": "2021-08-21T07:40:24.358062Z",
-     "shell.execute_reply": "2021-08-21T07:40:24.357768Z"
-    }
-   },
+   "metadata": {},
    "outputs": [],
    "source": [
     "sr, wav = wavfile.read(ttslearn.util.example_audio_file())"
@@ -785,14 +596,7 @@
   {
    "cell_type": "code",
    "execution_count": 28,
-   "metadata": {
-    "execution": {
-     "iopub.execute_input": "2021-08-21T07:40:24.360007Z",
-     "iopub.status.busy": "2021-08-21T07:40:24.359643Z",
-     "iopub.status.idle": "2021-08-21T07:40:24.361741Z",
-     "shell.execute_reply": "2021-08-21T07:40:24.361445Z"
-    }
-   },
+   "metadata": {},
    "outputs": [
     {
      "data": {
@@ -800,7 +604,7 @@
        "48000"
       ]
      },
-     "execution_count": 1,
+     "execution_count": 28,
      "metadata": {},
      "output_type": "execute_result"
     }
@@ -812,14 +616,7 @@
   {
    "cell_type": "code",
    "execution_count": 29,
-   "metadata": {
-    "execution": {
-     "iopub.execute_input": "2021-08-21T07:40:24.363718Z",
-     "iopub.status.busy": "2021-08-21T07:40:24.363353Z",
-     "iopub.status.idle": "2021-08-21T07:40:24.365422Z",
-     "shell.execute_reply": "2021-08-21T07:40:24.365134Z"
-    }
-   },
+   "metadata": {},
    "outputs": [
     {
      "data": {
@@ -827,7 +624,7 @@
        "(153120,)"
       ]
      },
-     "execution_count": 1,
+     "execution_count": 29,
      "metadata": {},
      "output_type": "execute_result"
     }
@@ -839,14 +636,7 @@
   {
    "cell_type": "code",
    "execution_count": 30,
-   "metadata": {
-    "execution": {
-     "iopub.execute_input": "2021-08-21T07:40:24.367417Z",
-     "iopub.status.busy": "2021-08-21T07:40:24.367066Z",
-     "iopub.status.idle": "2021-08-21T07:40:24.369122Z",
-     "shell.execute_reply": "2021-08-21T07:40:24.368818Z"
-    }
-   },
+   "metadata": {},
    "outputs": [
     {
      "data": {
@@ -854,7 +644,7 @@
        "3.19"
       ]
      },
-     "execution_count": 1,
+     "execution_count": 30,
      "metadata": {},
      "output_type": "execute_result"
     }
@@ -866,14 +656,7 @@
   {
    "cell_type": "code",
    "execution_count": 31,
-   "metadata": {
-    "execution": {
-     "iopub.execute_input": "2021-08-21T07:40:24.371618Z",
-     "iopub.status.busy": "2021-08-21T07:40:24.371207Z",
-     "iopub.status.idle": "2021-08-21T07:40:24.373293Z",
-     "shell.execute_reply": "2021-08-21T07:40:24.373003Z"
-    }
-   },
+   "metadata": {},
    "outputs": [
     {
      "data": {
@@ -881,7 +664,7 @@
        "array([  74,   47,   17, ..., -144, -143, -144], dtype=int16)"
       ]
      },
-     "execution_count": 1,
+     "execution_count": 31,
      "metadata": {},
      "output_type": "execute_result"
     }
@@ -893,14 +676,7 @@
   {
    "cell_type": "code",
    "execution_count": 32,
-   "metadata": {
-    "execution": {
-     "iopub.execute_input": "2021-08-21T07:40:24.375277Z",
-     "iopub.status.busy": "2021-08-21T07:40:24.374952Z",
-     "iopub.status.idle": "2021-08-21T07:40:24.377075Z",
-     "shell.execute_reply": "2021-08-21T07:40:24.376781Z"
-    }
-   },
+   "metadata": {},
    "outputs": [
     {
      "data": {
@@ -908,7 +684,7 @@
        "numpy.ndarray"
       ]
      },
-     "execution_count": 1,
+     "execution_count": 32,
      "metadata": {},
      "output_type": "execute_result"
     }
@@ -927,14 +703,7 @@
   {
    "cell_type": "code",
    "execution_count": 33,
-   "metadata": {
-    "execution": {
-     "iopub.execute_input": "2021-08-21T07:40:24.379642Z",
-     "iopub.status.busy": "2021-08-21T07:40:24.379356Z",
-     "iopub.status.idle": "2021-08-21T07:40:24.608689Z",
-     "shell.execute_reply": "2021-08-21T07:40:24.608396Z"
-    }
-   },
+   "metadata": {},
    "outputs": [
     {
      "data": {
@@ -950,7 +719,7 @@
        "<IPython.lib.display.Audio object>"
       ]
      },
-     "execution_count": 1,
+     "execution_count": 33,
      "metadata": {},
      "output_type": "execute_result"
     },
@@ -998,14 +767,7 @@
   {
    "cell_type": "code",
    "execution_count": 34,
-   "metadata": {
-    "execution": {
-     "iopub.execute_input": "2021-08-21T07:40:24.612054Z",
-     "iopub.status.busy": "2021-08-21T07:40:24.611747Z",
-     "iopub.status.idle": "2021-08-21T07:40:25.484718Z",
-     "shell.execute_reply": "2021-08-21T07:40:25.484424Z"
-    }
-   },
+   "metadata": {},
    "outputs": [
     {
      "data": {
@@ -1029,7 +791,7 @@
     "logX = 20*np.log10(X)\n",
     "\n",
     "fig, ax = plt.subplots(1, 2, figsize=(10, 4), sharex=True)\n",
-    "freq = np.arange(len(X)) * sr / 2 / len(X)\n",
+    "freq = np.arange(len(X)) / 2 / len(X) * sr\n",
     "ax[0].plot(freq, X)\n",
     "ax[0].set_title(\"Amplitude spectrum\")\n",
     "ax[0].set_xlim(0, sr // 2)\n",
@@ -1063,14 +825,7 @@
   {
    "cell_type": "code",
    "execution_count": 35,
-   "metadata": {
-    "execution": {
-     "iopub.execute_input": "2021-08-21T07:40:25.494779Z",
-     "iopub.status.busy": "2021-08-21T07:40:25.490939Z",
-     "iopub.status.idle": "2021-08-21T07:40:25.561092Z",
-     "shell.execute_reply": "2021-08-21T07:40:25.561539Z"
-    }
-   },
+   "metadata": {},
    "outputs": [
     {
      "data": {
@@ -1108,14 +863,7 @@
   {
    "cell_type": "code",
    "execution_count": 36,
-   "metadata": {
-    "execution": {
-     "iopub.execute_input": "2021-08-21T07:40:25.565064Z",
-     "iopub.status.busy": "2021-08-21T07:40:25.564761Z",
-     "iopub.status.idle": "2021-08-21T07:40:25.566152Z",
-     "shell.execute_reply": "2021-08-21T07:40:25.566427Z"
-    }
-   },
+   "metadata": {},
    "outputs": [],
    "source": [
     "def hanning(N):\n",
@@ -1127,7 +875,7 @@
     "    # 窓関数（簡単のため、窓幅とフレーム長 N は同じとします）\n",
     "    w = hanning(N)\n",
     "    # 短時間フーリエ変換のフレーム数\n",
-    "    M = (len(x) - N) // frame_shift + 1\n",
+    "    M = (len(x) - N) // S + 1\n",
     "    # 短時間フーリエ変換の結果格納用の 2 次元配列\n",
     "    X = np.zeros((M, N//2 + 1), dtype=complex)\n",
     "    # 音声をずらして切り出し、フーリエ変換\n",
@@ -1147,14 +895,7 @@
   {
    "cell_type": "code",
    "execution_count": 37,
-   "metadata": {
-    "execution": {
-     "iopub.execute_input": "2021-08-21T07:40:25.570112Z",
-     "iopub.status.busy": "2021-08-21T07:40:25.569490Z",
-     "iopub.status.idle": "2021-08-21T07:40:26.485394Z",
-     "shell.execute_reply": "2021-08-21T07:40:26.485678Z"
-    }
-   },
+   "metadata": {},
    "outputs": [
     {
      "data": {
@@ -1207,14 +948,7 @@
   {
    "cell_type": "code",
    "execution_count": 38,
-   "metadata": {
-    "execution": {
-     "iopub.execute_input": "2021-08-21T07:40:26.488955Z",
-     "iopub.status.busy": "2021-08-21T07:40:26.488627Z",
-     "iopub.status.idle": "2021-08-21T07:40:26.818271Z",
-     "shell.execute_reply": "2021-08-21T07:40:26.818555Z"
-    }
-   },
+   "metadata": {},
    "outputs": [
     {
      "data": {
@@ -1258,14 +992,7 @@
   {
    "cell_type": "code",
    "execution_count": 39,
-   "metadata": {
-    "execution": {
-     "iopub.execute_input": "2021-08-21T07:40:26.902379Z",
-     "iopub.status.busy": "2021-08-21T07:40:26.886372Z",
-     "iopub.status.idle": "2021-08-21T07:40:28.496339Z",
-     "shell.execute_reply": "2021-08-21T07:40:28.496627Z"
-    }
-   },
+   "metadata": {},
    "outputs": [
     {
      "data": {
@@ -1324,14 +1051,7 @@
   {
    "cell_type": "code",
    "execution_count": 40,
-   "metadata": {
-    "execution": {
-     "iopub.execute_input": "2021-08-21T07:40:28.500754Z",
-     "iopub.status.busy": "2021-08-21T07:40:28.500452Z",
-     "iopub.status.idle": "2021-08-21T07:40:28.719327Z",
-     "shell.execute_reply": "2021-08-21T07:40:28.719025Z"
-    }
-   },
+   "metadata": {},
    "outputs": [
     {
      "data": {
@@ -1424,14 +1144,7 @@
   {
    "cell_type": "code",
    "execution_count": 41,
-   "metadata": {
-    "execution": {
-     "iopub.execute_input": "2021-08-21T07:40:28.724146Z",
-     "iopub.status.busy": "2021-08-21T07:40:28.723844Z",
-     "iopub.status.idle": "2021-08-21T07:40:31.541539Z",
-     "shell.execute_reply": "2021-08-21T07:40:31.541240Z"
-    }
-   },
+   "metadata": {},
    "outputs": [
     {
      "data": {
@@ -1501,14 +1214,7 @@
   {
    "cell_type": "code",
    "execution_count": 42,
-   "metadata": {
-    "execution": {
-     "iopub.execute_input": "2021-08-21T07:40:31.546038Z",
-     "iopub.status.busy": "2021-08-21T07:40:31.545724Z",
-     "iopub.status.idle": "2021-08-21T07:40:32.795387Z",
-     "shell.execute_reply": "2021-08-21T07:40:32.795675Z"
-    }
-   },
+   "metadata": {},
    "outputs": [
     {
      "data": {
@@ -1571,14 +1277,7 @@
   {
    "cell_type": "code",
    "execution_count": 43,
-   "metadata": {
-    "execution": {
-     "iopub.execute_input": "2021-08-21T07:40:32.799811Z",
-     "iopub.status.busy": "2021-08-21T07:40:32.799508Z",
-     "iopub.status.idle": "2021-08-21T07:40:36.313494Z",
-     "shell.execute_reply": "2021-08-21T07:40:36.313195Z"
-    }
-   },
+   "metadata": {},
    "outputs": [
     {
      "data": {
@@ -1691,14 +1390,7 @@
   {
    "cell_type": "code",
    "execution_count": 44,
-   "metadata": {
-    "execution": {
-     "iopub.execute_input": "2021-08-21T07:40:36.327019Z",
-     "iopub.status.busy": "2021-08-21T07:40:36.326695Z",
-     "iopub.status.idle": "2021-08-21T07:40:36.954157Z",
-     "shell.execute_reply": "2021-08-21T07:40:36.954445Z"
-    }
-   },
+   "metadata": {},
    "outputs": [
     {
      "data": {

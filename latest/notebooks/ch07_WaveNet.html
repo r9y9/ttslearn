@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>第7章 WaveNet: 深層学習に基づく音声波形の生成モデル &mdash; ttslearn 0.2.1 documentation</title>
+  <title>第7章 WaveNet: 深層学習に基づく音声波形の生成モデル &mdash; ttslearn 0.2.2 documentation</title>
   
 
   
@@ -69,7 +69,7 @@
             
             
               <div class="version">
-                0.2.1
+                0.2.2
               </div>
             
           
@@ -540,7 +540,7 @@ div.rendered_html tbody tr:hover {
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-Python 3.8.6 | packaged by conda-forge | (default, Dec 26 2020, 05:05:16)
+Python 3.9.1 (default, Feb  5 2021, 16:06:04)
 [GCC 9.3.0]
 </pre></div></div>
 </div>
@@ -576,7 +576,7 @@ Python 3.8.6 | packaged by conda-forge | (default, Dec 26 2020, 05:05:16)
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-&#39;0.2.1&#39;
+&#39;0.2.2&#39;
 </pre></div></div>
 </div>
 </div>
@@ -651,7 +651,7 @@ Populating the interactive namespace from numpy and matplotlib
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-&#39;1.8.1&#39;
+&#39;1.9.0&#39;
 </pre></div></div>
 </div>
 </div>
@@ -1860,7 +1860,7 @@ WaveNet の出力のサイズ: (16, 256, 16000)
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="n">log_prob</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">log_softmax</span><span class="p">(</span><span class="n">x_hat</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="c1"># 自己回帰性を保つため、出力を時間方向に1つシフトする</span>
-<span class="n">nll</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">NLLLoss</span><span class="p">()(</span><span class="n">log_prob</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">1</span><span class="p">:],</span> <span class="n">x</span><span class="p">[:,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">nll</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">NLLLoss</span><span class="p">()(</span><span class="n">log_prob</span><span class="p">[:,</span> <span class="p">:,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">x</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:])</span>
 </pre></div>
 </div>
 </div>
@@ -1869,7 +1869,7 @@ WaveNet の出力のサイズ: (16, 256, 16000)
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">ce_loss</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">CrossEntropyLoss</span><span class="p">()(</span><span class="n">x_hat</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">1</span><span class="p">:],</span> <span class="n">x</span><span class="p">[:,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span></span><span class="n">ce_loss</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">CrossEntropyLoss</span><span class="p">()(</span><span class="n">x_hat</span><span class="p">[:,</span> <span class="p">:,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">x</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:])</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;nll:&quot;</span><span class="p">,</span> <span class="n">nll</span><span class="o">.</span><span class="n">item</span><span class="p">())</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ce_loss&quot;</span><span class="p">,</span> <span class="n">ce_loss</span><span class="o">.</span><span class="n">item</span><span class="p">())</span>
 </pre></div>
@@ -1880,8 +1880,8 @@ WaveNet の出力のサイズ: (16, 256, 16000)
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-nll: 5.548800468444824
-ce_loss 5.548800468444824
+nll: 5.548838138580322
+ce_loss 5.548838138580322
 </pre></div></div>
 </div>
 </div>

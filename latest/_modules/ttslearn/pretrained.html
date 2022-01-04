@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>ttslearn.pretrained &mdash; ttslearn 0.2.0 documentation</title>
+  <title>ttslearn.pretrained &mdash; ttslearn 0.2.1 documentation</title>
   
 
   
@@ -35,7 +35,6 @@
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/doctools.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-        <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
@@ -65,7 +64,7 @@
             
             
               <div class="version">
-                0.2.0
+                0.2.1
               </div>
             
           
@@ -208,7 +207,7 @@
     <span class="s2">&quot;v0.2.1&quot;</span><span class="p">:</span> <span class="s2">&quot;https://github.com/r9y9/ttslearn/releases/download/v0.2.1&quot;</span><span class="p">,</span>
 <span class="p">}</span>
 
-<span class="n">DEFAULT_CACHE_DIR</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;HOME&quot;</span><span class="p">],</span> <span class="s2">&quot;.cache&quot;</span><span class="p">,</span> <span class="s2">&quot;ttslearn&quot;</span><span class="p">)</span>
+<span class="n">DEFAULT_CACHE_DIR</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s2">&quot;~&quot;</span><span class="p">),</span> <span class="s2">&quot;.cache&quot;</span><span class="p">,</span> <span class="s2">&quot;ttslearn&quot;</span><span class="p">)</span>
 <span class="n">CACHE_DIR</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;TTSLEARN_CACHE_DIR&quot;</span><span class="p">,</span> <span class="n">DEFAULT_CACHE_DIR</span><span class="p">)</span>
 
 
@@ -267,8 +266,8 @@
 
 <span class="sd">    Args:</span>
 <span class="sd">        name (str): Pre-trained model name</span>
-<span class="sd">        args (list): Additional args for instanciation</span>
-<span class="sd">        kwargs (dict): Additional kwargs for instanciation</span>
+<span class="sd">        args (list): Additional args for instantiation</span>
+<span class="sd">        kwargs (dict): Additional kwargs for instantiation</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        object: instance of TTS engine</span>
