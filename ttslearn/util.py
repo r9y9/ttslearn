@@ -87,14 +87,16 @@ def example_audio_file() -> str:
 
     Examples
     --------
-    >>> from scipy.io import wavfile
-    >>> fs, x = wavfile.read(pysptk.util.example_audio_file())
 
-    >>> import matplotlib.pyplot as plt
-    >>> plt.plot(x, label="cmu_us_awb_arctic arctic_a0007.wav")
-    >>> plt.xlim(0, len(x))
-    >>> plt.legend()
+    .. plot::
 
+        import ttslearn
+        from scipy.io import wavfile
+        import matplotlib.pyplot as plt
+
+        sr, x = wavfile.read(ttslearn.util.example_audio_file())
+        fig, ax = plt.subplots(figsize=(8,2))
+        librosa.display.waveshow(x.astype(np.float32), sr, ax=ax)
     """
 
     return pkg_resources.resource_filename(__name__, EXAMPLE_AUDIO)
