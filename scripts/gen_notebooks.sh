@@ -18,7 +18,7 @@ n_jobs=8
 
 cd recipes/dnntts
 if [ ! -e dnntts_exp.tar.gz ]; then
-    gdown "https://drive.google.com/uc?id=1p8xj9wiX3TRtkjw_swayePXezxmu_UnG"
+    gdown "https://drive.google.com/uc?id=171gGoH3H4PJ-9cMQES-l6KpTu9n0udGD"
 fi
 if [ ! -d exp ]; then
     tar zxvf dnntts_exp.tar.gz
@@ -27,7 +27,7 @@ cd -
 
 cd recipes/wavenet
 if [ ! -e wavenet_exp.tar.gz ]; then
-    gdown "https://drive.google.com/uc?id=1cuDxWW0KIUJLzY5Gvk3I_u8VL4bacBq0"
+    gdown "https://drive.google.com/uc?id=1Z09yCCAKyKOUU3Zsdxs0mZ1Q-TCPqFHA"
 fi
 if [ ! -d exp ]; then
     tar zxvf wavenet_exp.tar.gz
@@ -36,7 +36,7 @@ cd -
 
 cd recipes/tacotron
 if [ ! -e tacotron_exp.tar.gz ]; then
-    gdown "https://drive.google.com/uc?id=1RvRCmHhqUGFwpR4KYMu_bh6K_VGlJmt_"
+    gdown "https://drive.google.com/uc?id=1LoIGkwTLUZmkJkxbTR1S7yyaWexn-Wfp"
 fi
 if [ ! -d exp ]; then
     tar zxvf tacotron_exp.tar.gz

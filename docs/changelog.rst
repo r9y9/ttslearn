@@ -1,6 +1,12 @@
 Change log
 ==========
 
+v0.2.3 <xxxx-xx-xx>
+-------------------
+
+- `#36`_: Update gdrive links
+- `#35`_: Fix docs of example audio and rename waveplot to waveshow
+
 v0.2.2 <2022-01-04>
 -------------------
 
@@ -49,3 +55,5 @@ The first public release!
 .. _#22: https://github.com/r9y9/ttslearn/pull/22
 .. _#26: https://github.com/r9y9/ttslearn/issues/26
 .. _#30: https://github.com/r9y9/ttslearn/issues/30
+.. _#35: https://github.com/r9y9/ttslearn/pull/35
+.. _#36: https://github.com/r9y9/ttslearn/pull/36
