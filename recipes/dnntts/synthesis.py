@@ -82,7 +82,7 @@ def run_synthesis(out_dir, device, sample_rate, lab_file, *args, **kwargs):
     return wav
 
 
-@hydra.main(config_path="conf/synthesis", config_name="config")
+@hydra.main(config_path="conf/synthesis", config_name="config", version_base="1.2")
 def my_app(config: DictConfig) -> None:
     if not torch.cuda.is_available():
         device = torch.device("cpu")
