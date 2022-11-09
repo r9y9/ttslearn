@@ -69,7 +69,7 @@ def train_loop(
     save_checkpoint(logger, out_dir, model, optimizer, config.train.nepochs)
 
 
-@hydra.main(config_path="conf/train_dnntts", config_name="config", version_base="1.2")
+@hydra.main(config_path="conf/train_dnntts", config_name="config")
 def my_app(config: DictConfig) -> None:
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     model, optimizer, lr_scheduler, data_loaders, writer, logger = setup(
