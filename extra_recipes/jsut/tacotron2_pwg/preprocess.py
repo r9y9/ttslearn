@@ -44,7 +44,7 @@ def preprocess(
     _sr, x = wavfile.read(wav_file)
     if x.dtype in [np.int16, np.int32]:
         x = (x / np.iinfo(x.dtype).max).astype(np.float64)
-    x = librosa.resample(x, _sr, sr)
+    x = librosa.resample(x, orig_sr=_sr, target_sr=sr)
     # workaround for over resampling: add a small white noise
     if sr > _sr:
         x = x + np.random.randn(len(x)) * (1 / 2 ** 15)
