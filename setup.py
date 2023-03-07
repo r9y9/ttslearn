@@ -41,7 +41,7 @@ setup(
         "librosa>=0.8.1",
         "tqdm",
         "joblib",
-        "hydra-core >= 1.1.0",
+        "hydra-core >= 1.1.0, < 1.2.0",
         "pyopenjtalk>=0.1.0",
         "matplotlib>=1.5",
         "parallel_wavegan>=0.5.1",
