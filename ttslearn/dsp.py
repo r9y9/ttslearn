@@ -315,7 +315,7 @@ def logmelspectrogram(
     fmax = sr // 2 if fmax is None else fmax
 
     # メルフィルタバンク
-    mel_basis = librosa.filters.mel(sr, n_fft, fmin=fmin, fmax=fmax, n_mels=n_mels)
+    mel_basis = librosa.filters.mel(sr, n_fft=n_fft, fmin=fmin, fmax=fmax, n_mels=n_mels)
     # スペクトログラム -> メルスペクトログラム
     S = np.dot(mel_basis, np.abs(S))
 
