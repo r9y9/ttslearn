@@ -46,7 +46,7 @@ def preprocess(
     _sr, x = wavfile.read(wav_file)
     if x.dtype in [np.int16, np.int32]:
         x = (x / np.iinfo(x.dtype).max).astype(np.float64)
-    x = librosa.resample(x, _sr, sr)
+    x = librosa.resample(x, orig_sr=_sr, target_sr=sr)
     out_feats = logmelspectrogram(x, sr)
 
     # 冒頭と末尾の非音声区間の長さを調整

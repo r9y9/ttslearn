@@ -45,7 +45,7 @@ def preprocess(wav_file, lab_file, binary_dict, numeric_dict, sr, in_dir, out_di
     _sr, x = wavfile.read(wav_file)
     if x.dtype in [np.int16, np.int32]:
         x = (x / np.iinfo(x.dtype).max).astype(np.float64)
-    x = librosa.resample(x, _sr, sr)
+    x = librosa.resample(x, orig_sr=_sr, target_sr=sr)
 
     # 連続対数基本周波数と有声 / 無声フラグを結合した特徴量の計算
     out_feats = world_log_f0_vuv(x.astype(np.float64), sr)

@@ -255,7 +255,7 @@ def logspectrogram(
         n_fft = next_power_of_2(win_length)
 
     S = librosa.stft(
-        y, n_fft=n_fft, hop_length=hop_length, win_length=win_length, window="hanning"
+        y, n_fft=n_fft, hop_length=hop_length, win_length=win_length, window="hann"
     )
     # スペクトログラムのクリッピング
     # NOTE: クリッピングの値は、データに依存して調整する必要があります。
@@ -308,14 +308,16 @@ def logmelspectrogram(
         n_fft = next_power_of_2(win_length)
 
     S = librosa.stft(
-        y, n_fft=n_fft, hop_length=hop_length, win_length=win_length, window="hanning"
+        y, n_fft=n_fft, hop_length=hop_length, win_length=win_length, window="hann"
     )
 
     fmin = 0 if fmin is None else fmin
     fmax = sr // 2 if fmax is None else fmax
 
     # メルフィルタバンク
-    mel_basis = librosa.filters.mel(sr, n_fft, fmin=fmin, fmax=fmax, n_mels=n_mels)
+    mel_basis = librosa.filters.mel(
+        sr=sr, n_fft=n_fft, fmin=fmin, fmax=fmax, n_mels=n_mels
+    )
     # スペクトログラム -> メルスペクトログラム
     S = np.dot(mel_basis, np.abs(S))
 
@@ -374,7 +376,7 @@ def logmelspectrogram_to_audio(
         fmax=fmax,
     )
     y = librosa.griffinlim(
-        S, hop_length=hop_length, win_length=win_length, window="hanning", n_iter=n_iter
+        S, hop_length=hop_length, win_length=win_length, window="hann", n_iter=n_iter
     )
 
     return y

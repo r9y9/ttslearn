@@ -11,7 +11,7 @@ def test_world_spss():
     feats = world_spss_params(x, sr, mgc_order=59)
     assert feats.shape[1] == 199
 
-    x = librosa.resample(x, sr, 16000)
+    x = librosa.resample(x, orig_sr=sr, target_sr=16000)
     feats_sr16 = world_spss_params(x, 16000)
     assert feats_sr16.shape[1] == 127
 
